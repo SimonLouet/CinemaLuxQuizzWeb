@@ -28,27 +28,25 @@ class ReponsePossible
      */
     private $piecejointe;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", inversedBy="reponsedonnee")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $utilisateur;
+    
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Reponse", mappedBy="reponsedonnees")
      */
     private $reponses;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Question", inversedBy="reponsecorrect")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $question;
+   
 
     /**
      * @ORM\Column(type="boolean")
      */
     private $correct;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Question", inversedBy="reponsespossible")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $question;
 
     public function __construct()
     {
@@ -84,17 +82,6 @@ class ReponsePossible
         return $this;
     }
 
-    public function getUtilisateur(): ?Utilisateur
-    {
-        return $this->utilisateur;
-    }
-
-    public function setUtilisateur(?Utilisateur $utilisateur): self
-    {
-        $this->utilisateur = $utilisateur;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Reponse[]
@@ -124,17 +111,7 @@ class ReponsePossible
         return $this;
     }
 
-    public function getQuestion(): ?Question
-    {
-        return $this->question;
-    }
-
-    public function setQuestion(?Question $question): self
-    {
-        $this->question = $question;
-
-        return $this;
-    }
+    
 
     public function getCorrect(): ?bool
     {
@@ -144,6 +121,18 @@ class ReponsePossible
     public function setCorrect(bool $correct): self
     {
         $this->correct = $correct;
+
+        return $this;
+    }
+
+    public function getQuestion(): ?Question
+    {
+        return $this->question;
+    }
+
+    public function setQuestion(?Question $question): self
+    {
+        $this->question = $question;
 
         return $this;
     }

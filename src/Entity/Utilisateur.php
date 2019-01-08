@@ -39,7 +39,7 @@ class Utilisateur
     private $parties;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\reponse", mappedBy="utilisateur", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Reponse", mappedBy="utilisateur", orphanRemoval=true)
      */
     private $reponses;
 

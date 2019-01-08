@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Consulter une partie</title>
+    </head>
+    <body>       
+		Consulter une partie</br>
+		<table >
+			<tr><td>Nom : </td><td>{{partie.nom}}</td>
+			<tr><td>Date de la partie : </td><td>{{partie.date|date("d/m/Y")}}</td></tr>
+		</table>
+		
+		<table>
+			{% for e in questions %}
+			<tr>
+				<td>{{ e.libelle }}</td>
+				<table>
+					{% for i in e.reponsespossible %}
+					<tr>
+						<td>{{ i.libelle }}</td>
+					
+					{% else %}
+					
+						<td>Aucune reponse</td>
+					</tr>
+					{% endfor %}
+				</table>
+			</tr>
+			{% else %}
+			<tr>
+				<td>Aucune question</td>
+			</tr>
+			{% endfor %}
+		</table>
+    </body>
+</html>

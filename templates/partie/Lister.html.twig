@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Lister les parties</title>
+    </head>
+    <body>
+        Lister les parties</br>
+		<table>
+			{% for e in pParties %}
+			<tr>
+				<td><a href="{{ path('PartieConsulter', { 'id': e.id }) }}">{{ e.nom }}</a></td>
+				<td>{{ e.date|date('d/m/Y') }}</td>
+			{% else %}
+				<tr>
+				<td>Aucune partie n'a été trouvé.</td>
+			</tr>
+			{% endfor %}
+		</table>
+	
+	 
+    </body>
+</html>

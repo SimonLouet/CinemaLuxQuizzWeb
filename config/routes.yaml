@@ -4,4 +4,16 @@
 
 PartieAjouter:
     path: /Partie/Ajouter
-    controller: App\Controller\PartieController::index
+    controller: App\Controller\PartieController::Ajouter
+
+PartieLister:
+    path: /Partie/Lister
+    controller: App\Controller\PartieController::Lister
+    
+PartieConsulter:
+    path: /Partie/Consulter/{id}
+    controller: App\Controller\PartieController::Consulter
+    
+PartieModifier:
+    path: /Partie/Modifier
+    controller: App\Controller\PartieController::Modifier

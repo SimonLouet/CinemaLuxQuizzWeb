@@ -33,10 +33,7 @@ class Question
      */
     private $piecejointe;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Reponse", mappedBy="question")
-     */
-    private $reponses;
+    
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Partie", inversedBy="questions")
@@ -44,12 +41,18 @@ class Question
      */
     private $partie;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ReponsePossible", mappedBy="question")
+     */
+    private $reponsespossible;
+
     
 
     public function __construct()
     {
         $this->reponses = new ArrayCollection();
         $this->reponsecorrect = new ArrayCollection();
+        $this->reponsespossible = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -93,36 +96,7 @@ class Question
         return $this;
     }
 
-    /**
-     * @return Collection|Reponse[]
-     */
-    public function getReponses(): Collection
-    {
-        return $this->reponses;
-    }
-
-    public function addReponse(Reponse $reponse): self
-    {
-        if (!$this->reponses->contains($reponse)) {
-            $this->reponses[] = $reponse;
-            $reponse->setQuestion($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReponse(Reponse $reponse): self
-    {
-        if ($this->reponses->contains($reponse)) {
-            $this->reponses->removeElement($reponse);
-            // set the owning side to null (unless already changed)
-            if ($reponse->getQuestion() === $this) {
-                $reponse->setQuestion(null);
-            }
-        }
-
-        return $this;
-    }
+    
 
     public function getPartie(): ?Partie
     {
@@ -132,6 +106,37 @@ class Question
     public function setPartie(?Partie $partie): self
     {
         $this->partie = $partie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ReponsePossible[]
+     */
+    public function getReponsespossible(): Collection
+    {
+        return $this->reponsespossible;
+    }
+
+    public function addReponsespossible(ReponsePossible $reponsespossible): self
+    {
+        if (!$this->reponsespossible->contains($reponsespossible)) {
+            $this->reponsespossible[] = $reponsespossible;
+            $reponsespossible->setQuestion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReponsespossible(ReponsePossible $reponsespossible): self
+    {
+        if ($this->reponsespossible->contains($reponsespossible)) {
+            $this->reponsespossible->removeElement($reponsespossible);
+            // set the owning side to null (unless already changed)
+            if ($reponsespossible->getQuestion() === $this) {
+                $reponsespossible->setQuestion(null);
+            }
+        }
 
         return $this;
     }
