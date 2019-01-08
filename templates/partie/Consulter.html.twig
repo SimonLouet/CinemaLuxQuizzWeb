@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Consulter une partie</title>
-    </head>
-    <body>       
-		Consulter une partie</br>
+{% include 'header.html.twig'%}
 		<table >
 			<tr><td>Nom : </td><td>{{partie.nom}}</td>
 			<tr><td>Date de la partie : </td><td>{{partie.date|date("d/m/Y")}}</td></tr>
@@ -33,5 +26,4 @@
 			</tr>
 			{% endfor %}
 		</table>
-    </body>
-</html>
+{% include 'footer.html.twig'%}

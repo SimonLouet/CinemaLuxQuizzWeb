@@ -1,23 +1,31 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Lister les parties</title>
-    </head>
-    <body>
-        Lister les parties</br>
-		<table>
-			{% for e in pParties %}
-			<tr>
-				<td><a href="{{ path('PartieConsulter', { 'id': e.id }) }}">{{ e.nom }}</a></td>
-				<td>{{ e.date|date('d/m/Y') }}</td>
-			{% else %}
-				<tr>
-				<td>Aucune partie n'a été trouvé.</td>
-			</tr>
-			{% endfor %}
-		</table>
-	
-	 
-    </body>
-</html>
+{% include 'header.html.twig'%}
+<div class="card mb-3">
+	<div class="card-header">
+		<i class="fas fa-table"></i>
+		Liste des parties
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Date de la partie</th>
+					</tr>
+				</thead>
+				<tfoot>
+					{% for e in pParties %}
+					<tr>
+						<td><a href="{{ path('PartieConsulter', { 'id': e.id }) }}">{{ e.nom }}</a></td>
+						<td>{{ e.date|date('d/m/Y') }}</td>
+					{% else %}
+						<tr>
+						<td>Aucune partie n'a été trouvé.</td>
+					</tr>
+					{% endfor %}
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+{% include 'footer.html.twig'%}
