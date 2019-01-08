@@ -24,7 +24,7 @@ class Question
     private $libelle;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default":0})
      */
     private $ouverte;
 
@@ -42,7 +42,7 @@ class Question
     private $partie;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ReponsePossible", mappedBy="question")
+     * @ORM\OneToMany(targetEntity="App\Entity\ReponsePossible", mappedBy="question", cascade={"remove"})
      */
     private $reponsespossible;
 

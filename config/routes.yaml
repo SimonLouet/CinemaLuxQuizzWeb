@@ -2,6 +2,9 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+
+
+############################################Partie###########################################################
 PartieAjouter:
     path: /Partie/Ajouter
     controller: App\Controller\PartieController::Ajouter
@@ -17,3 +20,19 @@ PartieConsulter:
 PartieModifier:
     path: /Partie/Modifier/{id}
     controller: App\Controller\PartieController::Modifier
+    
+   
+
+   
+############################################Question###########################################################
+QuestionAjouter:
+    path: /Question/Ajouter/{id}
+    controller: App\Controller\QuestionController::Ajouter
+    
+QuestionConsulter:
+    path: /Question/Supprimer/{id}
+    controller: App\Controller\QuestionController::Supprimer
+    
+QuestionModifier:
+    path: /Question/Modifier/{id}
+    controller: App\Controller\QuestionController::Modifier

@@ -31,7 +31,7 @@ class PartieController extends AbstractController
 			$entityManager->persist($partie);
 			$entityManager->flush();
 	   
-			return $this->render('partie/consulter.html.twig', ['partie' => $partie,]);
+			return $this->redirect( $this->generateUrl('PartieConsulter', ['id' => $partie->getid()]));
 		}
 		else
 		{
@@ -76,16 +76,16 @@ class PartieController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
 
-                 $partie = $form->getData();
-                 $entityManager = $this->getDoctrine()->getManager();
-                 $entityManager->persist($partie);
-                 $entityManager->flush();
+                $partie = $form->getData();
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($partie);
+                $entityManager->flush();
 				 
-                 return $this->redirect( $this->generateUrl('PartieConsulter', ['id' => $partie->getid()]));
+                return $this->redirect( $this->generateUrl('PartieConsulter', ['id' => $partie->getid()]));
            }
            else{
-                return $this->render('partie/ajouter.html.twig', array('form' => $form->createView(),));
+                return $this->render('partie/modifier.html.twig', array('form' => $form->createView(),));
            }
         }
- }
+	}
 }
