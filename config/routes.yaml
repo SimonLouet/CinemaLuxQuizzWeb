@@ -36,3 +36,17 @@ QuestionConsulter:
 QuestionModifier:
     path: /Question/Modifier/{id}
     controller: App\Controller\QuestionController::Modifier
+    
+    
+############################################Question###########################################################
+ReponsePossibleAjouter:
+    path: /ReponsePossible/Ajouter/{id}
+    controller: App\Controller\ReponsePossibleController::Ajouter
+    
+ReponsePossibleConsulter:
+    path: /ReponsePossible/Supprimer/{id}
+    controller: App\Controller\ReponsePossibleController::Supprimer
+    
+ReponsePossibleModifier:
+    path: /ReponsePossible/Modifier/{id}
+    controller: App\Controller\ReponsePossibleController::Modifier
