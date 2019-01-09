@@ -1,0 +1,6 @@
+{
+  "root": true,
+  "syntaxes": {
+    "*.html": "text.html.twig"
+  }
+}

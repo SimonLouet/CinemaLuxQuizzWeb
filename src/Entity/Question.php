@@ -46,6 +46,11 @@ class Question
      */
     private $reponsespossible;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $numero;
+
     
 
     public function __construct()
@@ -137,6 +142,18 @@ class Question
                 $reponsespossible->setQuestion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNumero(): ?int
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(int $numero): self
+    {
+        $this->numero = $numero;
 
         return $this;
     }

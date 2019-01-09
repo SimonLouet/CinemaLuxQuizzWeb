@@ -12,41 +12,50 @@ PartieAjouter:
 PartieLister:
     path: /Partie/Lister
     controller: App\Controller\PartieController::Lister
-    
+
 PartieConsulter:
     path: /Partie/Consulter/{id}
     controller: App\Controller\PartieController::Consulter
-    
+
 PartieModifier:
     path: /Partie/Modifier/{id}
     controller: App\Controller\PartieController::Modifier
-    
-   
 
-   
+PartiePlayStart:
+    path: /Partie/PlayStart/{id}
+    controller: App\Controller\PartieController::PlayStart
+
+
 ############################################Question###########################################################
 QuestionAjouter:
     path: /Question/Ajouter/{id}
     controller: App\Controller\QuestionController::Ajouter
-    
-QuestionConsulter:
+
+QuestionSupprimer:
     path: /Question/Supprimer/{id}
     controller: App\Controller\QuestionController::Supprimer
-    
+
 QuestionModifier:
     path: /Question/Modifier/{id}
     controller: App\Controller\QuestionController::Modifier
-    
-    
+
+QuestionUp:
+    path: /Question/Up/{id}
+    controller: App\Controller\QuestionController::Up
+
+QuestionDown:
+    path: /Question/Down/{id}
+    controller: App\Controller\QuestionController::Down
+
 ############################################Question###########################################################
 ReponsePossibleAjouter:
     path: /ReponsePossible/Ajouter/{id}
     controller: App\Controller\ReponsePossibleController::Ajouter
-    
-ReponsePossibleConsulter:
+
+ReponsePossibleSupprimer:
     path: /ReponsePossible/Supprimer/{id}
     controller: App\Controller\ReponsePossibleController::Supprimer
-    
+
 ReponsePossibleModifier:
     path: /ReponsePossible/Modifier/{id}
     controller: App\Controller\ReponsePossibleController::Modifier

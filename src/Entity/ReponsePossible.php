@@ -28,14 +28,14 @@ class ReponsePossible
      */
     private $piecejointe;
 
-    
+
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Reponse", mappedBy="reponsedonnees")
      */
     private $reponses;
 
-   
+
 
     /**
      * @ORM\Column(type="boolean")
@@ -47,6 +47,8 @@ class ReponsePossible
      * @ORM\JoinColumn(nullable=false)
      */
     private $question;
+
+
 
     public function __construct()
     {
@@ -111,7 +113,7 @@ class ReponsePossible
         return $this;
     }
 
-    
+
 
     public function getCorrect(): ?bool
     {
@@ -136,4 +138,5 @@ class ReponsePossible
 
         return $this;
     }
+
 }

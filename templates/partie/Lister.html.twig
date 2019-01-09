@@ -13,7 +13,7 @@
 						<th>Date de la partie</th>
 					</tr>
 				</thead>
-				<tfoot>
+				<tbody>
 					{% for e in pParties %}
 					<tr>
 						<td><a href="{{ path('PartieConsulter', { 'id': e.id }) }}">{{ e.nom }}</a></td>
@@ -23,9 +23,11 @@
 						<td>Aucune partie n'a été trouvé.</td>
 					</tr>
 					{% endfor %}
-				</tfoot>
+				</tbody>
 			</table>
 		</div>
 	</div>
 </div>
+
+
 {% include 'footer.html.twig'%}

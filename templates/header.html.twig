@@ -20,10 +20,10 @@
 
 		<!-- Custom styles for this template-->
 		<link href="{{ asset('') }}Theme/css/sb-admin.css" rel="stylesheet">
-        
-       
-		
-		
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
     </head>
     <body>
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -40,7 +40,7 @@
       <!-- Sidebar -->
       <ul class="sidebar navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="{{ path('PartieLister') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Gérer les parties</span>
           </a>
@@ -50,6 +50,3 @@
       <div id="content-wrapper">
 
         <div class="container-fluid">
-
-          
-        

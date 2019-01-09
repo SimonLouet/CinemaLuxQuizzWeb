@@ -35,7 +35,15 @@ class QuestionRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByPartieOrderByNumero($partie): array
+        {
+    		 $qb = $this->createQueryBuilder('e')
+                ->orderBy('e.numero', 'ASC')
+                ->getQuery();
 
+            return $qb->execute();
+
+        }
     /*
     public function findOneBySomeField($value): ?Question
     {
