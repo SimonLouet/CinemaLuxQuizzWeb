@@ -38,6 +38,7 @@ class QuestionRepository extends ServiceEntityRepository
     public function findByPartieOrderByNumero($partie): array
         {
     		 $qb = $this->createQueryBuilder('e')
+                ->andWhere('e.partie = '. $partie->getId())
                 ->orderBy('e.numero', 'ASC')
                 ->getQuery();
 

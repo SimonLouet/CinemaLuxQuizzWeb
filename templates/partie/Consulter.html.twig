@@ -13,6 +13,16 @@
   	</div>
 
 		<table class="table table-bordered table-striped">
+			<tr><td>Thème : </td><td>{{partie.theme}}</td></tr>
+			<tr><td>Déscription : </td><td><p>{{partie.description}}</p></td></tr>
+			<tr><td>image de fond : </td><td>
+			{%if  partie.imagefondname != null%}
+			<img src="{{ asset('uploads/imageFond/' ~ partie.imagefondname) }}" alt="Image de fond  de la partie {{partie.nom}}" height="180" width="360">
+			{%else%}
+			<p>Aucune image</p>
+			{%endif%}
+			</td></tr>
+
 			<tr><td>Date de la partie : </td><td>{{partie.date|date("d/m/Y")}}</td></tr>
 		</table>
 

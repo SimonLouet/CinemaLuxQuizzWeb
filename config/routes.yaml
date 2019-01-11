@@ -25,7 +25,13 @@ PartiePlayStart:
     path: /Partie/PlayStart/{id}
     controller: App\Controller\PartieController::PlayStart
 
+PlayQuestion:
+    path: /Partie/PlayQuestion/{id}
+    controller: App\Controller\PartieController::PlayQuestion
 
+PlayReponse:
+    path: /Partie/PlayReponse/{id}
+    controller: App\Controller\PartieController::PlayReponse
 ############################################Question###########################################################
 QuestionAjouter:
     path: /Question/Ajouter/{id}

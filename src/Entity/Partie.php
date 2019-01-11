@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PartieRepository")
@@ -37,6 +38,43 @@ class Partie
      * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="partie")
      */
     private $questions;
+
+
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+
+    private $imagefondname;
+
+
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $theme;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $colortext;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $colortitre;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $colorchrono;
+
+
 
 
     public function __construct()
@@ -133,5 +171,81 @@ class Partie
         return $this;
     }
 
-    
+
+
+    public function getImagefondname()
+    {
+        return $this->imagefondname;
+    }
+
+    public function setImagefondname( $imagefondname)
+    {
+        $this->imagefondname = $imagefondname;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getTheme(): ?string
+    {
+        return $this->theme;
+    }
+
+    public function setTheme(string $theme): self
+    {
+        $this->theme = $theme;
+
+        return $this;
+    }
+
+    public function getColortext(): ?string
+    {
+        return $this->colortext;
+    }
+
+    public function setColortext(string $colortext): self
+    {
+        $this->colortext = $colortext;
+
+        return $this;
+    }
+
+    public function getColortitre(): ?string
+    {
+        return $this->colortitre;
+    }
+
+    public function setColortitre(string $colortitre): self
+    {
+        $this->colortitre = $colortitre;
+
+        return $this;
+    }
+
+    public function getColorchrono(): ?string
+    {
+        return $this->colorchrono;
+    }
+
+    public function setColorchrono(string $colorchrono): self
+    {
+        $this->colorchrono = $colorchrono;
+
+        return $this;
+    }
+
+
+
+
 }

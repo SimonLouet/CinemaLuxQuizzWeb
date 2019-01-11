@@ -51,6 +51,11 @@ class Question
      */
     private $numero;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $timer;
+
     
 
     public function __construct()
@@ -154,6 +159,18 @@ class Question
     public function setNumero(int $numero): self
     {
         $this->numero = $numero;
+
+        return $this;
+    }
+
+    public function getTimer(): ?int
+    {
+        return $this->timer;
+    }
+
+    public function setTimer(int $timer): self
+    {
+        $this->timer = $timer;
 
         return $this;
     }

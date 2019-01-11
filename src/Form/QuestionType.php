@@ -11,15 +11,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class QuestionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libelle', TextType::class, array('label' => 'Intitulé de la question :'))
-            ->add('piecejointe', TextType::class, array('label' => 'Pièce jointe :','required' => false))
-			->add('ajouter', SubmitType::class, array('label' => 'Ajouter la question'))
+            ->add('libelle', TextType::class, array('label' => 'Intitulé de la question'))
+            ->add('timer', IntegerType::class, array('label' => 'Temp pour répondre (milliseconds)'))
+            ->add('piecejointe', TextType::class, array('label' => 'Pièce jointe','required' => false))
+      			->add('ajouter', SubmitType::class, array('label' => 'Ajouter la question'))
         ;
     }
 

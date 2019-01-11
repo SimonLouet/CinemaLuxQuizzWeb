@@ -1,0 +1,54 @@
+{% include 'headerPlay.html.twig' with {'partie': question.partie} only %}
+
+
+<div class="row justify-content-center" style="margin-top :5%;">
+    <h1  style="font-size: 100.0px;color:{{question.partie.colortitre}};" class="text-center">{{question.partie.nom}} </h1>
+</div>
+
+<div class="row justify-content-center ">
+	<div class="col-md-10 ">
+		<p style="font-size: 50.0px;color:{{question.partie.colortext}};">{{question.numero}} - {{question.libelle}} </p>
+	</div>
+</div>
+
+
+<div class="row justify-content-center ">
+	<div class="col-md-8 ">
+  <table>
+
+    {%set nbvote = 0%}
+    {% for e in reponsepossible %}
+      {%if e.correct%}
+      <tr style="font-size: 40.0px;" class="text-success"><td><p>A - {{e.libelle}}</p></td><td> : {{e.reponses|length}}</td></tr>
+      {%else %}
+      <tr style="font-size: 40.0px;" class="text-danger"><td><p>A - {{e.libelle}}</p></td><td> : {{e.reponses|length}}</td></tr>
+      {%endif%}
+    {% else%}
+      <p style="font-size: 40.0px;">Aucune réponse</p>
+    {% endfor%}
+  </div>
+</div>
+
+<script>
+
+
+
+document.addEventListener('keydown', (event) => {
+  const nomTouche = event.key;
+
+  if (nomTouche === 'Enter') {
+    {%if  questionsuivante != null%}
+    window.location.replace("{{ path('PlayQuestion', { 'id': questionsuivante.id}) }}");
+    {%else%}
+
+
+    {%endif%}
+  }
+  if (nomTouche === 'Escape') {
+    window.location.replace("{{ path('PartieConsulter', { 'id': question.partie.id }) }}");
+  }
+}, false);
+
+
+</script>
+{% include 'footerPlay.html.twig'%}
