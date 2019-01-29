@@ -12,12 +12,14 @@ use App\Entity\Question;
 use App\Form\QuestionType;
 use App\Form\QuestionModifierType;
 
+use App\Service\FileUploader;
+
 class QuestionController extends AbstractController
 {
   /**
   * @Route("/question", name="question")
   */
-  public function Ajouter($id,Request $request)
+  public function Ajouter($id,Request $request, FileUploader $fileUploader)
   {
     $partie = $this->getDoctrine()->getRepository(Partie::class)->find($id);
     $questions = $this->getDoctrine()->getRepository(question::class)->findBypartie($partie);
@@ -63,7 +65,6 @@ class QuestionController extends AbstractController
   public function Modifier($id, Request $request){
 
     $question = $this->getDoctrine()->getRepository(Question::class)->find($id);
-
     if (!$question) {
       throw $this->createNotFoundException('Aucune question trouvé avec le numéro '.$id);
     }
@@ -73,8 +74,9 @@ class QuestionController extends AbstractController
       $form->handleRequest($request);
 
       if ($form->isSubmitted() && $form->isValid()) {
-
         $question = $form->getData();
+
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($question);
         $entityManager->flush();

@@ -48,6 +48,11 @@ class ReponsePossible
      */
     private $question;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $fontsize;
+
 
 
     public function __construct()
@@ -135,6 +140,18 @@ class ReponsePossible
     public function setQuestion(?Question $question): self
     {
         $this->question = $question;
+
+        return $this;
+    }
+
+    public function getFontsize(): ?float
+    {
+        return $this->fontsize;
+    }
+
+    public function setFontsize(float $fontsize): self
+    {
+        $this->fontsize = $fontsize;
 
         return $this;
     }

@@ -1,6 +1,15 @@
 {
+    "bacon/bacon-qr-code": {
+        "version": "2.0.0"
+    },
     "behat/transliterator": {
         "version": "v1.2.0"
+    },
+    "cboden/ratchet": {
+        "version": "v0.4.1"
+    },
+    "dasprid/enum": {
+        "version": "1.0.0"
     },
     "doctrine/annotations": {
         "version": "1.0",
@@ -68,11 +77,59 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "endroid/installer": {
+        "version": "1.0.8"
+    },
+    "endroid/qr-code": {
+        "version": "3.5.2"
+    },
+    "evenement/evenement": {
+        "version": "v3.0.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.5.2"
+    },
+    "hemiframe/php-websocket": {
+        "version": "1.7.0"
+    },
+    "hoa/consistency": {
+        "version": "1.17.05.02"
+    },
+    "hoa/event": {
+        "version": "1.17.01.13"
+    },
+    "hoa/exception": {
+        "version": "1.17.01.16"
+    },
+    "hoa/http": {
+        "version": "1.17.01.13"
+    },
+    "hoa/protocol": {
+        "version": "1.17.01.14"
+    },
+    "hoa/socket": {
+        "version": "1.17.05.16"
+    },
+    "hoa/stream": {
+        "version": "1.17.02.21"
+    },
+    "hoa/websocket": {
+        "version": "3.17.01.09"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
     "jms/metadata": {
         "version": "1.7.0"
+    },
+    "kartik-v/bootstrap-fileinput": {
+        "version": "4.5.x-dev"
+    },
+    "khanamiryan/qrcode-detector-decoder": {
+        "version": "1.0.2"
+    },
+    "myclabs/php-enum": {
+        "version": "1.6.4"
     },
     "nikic/php-parser": {
         "version": "v4.1.1"
@@ -89,11 +146,41 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/log": {
         "version": "1.1.0"
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "ralouphie/getallheaders": {
+        "version": "2.0.5"
+    },
+    "ratchet/rfc6455": {
+        "version": "0.2.4"
+    },
+    "react/cache": {
+        "version": "v0.5.0"
+    },
+    "react/dns": {
+        "version": "v0.4.16"
+    },
+    "react/event-loop": {
+        "version": "v1.0.0"
+    },
+    "react/promise": {
+        "version": "v2.7.1"
+    },
+    "react/promise-timer": {
+        "version": "v1.5.0"
+    },
+    "react/socket": {
+        "version": "v1.2.0"
+    },
+    "react/stream": {
+        "version": "v1.1.0"
     },
     "symfony/apache-pack": {
         "version": "1.0",
@@ -200,6 +287,9 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.10.0"
     },
+    "symfony/process": {
+        "version": "v4.2.2"
+    },
     "symfony/property-access": {
         "version": "v4.2.2"
     },
@@ -225,6 +315,15 @@
             "branch": "master",
             "version": "3.3",
             "ref": "369b5b29dc52b2c190002825ae7ec24ab6f962dd"
+        }
+    },
+    "symfony/validator": {
+        "version": "4.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.1",
+            "ref": "0cdc982334f45d554957a6167e030482795bf9d7"
         }
     },
     "symfony/var-exporter": {

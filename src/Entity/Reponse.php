@@ -35,6 +35,11 @@ class Reponse
      */
     private $reponsedonnees;
 
+    /**
+     * @ORM\Column(type="decimal", precision=20, scale=3)
+     */
+    private $timereponse;
+
     public function __construct()
     {
         $this->reponsedonnees = new ArrayCollection();
@@ -91,6 +96,18 @@ class Reponse
         if ($this->reponsedonnees->contains($reponsedonnee)) {
             $this->reponsedonnees->removeElement($reponsedonnee);
         }
+
+        return $this;
+    }
+
+    public function getTimereponse(): ?\decimal
+    {
+        return $this->timereponse;
+    }
+
+    public function setTimereponse( $timereponse): self
+    {
+        $this->timereponse = $timereponse;
 
         return $this;
     }

@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
@@ -20,11 +22,11 @@ class QuestionModifierType extends AbstractType
 			->add('ajouter', SubmitType::class, array('label' => 'Modifier la question'))
         ;
     }
-	
+
 	public function getParent(){
       return QuestionType::class;
     }
-	
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

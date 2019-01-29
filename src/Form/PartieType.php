@@ -14,6 +14,9 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class PartieType extends AbstractType
 {
@@ -21,21 +24,26 @@ class PartieType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, array('label' => 'Nom'))
-            ->add('theme', TextType::class, array('label' => 'thème'))
-            ->add('description', TextareaType::class, array('label' => 'Présentation'))
-            ->add('imagefondname', FileType::class, array('label' => 'Image de fond',
-                                                          'required' => false))
-            ->add('colortitre', ColorType::class, array('label' => 'Couleur des titres'))
-            ->add('colortext', ColorType::class, array('label' => 'Couleur des textes'))
-            ->add('colorchrono', ColorType::class, array('label' => 'Couleur des chronomètre'))
+            ->add('modejeux', ChoiceType::class, ['label' => 'Mode de jeux',
+                                                  'choices'  => [
+                                                      'Tour par tour' => "TourParTour",
+                                                      'Makey Makey' => "MakeyMakey",
+                                                  ],
+                                              ])
             ->add('date', DateTimeType::class, array('input' => 'datetime',
                                                           'widget' => 'single_text',
                                                           'format' => 'dd/MM/yyyy',
                                                           'required' => true,
                                                           'label' =>'Date de la partie',
                                                           'placeholder' => 'jj/mm/aaaa'))
-
-			->add('ajouter', SubmitType::class, array('label' => 'Nouvelle partie'))
+            ->add('theme', TextType::class, array('label' => 'thème'))
+            ->add('imagefondname', FileType::class, array('label' => false,'attr' => [ 'placeholder' => 'Choose file'],'required' => false))
+            ->add('fontpolice', TextType::class, array('label' => 'Nom police google (https://fonts.google.com/)',  'data' => 'Roboto'))
+            ->add('fontsize', NumberType::class, array('label' => 'Taille police',  'data' => '40.0'))
+            ->add('colortitre', ColorType::class, array('label' => 'Couleur des titres'))
+            ->add('colortext', ColorType::class, array('label' => 'Couleur des textes'))
+            ->add('colorfenetre', ColorType::class, array('label' => 'Couleur des fenètre'))
+			      ->add('ajouter', SubmitType::class, array('label' => 'Nouvelle partie'))
         ;
 
     }
@@ -43,6 +51,8 @@ class PartieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+
+            'mapped' => false,
             'data_class' => Partie::class,
         ]);
     }

@@ -43,6 +43,16 @@ public function getNbQuestion() {
   ->getSingleScalarResult();
 
 }
+
+public function resetPartie($idPartie) {
+  $rawSql = "DELETE r.* FROM reponse as r INNER JOIN question AS q ON r.question_id = q.id WHERE q.partie_id = ".$idPartie;
+  $stmt = $this->getEntityManager()->getConnection()->prepare($rawSql);
+  $stmt->execute();
+  return ;
+
+}
+
+
 /*
 public function findOneBySomeField($value): ?Partie
 {

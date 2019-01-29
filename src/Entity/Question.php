@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionRepository")
@@ -30,10 +32,11 @@ class Question
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\File(maxSize = "60000000000")
      */
     private $piecejointe;
 
-    
+
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Partie", inversedBy="questions")
@@ -56,7 +59,17 @@ class Question
      */
     private $timer;
 
-    
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $videoyoutube;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $fontsize;
+
+
 
     public function __construct()
     {
@@ -94,19 +107,19 @@ class Question
         return $this;
     }
 
-    public function getPiecejointe(): ?string
+    public function getPiecejointe()
     {
         return $this->piecejointe;
     }
 
-    public function setPiecejointe(?string $piecejointe): self
+    public function setPiecejointe($piecejointe)
     {
         $this->piecejointe = $piecejointe;
 
         return $this;
     }
 
-    
+
 
     public function getPartie(): ?Partie
     {
@@ -175,5 +188,29 @@ class Question
         return $this;
     }
 
-    
+    public function getVideoyoutube(): ?string
+    {
+        return $this->videoyoutube;
+    }
+
+    public function setVideoyoutube(?string $videoyoutube): self
+    {
+        $this->videoyoutube = $videoyoutube;
+
+        return $this;
+    }
+
+    public function getFontsize(): ?float
+    {
+        return $this->fontsize;
+    }
+
+    public function setFontsize(float $fontsize): self
+    {
+        $this->fontsize = $fontsize;
+
+        return $this;
+    }
+
+
 }

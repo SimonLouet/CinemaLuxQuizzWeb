@@ -35,7 +35,21 @@ class UtilisateurRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function FirstReponse($idQuestion)
+    {
+      $rawSql = "SELECT e.id, e.login,rp.correct FROM utilisateur e , reponse r, reponse_reponse_possible rrp, reponse_possible rp Where rp.id = rrp.reponse_possible_id AND r.id = rrp.reponse_id AND r.utilisateur_id = e.id AND r.question_id = ".$idQuestion." ORDER BY r.timereponse ";
+      $stmt = $this->getEntityManager()->getConnection()->prepare($rawSql);
+      $stmt->execute([]);
+      return $stmt->fetchAll();
+    }
 
+    public function Score($idPartie)
+    {
+      $rawSql = "SELECT u.login, COUNT(r.id) as score from utilisateur u , reponse r ,reponse_reponse_possible rrp ,reponse_possible rp ,question q WHERE rrp.reponse_id = r.id AND rrp.reponse_possible_id = rp.id AND rp.question_id = q.id AND r.utilisateur_id = u.id AND rp.correct = 1 AND q.partie_id = ".$idPartie." GROUP BY (r.utilisateur_id) ORDER BY score DESC ;";
+      $stmt = $this->getEntityManager()->getConnection()->prepare($rawSql);
+      $stmt->execute([]);
+      return $stmt->fetchAll();
+    }
     /*
     public function findOneBySomeField($value): ?Utilisateur
     {

@@ -22,16 +22,22 @@ PartieModifier:
     controller: App\Controller\PartieController::Modifier
 
 PartiePlayStart:
-    path: /Partie/PlayStart/{id}
-    controller: App\Controller\PartieController::PlayStart
+    path: /PlayAdmin/Start/{id}
+    controller: App\Controller\PlayAdminController::Start
 
 PlayQuestion:
-    path: /Partie/PlayQuestion/{id}
-    controller: App\Controller\PartieController::PlayQuestion
+    path: /PlayAdmin/Question/{id}
+    controller: App\Controller\PlayAdminController::Question
 
 PlayReponse:
-    path: /Partie/PlayReponse/{id}
-    controller: App\Controller\PartieController::PlayReponse
+    path: /PlayAdmin/Reponse/{id}
+    controller: App\Controller\PlayAdminController::Reponse
+
+PartiePlayuserStart:
+    path: /PlayUser/Start/{id}
+    controller: App\Controller\PlayUserController::Start
+
+
 ############################################Question###########################################################
 QuestionAjouter:
     path: /Question/Ajouter/{id}

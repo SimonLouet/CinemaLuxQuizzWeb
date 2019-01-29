@@ -72,7 +72,22 @@ class Partie
     /**
      * @ORM\Column(type="string", length=10)
      */
-    private $colorchrono;
+    private $colorfenetre;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $fontpolice;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $fontsize;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $modejeux;
 
 
 
@@ -233,14 +248,50 @@ class Partie
         return $this;
     }
 
-    public function getColorchrono(): ?string
+    public function getColorfenetre(): ?string
     {
-        return $this->colorchrono;
+        return $this->colorfenetre;
     }
 
-    public function setColorchrono(string $colorchrono): self
+    public function setColorfenetre(string $colorfenetre): self
     {
-        $this->colorchrono = $colorchrono;
+        $this->colorfenetre = $colorfenetre;
+
+        return $this;
+    }
+
+    public function getFontpolice(): ?string
+    {
+        return $this->fontpolice;
+    }
+
+    public function setFontpolice(string $fontpolice): self
+    {
+        $this->fontpolice = $fontpolice;
+
+        return $this;
+    }
+
+    public function getFontsize(): ?float
+    {
+        return $this->fontsize;
+    }
+
+    public function setFontsize(float $fontsize): self
+    {
+        $this->fontsize = $fontsize;
+
+        return $this;
+    }
+
+    public function getModejeux(): ?string
+    {
+        return $this->modejeux;
+    }
+
+    public function setModejeux(string $modejeux): self
+    {
+        $this->modejeux = $modejeux;
 
         return $this;
     }

@@ -1,0 +1,29 @@
+
+{% include 'headerPlay.html.twig' with {'partie': partie} only %}
+<input id="idPartie" name="idPartie" type="hidden" value="{{id}}">
+
+
+
+
+
+
+
+<span  id="ws-content-receiver">
+<div class="alert alert-info">
+  <strong>Info!</strong>Connexion au serveur ...
+</div>
+
+
+
+</span>
+
+
+
+{% include 'footerPlay.html.twig'%}
+
+
+<script src="{{ asset('') }}js/chrono.js"></script>
+<script type="text/javascript">
+var wsUrl = '192.168.24.49:8080';
+</script>
+<script type="text/javascript" src="{{ asset('') }}js/QuizzUser.js"></script>

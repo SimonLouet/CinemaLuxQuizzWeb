@@ -35,7 +35,13 @@ class ReponseRepository extends ServiceEntityRepository
         ;
     }
     */
-
+    public function CountReponse($idreponse)
+    {
+      $rawSql = "SELECT COUNT(e.reponse_id) AS pourcent FROM reponse_reponse_possible e Where reponse_possible_id = ".$idreponse;
+      $stmt = $this->getEntityManager()->getConnection()->prepare($rawSql);
+      $stmt->execute();
+      return $stmt->fetchAll();
+    }
     /*
     public function findOneBySomeField($value): ?Reponse
     {

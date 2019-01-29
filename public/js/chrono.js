@@ -1,46 +1,31 @@
-var lienDirectorie
 var start = 0
 var end = 0
 var diff = 0
+var tempEnd = 0
 var timerID = 0
-var chronoIsStart = false
-var msecTimer = 0
+var json = null
 
 function chrono(){
-	start = new Date()
-	diff = end - start
-	diff = new Date(diff)
+	end = new Date();
+	diff = end - start;
 
-  if(start.getTime() > end.getTime()){
-    window.location.replace(lienDirectorie)
-  }else{
-
-		var msec = diff.getMilliseconds()
-		var sec = diff.getSeconds()
-		var min = diff.getMinutes()
-		document.getElementById("chronotime").innerHTML =   min + ":" + sec + ":" + msec
+	var pourcent = (diff / tempEnd) * 100;
+	var barchrono = document.getElementById("bar-chrono");
+	if(barchrono != null){
+		barchrono.innerHTML = '<div class="progress-bar" role="progressbar" style="width: '+pourcent+'%" aria-valuenow="'+pourcent+'" aria-valuemin="0" aria-valuemax="100">'+Math.ceil((tempEnd-diff) / 1000)+'s</div>';
+	}
+	if(pourcent < 100){
 		timerID = setTimeout("chrono()", 10)
+	}else{
+		if(json != null){
+			ws.send(json);
+		}
+
 	}
 }
-
-function chronoInit(msec,lien){
-	lienDirectorie = lien
-	msecTimer = msec
-
+function chronoStart(temp,sendjson){
+	tempEnd = temp;
+	json = sendjson;
 	start = new Date()
-	end = new Date(start.getTime()+ msecTimer)
-
-	diff = end - start
-	diff = new Date(diff)
-	var msec = diff.getMilliseconds()
-	var sec = diff.getSeconds()
-	var min = diff.getMinutes()
-	document.getElementById("chronotime").innerHTML =   min + ":" + sec + ":" + msec
-}
-
-function chronoStart(){
-	chronoIsStart = true;
-	start = new Date()
-	end = new Date(start.getTime()+ msecTimer)
 	chrono()
 }
