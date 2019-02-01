@@ -45,7 +45,7 @@ class Question
     private $partie;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ReponsePossible", mappedBy="question", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\ReponsePossible", mappedBy="question", cascade={"remove","persist"})
      */
     private $reponsespossible;
 
@@ -78,6 +78,19 @@ class Question
         $this->reponsespossible = new ArrayCollection();
     }
 
+    public function __clone() {
+      if ($this->id) {
+        $this->id = null;
+        // cloning the relation M which is a OneToMany
+        $reponsespossibleClone = new ArrayCollection();
+        foreach ($this->reponsespossible as $item) {
+          $itemClone = clone $item;
+          $itemClone->setQuestion($this);
+          $reponsespossibleClone->add($itemClone);
+        }
+        $this->reponsespossible = $reponsespossibleClone;
+      }
+    }
     public function getId(): ?int
     {
         return $this->id;

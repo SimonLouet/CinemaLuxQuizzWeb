@@ -22,9 +22,9 @@ class ReponsePossibleController extends AbstractController
 		$question = $this->getDoctrine()->getRepository(Question::class)->find($id);
         $reponsepossible = new ReponsePossible();
 		$reponsepossible->setquestion($question);
-		
+
 		$form = $this->createForm(ReponsePossibleType::class, $reponsepossible);
-		
+
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
@@ -33,27 +33,27 @@ class ReponsePossibleController extends AbstractController
 			$entityManager = $this->getDoctrine()->getManager();
 			$entityManager->persist($reponsepossible);
 			$entityManager->flush();
-	   
+
 			return $this->redirect( $this->generateUrl('PartieConsulter', ['id' => $question->getPartie()->getid()]));
 		}
 		else
 		{
-			return $this->render('Reponse_Possible/Ajouter.html.twig', array('form' => $form->createView(),));
+			return $this->render('reponse_possible/Ajouter.html.twig', array('form' => $form->createView(),));
 		}
 	}
-	
+
 	public function Supprimer($id,Request $request)
     {
 		$reponsepossible = $this->getDoctrine()->getRepository(ReponsePossible::class)->find($id);
-		
+
 		$entityManager = $this->getDoctrine()->getManager();
 		$entityManager->remove($reponsepossible);
 		$entityManager->flush();
-	   
+
 		return $this->redirect( $this->generateUrl('PartieConsulter', ['id' => $reponsepossible->getquestion()->getPartie()->getid()]));
-		
+
 	}
-	
+
 	public function Modifier($id, Request $request){
 
 		$reponsepossible = $this->getDoctrine()->getRepository(ReponsePossible::class)->find($id);
@@ -72,11 +72,11 @@ class ReponsePossibleController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($reponsepossible);
                 $entityManager->flush();
-				 
+
                 return $this->redirect( $this->generateUrl('PartieConsulter', ['id' => $reponsepossible->getquestion()->getpartie()->getid()]));
            }
            else{
-                return $this->render('Reponse_Possible/Modifier.html.twig', array('form' => $form->createView(),));
+                return $this->render('reponse_possible/Modifier.html.twig', array('form' => $form->createView(),));
            }
         }
 	}

@@ -35,7 +35,7 @@ class Partie
     private $utilisateurs;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="partie")
+     * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="partie",cascade={"remove","persist"})
      */
     private $questions;
 
@@ -98,6 +98,21 @@ class Partie
         $this->questions = new ArrayCollection();
     }
 
+    public function __clone() {
+      if ($this->id) {
+        $this->id = null;
+
+        // cloning the relation M which is a OneToMany
+        $questionsClone = new ArrayCollection();
+        foreach ($this->questions as $item) {
+          $itemClone = clone $item;
+          $itemClone->setPartie($this);
+          $questionsClone->add($itemClone);
+        }
+        $this->questions = $questionsClone;
+      }
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -133,6 +148,12 @@ class Partie
     public function getUtilisateurs(): Collection
     {
         return $this->utilisateurs;
+    }
+
+    public function setUtilisateurs($utilisateurs)
+    {
+      $this->utilisateurs = $utilisateurs;
+        return $this;
     }
 
     public function addUtilisateur(Utilisateur $utilisateur): self

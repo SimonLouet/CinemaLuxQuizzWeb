@@ -45,7 +45,7 @@ class QuestionController extends AbstractController
     }
     else
     {
-      return $this->render('Question/Ajouter.html.twig', array('form' => $form->createView(),));
+      return $this->render('question/Ajouter.html.twig', array('form' => $form->createView(),));
     }
   }
 
@@ -53,8 +53,16 @@ class QuestionController extends AbstractController
   public function Supprimer($id,Request $request)
   {
     $question = $this->getDoctrine()->getRepository(Question::class)->find($id);
-
+    $questions = $this->getDoctrine()->getRepository(question::class)->findByPartieOrderByNumero($question->getPartie());
     $entityManager = $this->getDoctrine()->getManager();
+
+    foreach ($questions as $item) {
+      if($item->getNumero() > $question->getNumero()){
+        $item->setNumero($item->getNumero() - 1);
+        $entityManager->persist($question);
+      }
+    }
+
     $entityManager->remove($question);
     $entityManager->flush();
 
@@ -84,7 +92,7 @@ class QuestionController extends AbstractController
         return $this->redirect( $this->generateUrl('PartieConsulter', ['id' => $question->getpartie()->getid()]));
       }
       else{
-        return $this->render('question/modifier.html.twig', array('form' => $form->createView(),));
+        return $this->render('question/Modifier.html.twig', array('form' => $form->createView(),));
       }
     }
   }

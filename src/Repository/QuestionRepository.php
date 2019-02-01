@@ -45,6 +45,14 @@ class QuestionRepository extends ServiceEntityRepository
         return $qb->execute();
 
     }
+    public function ReponseStatistique($idQuestion)
+    {
+      $rawSql = "SELECT e.login,e.mail,rp.correct,rp.libelle,r.timereponse FROM utilisateur e , reponse r, reponse_reponse_possible rrp, reponse_possible rp Where rp.id = rrp.reponse_possible_id AND r.id = rrp.reponse_id AND r.utilisateur_id = e.id AND r.question_id = ".$idQuestion;
+      $stmt = $this->getEntityManager()->getConnection()->prepare($rawSql);
+      $stmt->execute([]);
+      return $stmt->fetchAll();
+    }
+
     /*
     public function findOneBySomeField($value): ?Question
     {

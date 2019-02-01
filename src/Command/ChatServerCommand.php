@@ -10,8 +10,11 @@ use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
 use App\Entity\Partie;
 
+$server;
+
 class ChatServerCommand extends ContainerAwareCommand
 {
+
     protected function configure()
     {
         $this
@@ -21,14 +24,21 @@ class ChatServerCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-      $em = $this->getContainer()->get('doctrine');
-      //$partie = $em->findOneById(17);
-      //$output->writeln($partie->getNom());
-      $server = IoServer::factory(
-          new HttpServer(new WsServer(new ServerWebSocket($em))),
-          8080,
-          '0.0.0.0'
-      );
-      $server->run();
+      try {
+        $em = $this->getContainer()->get('doctrine');
+
+        $server = IoServer::factory(
+            new HttpServer(new WsServer(new ServerWebSocket($em))),
+            8080,
+            '0.0.0.0'
+        );
+        $server->run();
+      } catch (Exception $e) {
+        echo $e->getMessage();
+        exit(0);
+      }
     }
+
+
+
 }

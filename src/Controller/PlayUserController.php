@@ -21,6 +21,6 @@ class PlayUserController extends AbstractController
   */
   public function Start($id){
     $partie = $this->getDoctrine()->getRepository(Partie::class)->find($id);
-    return $this->render('play_user/play.html.twig', array('id' => $id,'partie' => $partie));
+    return $this->render('play_user/Play.html.twig', array('id' => $id,'partie' => $partie));
   }
 }

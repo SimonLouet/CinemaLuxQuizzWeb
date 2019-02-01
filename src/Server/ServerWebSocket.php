@@ -61,6 +61,10 @@ class ServerWebSocket implements MessageComponentInterface
     $action = $messageData->action ?? 'unknown';
     echo $action."\n";
     switch ($action) {
+      case 'DeconnexionServeur':
+      $mdp = $messageData->mdp ?? "";
+      return $this->DeconnexionServeur($from,$mdp);
+
       case 'InitPartie':
       $idPartie = $messageData->idPartie ?? 0;
       return $this->InitPartie($from,$idPartie);
@@ -85,6 +89,13 @@ class ServerWebSocket implements MessageComponentInterface
         $this->gameMode->Action($this,$from,$action,$messageData);
       }
       break;
+    }
+  }
+
+  public function DeconnexionServeur(ConnectionInterface $from,$mdp)
+  {
+    if($mdp == "5qsef14qf68qsfe518qs45qs8gf4qg6sr6g"){
+      throw new Exception('Deconnexion du serveur');
     }
   }
 

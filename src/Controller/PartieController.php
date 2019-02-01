@@ -61,16 +61,31 @@ class PartieController extends AbstractController
     }
     else
     {
-      return $this->render('Partie/Ajouter.html.twig', array('form' => $form->createView(),));
+      return $this->render('partie/Ajouter.html.twig', array('form' => $form->createView(),));
     }
   }
+
+
+  public function Cloner($id,Request $request)
+  {
+    $partie = $this->getDoctrine()->getRepository(Partie::class)->find($id);
+    $partie = clone $partie;
+    $partie->setUtilisateurs(null);
+    $partie->setNom($partie->getNom()."(clone)");
+    echo $partie->getQuestions()[0]->getlibelle();
+    $entityManager = $this->getDoctrine()->getManager();
+    $entityManager->persist($partie);
+    $entityManager->flush();
+    return $this->redirect( $this->generateUrl('PartieConsulter', ['id' => $partie->getid()]));
+  }
+
 
   public function Lister(){
 
 
     $repository = $this->getDoctrine()->getRepository(Partie::class);
     $parties = $repository->findAll();
-    return $this->render('Partie/lister.html.twig', [
+    return $this->render('partie/Lister.html.twig', [
       'pParties' => $parties,]);
 
     }
@@ -87,8 +102,22 @@ class PartieController extends AbstractController
         );
       }
 
-      return $this->render('Partie/Consulter.html.twig', ['partie' => $partie,'questions' => $questions]);
+      return $this->render('partie/Consulter.html.twig', ['partie' => $partie,'questions' => $questions]);
     }
+
+    public function Supprimer($id,Request $request)
+    {
+      $partie = $this->getDoctrine()->getRepository(Partie::class)->find($id);
+
+      $entityManager = $this->getDoctrine()->getManager();
+      $entityManager->remove($partie);
+      $entityManager->flush();
+
+      return $this->redirect( $this->generateUrl('PartieLister'));
+
+    }
+
+
 
     public function Modifier($id, Request $request){
 
@@ -117,9 +146,28 @@ class PartieController extends AbstractController
           return $this->redirect( $this->generateUrl('PartieConsulter', ['id' => $partie->getid()]));
         }
         else{
-          return $this->render('partie/modifier.html.twig', array('form' => $form->createView(),));
+          return $this->render('partie/Modifier.html.twig', array('form' => $form->createView(),));
         }
       }
+    }
+
+
+    public function Statistique($id){
+
+      $partie = $this->getDoctrine()->getRepository(Partie::class)->find($id);
+      if (!$partie) {
+        throw $this->createNotFoundException(
+          'Aucune partie trouvé avec le numéro '.$id
+        );
+      }
+      $questions = $this->getDoctrine()->getRepository(question::class)->findByPartieOrderByNumero($partie);
+      $reponseStat = array();
+      foreach ($questions as $question) {
+        array_push($reponseStat,$this->getDoctrine()->getRepository(Question::class)->ReponseStatistique($question->getId()));
+      }
+
+
+      return $this->render('partie/Statistique.html.twig', ['partie' => $partie,'questions' => $questions,'reponseStat' => $reponseStat]);
     }
 
 
@@ -128,9 +176,6 @@ class PartieController extends AbstractController
 
 
 
-
-
-    
 
 
     private function loadimageFond($file,$fileName)

@@ -9,13 +9,25 @@ PartieAjouter:
     path: /Partie/Ajouter
     controller: App\Controller\PartieController::Ajouter
 
+PartieCloner:
+    path: /Partie/Cloner/{id}
+    controller: App\Controller\PartieController::Cloner
+
 PartieLister:
     path: /Partie/Lister
     controller: App\Controller\PartieController::Lister
 
+PartieStatistique:
+    path: /Partie/Statistique/{id}
+    controller: App\Controller\PartieController::Statistique
+
 PartieConsulter:
     path: /Partie/Consulter/{id}
     controller: App\Controller\PartieController::Consulter
+
+PartieSupprimer:
+    path: /Partie/Supprimer/{id}
+    controller: App\Controller\PartieController::Supprimer
 
 PartieModifier:
     path: /Partie/Modifier/{id}
@@ -25,13 +37,9 @@ PartiePlayStart:
     path: /PlayAdmin/Start/{id}
     controller: App\Controller\PlayAdminController::Start
 
-PlayQuestion:
-    path: /PlayAdmin/Question/{id}
-    controller: App\Controller\PlayAdminController::Question
-
-PlayReponse:
-    path: /PlayAdmin/Reponse/{id}
-    controller: App\Controller\PlayAdminController::Reponse
+WebSocket:
+    path: /PlayAdmin/WebSocket
+    controller: App\Controller\PlayAdminController::WebSocket
 
 PartiePlayuserStart:
     path: /PlayUser/Start/{id}
