@@ -42,7 +42,7 @@ WebSocket:
     controller: App\Controller\PlayAdminController::WebSocket
 
 PartiePlayuserStart:
-    path: /PlayUser/Start/{id}
+    path: /PlayUser/Start
     controller: App\Controller\PlayUserController::Start
 
 

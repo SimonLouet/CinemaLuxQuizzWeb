@@ -1,6 +1,4 @@
-/* globals wsUrl: true */
-//Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-//Chart.defaults.global.defaultFontColor = '#292b2c';
+
 function ModeTourParTour () {
   this.colorsDonuts = ['#007BFF','#FFC107','#28A745','#DC3545','#6C757D','#17A2B8'];
   this.DonutReponseData;
@@ -476,7 +474,7 @@ function ModeMakeyMakey () {
 
 
 var _body = document.getElementById('ws-content-receiver');
-var ws = new WebSocket('ws://' + wsUrl);
+var ws = new WebSocket('ws://' + wsIp+":"+wsPort);
 var partie;
 var question;
 var colors = ["primary","warning","success","danger","secondary","info","light","muted"];

@@ -1,4 +1,4 @@
-/* globals wsUrl: true */
+
 function ModeTourParTour () {
 
   this.Action = function (message) {
@@ -168,6 +168,15 @@ function ModeMakeyMakey () {
 
   }
 
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      console.log("NextEtape");
+      ws.send(JSON.stringify({
+        action: 'NextEtape'
+      }));
+    }
+  }, false);
+  
   this.SendReponse = function (x) {
     ws.send(JSON.stringify({
       action: 'RepondreQuestion',
@@ -289,7 +298,7 @@ background.style.backgroundImage = "";
 
 var _body = document.getElementById('ws-content-receiver');
 
-var ws = new WebSocket('ws://' + wsUrl);
+var ws = new WebSocket('ws://' +  wsIp+":"+wsPort);
 var partie;
 var question;
 var colors = ["primary","warning","success","danger","secondary","info","light","muted"];

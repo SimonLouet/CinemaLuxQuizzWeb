@@ -36,7 +36,7 @@ FermetureConnexion = function() {
 
 
 StartServeur = function (message){
-  window.open("http://51.75.125.249/QuizzLux/public/PlayAdmin/WebSocket");
+  window.open("http://"+wsIp+"/QuizzLux/public/PlayAdmin/WebSocket");
   return false;
 }
 
@@ -53,7 +53,7 @@ DeconnecterServeur = function (message){
 
 TentativeConnexion = function (message){
   if(!connexionValide){
-    ws = new WebSocket('ws://' + wsUrl);
+    ws = new WebSocket('ws://' + wsIp+":"+wsPort);
     ws.onclose =FermetureConnexion;
     ws.onopen =OuvertureConnexion;
 

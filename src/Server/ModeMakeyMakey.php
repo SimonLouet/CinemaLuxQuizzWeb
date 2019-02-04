@@ -40,15 +40,14 @@ class ModeMakeyMakey implements GameMode
 
   private function NextEtape($sv,ConnectionInterface $from)
   {
-    if($sv->GetAutorisation($from)){
-      $this->nbQuestion += 1;
-
-      if($this->nbQuestion <= count($sv->partie->getQuestions())){
-        $this->SendAfficherQuestion($sv,$from,$this->nbQuestion);
-      }else{
-        $this->SendAfficherFin($sv,$from);
-      }
+    $this->nbQuestion += 1;
+    $from = $this->GetAdmin($sv)['connection'];
+    if($this->nbQuestion <= count($sv->partie->getQuestions())){
+      $this->SendAfficherQuestion($sv,$from,$this->nbQuestion);
+    }else{
+      $this->SendAfficherFin($sv,$from);
     }
+
     return true;
   }
 
@@ -210,4 +209,15 @@ class ModeMakeyMakey implements GameMode
     }
     return true;
   }
+
+  private function GetAdmin($sv)
+  {
+    foreach ($sv->users as $user) {
+      if($user['status'] == 'Admin'){
+        return $user;
+      }
+    }
+    return null;
+  }
+
 }
