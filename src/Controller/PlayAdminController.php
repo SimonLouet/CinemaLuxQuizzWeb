@@ -25,6 +25,12 @@ use App\Form\PartieType;
 use App\Form\PartieModifierType;
 
 
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\LabelAlignment;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Response\QrCodeResponse;
+
+
 class PlayAdminController extends AbstractController
 {
   /**
@@ -33,6 +39,24 @@ class PlayAdminController extends AbstractController
 
   public function Start($id){
     $partie = $this->getDoctrine()->getRepository(Partie::class)->find($id);
+
+    $qrCode = new QrCode("http://".$_SERVER['HTTP_HOST'].$this->generateUrl('PartiePlayuserStart'));
+    $qrCode->setSize(300);
+
+    // Set advanced options
+    $qrCode->setWriterByName('png');
+    $qrCode->setMargin(10);
+    $qrCode->setEncoding('UTF-8');
+    $qrCode->setErrorCorrectionLevel(new ErrorCorrectionLevel(ErrorCorrectionLevel::HIGH));
+    $qrCode->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0, 'a' => 0]);
+    $qrCode->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255, 'a' => 0]);
+    $qrCode->setRoundBlockSize(true);
+    $qrCode->setValidateResult(false);
+    $qrCode->setWriterOptions(['exclude_xml_declaration' => true]);
+
+    // Save it to a file
+    $qrCode->writeFile('uploads/QrCode/QRcode.png');
+
     return $this->render('play_admin/Play.html.twig', array('id' => $id,'partie' => $partie));
   }
 

@@ -13,11 +13,6 @@ use App\Entity\ReponsePossible;
 use App\Form\PartieType;
 use App\Form\PartieModifierType;
 
-use Endroid\QrCode\ErrorCorrectionLevel;
-use Endroid\QrCode\LabelAlignment;
-use Endroid\QrCode\QrCode;
-use Endroid\QrCode\Response\QrCodeResponse;
-
 class PartieController extends AbstractController
 {
   /**
@@ -40,22 +35,7 @@ class PartieController extends AbstractController
       $entityManager->flush();
 
       // Create a basic QR code
-      $qrCode = new QrCode("http://192.168.24.49".$this->generateUrl('PartiePlayuserStart', ['id' =>$partie->getid()]));
-      $qrCode->setSize(300);
 
-      // Set advanced options
-      $qrCode->setWriterByName('png');
-      $qrCode->setMargin(10);
-      $qrCode->setEncoding('UTF-8');
-      $qrCode->setErrorCorrectionLevel(new ErrorCorrectionLevel(ErrorCorrectionLevel::HIGH));
-      $qrCode->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0, 'a' => 0]);
-      $qrCode->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255, 'a' => 0]);
-      $qrCode->setRoundBlockSize(true);
-      $qrCode->setValidateResult(false);
-      $qrCode->setWriterOptions(['exclude_xml_declaration' => true]);
-
-      // Save it to a file
-      $qrCode->writeFile('uploads/QrCode/'.$partie->getid().'.png');
 
       return $this->redirect( $this->generateUrl('PartieConsulter', ['id' => $partie->getid()]));
     }

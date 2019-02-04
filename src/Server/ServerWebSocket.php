@@ -18,7 +18,6 @@ class ServerWebSocket implements MessageComponentInterface
   public $em;
   public $etape = '';
 
-
   public function __construct($em)
   {
     $this->em = $em;
@@ -140,6 +139,8 @@ class ServerWebSocket implements MessageComponentInterface
 
 
       echo "Initialisation de la partie\n";
+
+
       $from->send(json_encode([
         "action" => "InitPartie",
         "partie" => [

@@ -615,7 +615,7 @@ function AfficherQRCode(message){
   '<div class="row justify-content-center " style="margin-top :5%;">'+
     '<div class="col-md-2">'+
       '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
-        '<img class="rounded mx-auto d-block" src="/QuizzLux/public/uploads/QrCode/'+ partie.id + '.png" alt="QR code de la partie">'+
+        '<img class="rounded mx-auto d-block" src="/QuizzLux/public/uploads/QrCode/QRcode.png" alt="QR code de la partie">'+
       '</div>'+
     '</div>'+
   '</div>'+
