@@ -55,7 +55,7 @@ function ModeTourParTour () {
 
     _body.innerHTML =
     '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;">'+
-    '<i class="fa fa-circle-o-notch fa-spin" style="font-size:200px;color:white;"></i>'+
+    '<i class="fas fa-circle-notch fa-spin" style="font-size:200px;color:white;"></i>'+
     '</div>';
   }
 
@@ -101,14 +101,14 @@ function ModeTourParTour () {
     if(message.correct == 1){
       var rendu =
       '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;">'+
-      '<i class="fa fa-check" style="font-size:200px;color:white;">'+
+      '<i class="fas fa-check" style="font-size:200px;color:white;">'+
       '</div>';
       var background = document.getElementById('background');
       background.style.backgroundColor = "green";
     }else{
       var rendu =
       '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;">'+
-      '<i class="fa fa-close" style="font-size:200px;color:white;">'+
+      '<i class="fas fa-times" style="font-size:200px;color:white;">'+
       '</div>';
       var background = document.getElementById('background');
       background.style.backgroundColor = "red";
@@ -176,7 +176,7 @@ function ModeMakeyMakey () {
       }));
     }
   }, false);
-  
+
   this.SendReponse = function (x) {
     ws.send(JSON.stringify({
       action: 'RepondreQuestion',
@@ -203,7 +203,7 @@ function ModeMakeyMakey () {
 
     _body.innerHTML =
     '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;">'+
-    '<i class="fa fa-circle-o-notch fa-spin" style="font-size:200px;color:white;"></i>'+
+    '<i class="fas fa-circle-notch fa-spin" style="font-size:200px;color:white;"></i>'+
     '</div>';
   }
 
@@ -275,7 +275,7 @@ function ModeMakeyMakey () {
         '</div>'+
       '</div>'+
       '<div class="row  justify-content-center align-items-center" style="min-height: 98vh;">'+
-      '<i class="fa fa-times" style="font-size:200px;color:white;">'+
+      '<i class="fas fa-times" style="font-size:200px;color:white;">'+
       '</div>';
       var background = document.getElementById('background');
       background.style.backgroundColor = "red";
