@@ -36,7 +36,7 @@ FermetureConnexion = function() {
 
 
 StartServeur = function (message){
-  window.open("http://www.quizzlux.cinemalux.org/public/PlayAdmin/WebSocket");
+  window.open("http://51.75.125.249/public/PlayAdmin/WebSocket");
   return false;
 }
 
