@@ -419,10 +419,10 @@ function ModeMakeyMakey () {
     '</div>';
 
     _body.innerHTML = rendu;
+    modeJeux.bodyQuestion = _body.innerHTML;
   }
 
   this.AfficherReponse = function (message){
-    modeJeux.bodyQuestion = _body.innerHTML;
     if(message.correct){
       var rendu =
       '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;">'+
@@ -441,8 +441,10 @@ function ModeMakeyMakey () {
       var background = document.getElementById('background');
       background.style.backgroundColor = "green";
       background.style.backgroundImage = "";
-      setTimeout(function(){ws.send(JSON.stringify({action: 'NextEtape'}));}, 1000);
+      setTimeout(function(){ws.send(JSON.stringify({action: 'NextEtape'}));}, 3000);
     }else{
+
+
       var rendu =
       '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;">'+
         '<div class="col-md-12 ">'+
@@ -464,9 +466,6 @@ function ModeMakeyMakey () {
       setTimeout(function(){ _body.innerHTML = modeJeux.bodyQuestion;background.style.backgroundImage = "url('/QuizzLux/public/uploads/imageFond/"+partie.imagefondname+"')";}, 1000);
     }
     _body.innerHTML = rendu;
-
-
-
   }
 }
 
