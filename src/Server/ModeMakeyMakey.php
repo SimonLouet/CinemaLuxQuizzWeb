@@ -36,7 +36,7 @@ class ModeMakeyMakey implements GameMode
       case 'RepondreQuestion':
       $idreponse = $messageData->idreponse ?? 0;
       $equipe = $messageData->equipe ?? 0;
-      return $this->RepondreQuestion($sv,$from, $equipe);
+      return $this->RepondreQuestion($sv,$from,$idreponse, $equipe);
       break;
 
       default:
