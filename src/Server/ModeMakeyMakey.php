@@ -38,6 +38,114 @@ class ModeMakeyMakey implements GameMode
     }
   }
 
+
+  private function Connexion($sv,ConnectionInterface $from)
+  {
+    if($this->partie == null){
+      $from->send(json_encode([
+        "action" => "LoginUser",
+        "valide" => false,
+        "erreur" => "Aucune partie est en cours."
+      ]));
+      return;
+    }
+
+    if($this->etape != "QRCode" && $this->etape != "Presentation"){
+      $from->send(json_encode([
+        "action" => "LoginUser",
+        "valide" => false,
+        "erreur" => "les inscriptions sont fermé."
+      ]));
+      return;
+    }
+
+    $utilisateur = $this->em->getRepository(Utilisateur::class)->findOneBy(['mail' => "MakeyMakey@cinemalux.org" ]);
+
+
+    if($utilisateur != null){
+      echo "Connexion du client\n";
+      $valide = true;
+      foreach ($this->users as $user) {
+        if($user['status'] == 'Connected'){
+          if($utilisateur->getid() == $user['utilisateur']->getid() ){
+            $valide = false;
+            break;
+          }
+        }
+      }
+      if(!$valide){
+        $from->send(json_encode([
+          "action" => "LoginUser",
+          "valide" => false,
+          "erreur" => "Compte déjà connecté."
+        ]));
+        return;
+      }
+
+      $this->users[$from->resourceId]['status'] = 'Connected';
+      $this->users[$from->resourceId]['utilisateur'] = $utilisateur;
+      $from->send(json_encode([
+        "action" => "LoginUser",
+        "valide" => true,
+        "partie" => [
+          "id" => $this->partie->getId(),
+          "nom" => $this->partie->getNom(),
+          "description" => $this->partie->getDescription(),
+          "imagefondname" => $this->partie->getimagefondname(),
+          "theme" => $this->partie->getTheme(),
+          "colortext" => $this->partie->getColortext(),
+          "colortitre" => $this->partie->getColortitre(),
+          "colorfenetre" => $this->partie->getcolorfenetre(),
+          "fontpolice" => $this->partie->getfontpolice(),
+          "fontsize" => $this->partie->getfontsize(),
+          "modejeux" => $this->partie->getModejeux()
+        ]
+      ]));
+      $from->send(json_encode([
+        "action" => "AfficherPresentation"
+      ]));
+      $this->RefreshCompteurUser();
+    }else{
+      echo "inscription du client\n";
+
+      $utilisateur = new Utilisateur();
+
+      $utilisateur->setlogin("Equipe");
+      $utilisateur->setMdp(md5("5684q6rqg54q6rg4q6gqry5f4"));
+      $utilisateur->setMail("MakeyMakey@cinemalux.org");
+
+      $entityManager = $this->em->getManager();
+      $entityManager->persist($utilisateur);
+      $entityManager->flush();
+
+      $this->users[$from->resourceId]['status'] = 'Connected';
+      $this->users[$from->resourceId]['utilisateur'] = $utilisateur;
+      $from->send(json_encode([
+        "action" => "LoginUser",
+        "valide" => true,
+        "partie" => [
+          "id" => $this->partie->getId(),
+          "nom" => $this->partie->getNom(),
+          "description" => $this->partie->getDescription(),
+          "imagefondname" => $this->partie->getimagefondname(),
+          "theme" => $this->partie->getTheme(),
+          "colortext" => $this->partie->getColortext(),
+          "colortitre" => $this->partie->getColortitre(),
+          "colorfenetre" => $this->partie->getcolorfenetre(),
+          "fontpolice" => $this->partie->getfontpolice(),
+          "fontsize" => $this->partie->getfontsize(),
+          "modejeux" => $this->partie->getModejeux()
+        ]
+      ]));
+      $from->send(json_encode([
+        "action" => "AfficherPresentation"
+      ]));
+      $this->RefreshCompteurUser();
+    }
+    return true;
+  }
+
+
   private function NextEtape($sv,ConnectionInterface $from)
   {
     $this->nbQuestion += 1;

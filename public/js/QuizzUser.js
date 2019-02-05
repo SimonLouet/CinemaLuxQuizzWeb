@@ -306,7 +306,7 @@ var modeJeux = null;
 
 
 ws.onopen = function () {
-  AfficherMenuLogin("");
+  //AfficherMenuLogin("");
 };
 
 ws.onclose = function() {
