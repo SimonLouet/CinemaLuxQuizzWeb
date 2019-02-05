@@ -92,6 +92,13 @@ class ModeMakeyMakey implements GameMode
           "correct" => false
         ]));
 
+        foreach ($sv->users as $user) {
+          if($user['status'] == 'Connected'){
+            $user['repondu'] = microtime(true) - 5000;
+          }
+        }
+
+
       }
     }
   }

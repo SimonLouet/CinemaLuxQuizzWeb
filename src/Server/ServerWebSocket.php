@@ -169,20 +169,30 @@ class ServerWebSocket implements MessageComponentInterface
 
   private function LoginAdmin(ConnectionInterface $from, $mdp)
   {
-    if($mdp == "admin"){
-      $from->send(json_encode([
-        "action" => "LoginAdmin",
-        "valide" => true
-      ]));
-      $this->users[$from->resourceId]['status'] = 'Admin';
-
-    }else{
+    if($mdp != "admin"){
       $from->send(json_encode([
         "action" => "LoginAdmin",
         "valide" => false,
         "erreur" => "Mot de passe incorrect"
       ]));
+      return false;
     }
+
+    if($this->GetAdmin() != null){
+      $from->send(json_encode([
+        "action" => "LoginAdmin",
+        "valide" => false,
+        "erreur" => "Il y a déja un admin de connecté"
+      ]));
+      return false;
+    }
+
+    $from->send(json_encode([
+      "action" => "LoginAdmin",
+      "valide" => true
+    ]));
+    $this->users[$from->resourceId]['status'] = 'Admin';
+
 
     return true;
   }
@@ -348,4 +358,13 @@ class ServerWebSocket implements MessageComponentInterface
     return false;
   }
 
+  private function GetAdmin()
+  {
+    foreach ($this->users as $user) {
+      if($user['status'] == 'Admin'){
+        return $user;
+      }
+    }
+    return null;
+  }
 }
