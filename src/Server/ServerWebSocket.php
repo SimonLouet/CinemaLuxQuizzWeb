@@ -94,8 +94,8 @@ class ServerWebSocket implements MessageComponentInterface
   {
     if($this->users[$from->resourceId]['status'] == 'Admin'){
       echo "Deconnexion de l'administrateur\n";
-      $partie = null;
-      $gameMode = null;
+      $this->partie = null;
+      $this->gameMode = null;
       foreach ($this->users as $user) {
         if($user['status'] == 'Connected'){
           $this->deconnexion($user['connection']);
