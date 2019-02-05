@@ -177,9 +177,10 @@ function ModeMakeyMakey () {
     }
   }, false);
 
-  this.SendReponse = function (x) {
+  this.SendReponse = function (x,equipe) {
     ws.send(JSON.stringify({
       action: 'RepondreQuestion',
+      equipe: equipe,
       idreponse: x
     }));
     return false;
@@ -231,24 +232,30 @@ function ModeMakeyMakey () {
 
     _body.innerHTML = rendu;
     i = 0;
-    for (let r of message.reponsepossible) {
-      var reponseButton = document.getElementById('reponse-'+i);
-      reponseButton.setAttribute("onclick","modeJeux.SendReponse("+i+");");
-
-      i++;
-    }
     document.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowUp') {
-        modeJeux.SendReponse(0);
+        modeJeux.SendReponse(0,1);
       }
       if (event.key === 'ArrowLeft') {
-        modeJeux.SendReponse(1);
+        modeJeux.SendReponse(1,1);
       }
       if (event.key === 'ArrowDown') {
-        modeJeux.SendReponse(2);
+        modeJeux.SendReponse(2,1);
       }
       if (event.key === 'ArrowRight') {
-        modeJeux.SendReponse(3);
+        modeJeux.SendReponse(3,1);
+      }
+      if (event.key === 'Q') {
+        modeJeux.SendReponse(0,2);
+      }
+      if (event.key === 'Z') {
+        modeJeux.SendReponse(1,2);
+      }
+      if (event.key === 'D') {
+        modeJeux.SendReponse(2,2);
+      }
+      if (event.key === 'S') {
+        modeJeux.SendReponse(3,2);
       }
     }, false);
   }
@@ -336,7 +343,7 @@ ws.onmessage = function (event) {
     break;
 
     case 'AfficherMenuLogin':
-    AfficherMenuLogin();
+    AfficherMenuLogin("");
     break;
 
     case 'TentativeConnexion':
