@@ -248,25 +248,24 @@ class ModeMakeyMakey implements GameMode
 
     $scores = $sv->em->getRepository(utilisateur::class)->Score($sv->partie->getid());
     foreach ($sv->users as $user) {
-
       if($user['status'] == 'Connected'){
-        $valide = false;
+        $equipe1 = false;
+        $equipe2= false;
         foreach ($scores as $score) {
-          if($user['equipe1']->getLogin() == $score["login"] || $user['equipe2']->getLogin() == $score["login"] ){
-            $valide = true;
-            $user['connection']->send(json_encode([
-              "action" => "AfficherFin",
-              "score" => $score["score"]
-            ]));
+          if($user['equipe1']->getLogin() == $score["login"]){
+            $equipe1 = true;
+          }
+
+          if($user['equipe2']->getLogin() == $score["login"] ){
+            $equipe2 = true;
           }
         }
 
-        if(!$valide){
-          array_push($scores,["login" => $user['utilisateur']->getLogin(),"score"=>0]);
-          $user['connection']->send(json_encode([
-            "action" => "AfficherFin",
-            "score" => 0
-          ]));
+        if(!$equipe1){
+          array_push($scores,["login" => "Equipe1","score"=>0]);
+        }
+        if(!$equipe2){
+          array_push($scores,["login" => "Equipe2","score"=>0]);
         }
       }
     }
