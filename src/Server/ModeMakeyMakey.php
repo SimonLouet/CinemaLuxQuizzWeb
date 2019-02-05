@@ -109,7 +109,9 @@ class ModeMakeyMakey implements GameMode
 
     $sv->users[$from->resourceId]['status'] = 'Connected';
     $sv->users[$from->resourceId]['equipe1'] = $equipe1;
+    $sv->users[$from->resourceId]['equipe1Timer'] = 0.0;
     $sv->users[$from->resourceId]['equipe2'] = $equipe2;
+    $sv->users[$from->resourceId]['equipe2Timer'] = 0.0;
     $from->send(json_encode([
       "action" => "LoginUser",
       "valide" => true,
