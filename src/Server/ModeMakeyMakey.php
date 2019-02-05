@@ -150,20 +150,25 @@ class ModeMakeyMakey implements GameMode
 
 
   private function RepondreQuestion($sv,$from, $idreponse,$equipe){
+    echo "1 \n";
    if($idreponse < count ($this->question->getReponsespossible()) && $sv->etape == "Question"){
+     echo "2 \n";
      if($sv->users[$from->resourceId]['equipe'.$equipe.'Timer'] + 4.000 > microtime(true)){
+       echo "3 \n";
        return;
      }
+     echo "4 \n";
        if($this->question->getReponsespossible()[$idreponse]->getCorrect()){
+         echo "5 \n";
          $sv->etape = "reponseValide";
         $reponse = new Reponse();
-
+        echo "6 \n";
         $reponse->setQuestion($this->question);
         $timeReponse = microtime(true);
         $reponse->setTimereponse($timeReponse);
         $reponse->setUtilisateur($sv->users[$from->resourceId]['equipe'.$equipe]);
         $reponse->addReponsedonnee($this->question->getReponsespossible()[$idreponse]);
-
+        echo "7 \n";
         $entityManager = $sv->em->getManager();
         $entityManager->persist($reponse);
         $entityManager->flush();
@@ -173,7 +178,9 @@ class ModeMakeyMakey implements GameMode
           "reponselibelle" => $this->question->getReponsespossible()[$idreponse]->getLibelle(),
           "utilisateurlogin" => $sv->users[$from->resourceId]['equipe'.$equipe]->getLogin()
         ]));
+        echo "8 \n";
       }else{
+        echo "9 \n";
         $sv->users[$from->resourceId]['equipe'.$equipe.'Timer'] = microtime(true);
         $this->SendAdmin($sv,json_encode([
           "action" => "AfficherReponse",
@@ -181,6 +188,7 @@ class ModeMakeyMakey implements GameMode
           "reponselibelle" => $this->question->getReponsespossible()[$idreponse]->getLibelle(),
           "utilisateurlogin" => $sv->users[$from->resourceId]['equipe'.$equipe]->getLogin()
         ]));
+        echo "10 \n";
       }
     }
   }
