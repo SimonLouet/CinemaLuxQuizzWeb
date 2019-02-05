@@ -81,10 +81,10 @@ class ModeMakeyMakey implements GameMode
 
         foreach ($sv->users as $user) {
           if($user['status'] == 'Connected'){
-            $user['repondu'] = microtime(true) - 5000;
+            $user['repondu'] -= 5.000;
           }
         }
-        
+
       }else{
         $this->SendAdmin($sv,json_encode([
           "action" => "AfficherReponse",
