@@ -54,7 +54,7 @@ class ModeMakeyMakey implements GameMode
 
   private function RepondreQuestion($sv,$from, $idreponse){
    if($sv->users[$from->resourceId]['repondu'] + 4.000 <= microtime(true) && $idreponse < count ($this->question->getReponsespossible()) && $sv->etape == "Question"){
-      $sv->users[$from->resourceId]['repondu'] = microtime(true);
+
        if($this->question->getReponsespossible()[$idreponse]->getCorrect()){
          $sv->etape = "reponseValide";
         $reponse = new Reponse();
@@ -79,13 +79,9 @@ class ModeMakeyMakey implements GameMode
           "correct" => true
         ]));
 
-        foreach ($sv->users as $user) {
-          if($user['status'] == 'Connected'){
-            $user['repondu'] -= 5.000;
-          }
-        }
 
       }else{
+        $sv->users[$from->resourceId]['repondu'] = microtime(true);
         $this->SendAdmin($sv,json_encode([
           "action" => "AfficherReponse",
           "correct" => false,
