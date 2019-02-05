@@ -23,6 +23,11 @@ class ModeTourParTour implements GameMode
 
   public function Action($sv,ConnectionInterface $from,$action,$messageData){
     switch ($action) {
+
+      case 'Connexion':
+      return $this->Connexion($sv,$from);
+      break;
+
       case 'NextEtape':
       return $this->NextEtape($sv,$from);
       break;

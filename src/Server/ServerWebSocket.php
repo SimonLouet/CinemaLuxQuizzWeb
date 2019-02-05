@@ -154,6 +154,13 @@ class ServerWebSocket implements MessageComponentInterface
       $from->send(json_encode([
         "action" => "AfficherQRCode"
       ]));
+
+      foreach ($this->users as $user) {
+        if($user['status'] == 'NotConnected'){
+          return $user;
+        }
+      }
+
     }
     return true;
   }
@@ -225,7 +232,9 @@ class ServerWebSocket implements MessageComponentInterface
   {
     foreach ($this->users as $user) {
       if($user['status'] == 'Admin'){
-        return $user;
+        $user['connection']->send(json_encode([
+          "action" => "TentativeConnexion"
+        ]));
       }
     }
     return null;

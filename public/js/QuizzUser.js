@@ -335,6 +335,9 @@ ws.onmessage = function (event) {
     AfficherFirstConnexion(message);
     break;
 
+    case 'TentativeConnexion':
+    TentativeConnexion(message);
+    break;
 
     default:
     if(modeJeux != null){
@@ -375,12 +378,17 @@ var SendFirstConnexion = function () {
       mdp:mdp
     }));
   }
-
 };
 
 
 
 ////////////////////////////////////////////////////////////////////////////////////////Fonction appeller par le serveur ////////////////////////////////////////////////////////////////////////////////////
+
+function TentativeConnexion (message) {
+  ws.send(JSON.stringify({
+    action: 'Connexion'
+  }));
+};
 
 function LoginUser (message) {
   if(message.valide){
