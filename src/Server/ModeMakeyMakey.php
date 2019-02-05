@@ -46,7 +46,7 @@ class ModeMakeyMakey implements GameMode
 
   private function Connexion($sv,ConnectionInterface $from)
   {
-    if($this->partie == null){
+    if($sv->partie == null){
       $from->send(json_encode([
         "action" => "LoginUser",
         "valide" => false,
@@ -55,7 +55,7 @@ class ModeMakeyMakey implements GameMode
       return;
     }
 
-    if($this->etape != "QRCode" && $this->etape != "Presentation"){
+    if($sv->etape != "QRCode" && $sv->etape != "Presentation"){
       $from->send(json_encode([
         "action" => "LoginUser",
         "valide" => false,
@@ -64,13 +64,13 @@ class ModeMakeyMakey implements GameMode
       return;
     }
 
-    $utilisateur = $this->em->getRepository(Utilisateur::class)->findOneBy(['mail' => "MakeyMakey@cinemalux.org" ]);
+    $utilisateur = $sv->em->getRepository(Utilisateur::class)->findOneBy(['mail' => "MakeyMakey@cinemalux.org" ]);
 
 
     if($utilisateur != null){
       echo "Connexion du client\n";
       $valide = true;
-      foreach ($this->users as $user) {
+      foreach ($sv->users as $user) {
         if($user['status'] == 'Connected'){
           if($utilisateur->getid() == $user['utilisateur']->getid() ){
             $valide = false;
@@ -87,29 +87,29 @@ class ModeMakeyMakey implements GameMode
         return;
       }
 
-      $this->users[$from->resourceId]['status'] = 'Connected';
-      $this->users[$from->resourceId]['utilisateur'] = $utilisateur;
+      $sv->users[$from->resourceId]['status'] = 'Connected';
+      $sv->users[$from->resourceId]['utilisateur'] = $utilisateur;
       $from->send(json_encode([
         "action" => "LoginUser",
         "valide" => true,
         "partie" => [
-          "id" => $this->partie->getId(),
-          "nom" => $this->partie->getNom(),
-          "description" => $this->partie->getDescription(),
-          "imagefondname" => $this->partie->getimagefondname(),
-          "theme" => $this->partie->getTheme(),
-          "colortext" => $this->partie->getColortext(),
-          "colortitre" => $this->partie->getColortitre(),
-          "colorfenetre" => $this->partie->getcolorfenetre(),
-          "fontpolice" => $this->partie->getfontpolice(),
-          "fontsize" => $this->partie->getfontsize(),
-          "modejeux" => $this->partie->getModejeux()
+          "id" => $sv->partie->getId(),
+          "nom" => $sv->partie->getNom(),
+          "description" => $sv->partie->getDescription(),
+          "imagefondname" => $sv->partie->getimagefondname(),
+          "theme" => $sv->partie->getTheme(),
+          "colortext" => $sv->partie->getColortext(),
+          "colortitre" => $sv->partie->getColortitre(),
+          "colorfenetre" => $sv->partie->getcolorfenetre(),
+          "fontpolice" => $sv->partie->getfontpolice(),
+          "fontsize" => $sv->partie->getfontsize(),
+          "modejeux" => $sv->partie->getModejeux()
         ]
       ]));
       $from->send(json_encode([
         "action" => "AfficherPresentation"
       ]));
-      $this->RefreshCompteurUser();
+      $sv->RefreshCompteurUser();
     }else{
       echo "inscription du client\n";
 
@@ -119,33 +119,33 @@ class ModeMakeyMakey implements GameMode
       $utilisateur->setMdp(md5("5684q6rqg54q6rg4q6gqry5f4"));
       $utilisateur->setMail("MakeyMakey@cinemalux.org");
 
-      $entityManager = $this->em->getManager();
+      $entityManager = $sv->em->getManager();
       $entityManager->persist($utilisateur);
       $entityManager->flush();
 
-      $this->users[$from->resourceId]['status'] = 'Connected';
-      $this->users[$from->resourceId]['utilisateur'] = $utilisateur;
+      $sv->users[$from->resourceId]['status'] = 'Connected';
+      $sv->users[$from->resourceId]['utilisateur'] = $utilisateur;
       $from->send(json_encode([
         "action" => "LoginUser",
         "valide" => true,
         "partie" => [
-          "id" => $this->partie->getId(),
-          "nom" => $this->partie->getNom(),
-          "description" => $this->partie->getDescription(),
-          "imagefondname" => $this->partie->getimagefondname(),
-          "theme" => $this->partie->getTheme(),
-          "colortext" => $this->partie->getColortext(),
-          "colortitre" => $this->partie->getColortitre(),
-          "colorfenetre" => $this->partie->getcolorfenetre(),
-          "fontpolice" => $this->partie->getfontpolice(),
-          "fontsize" => $this->partie->getfontsize(),
-          "modejeux" => $this->partie->getModejeux()
+          "id" => $sv->partie->getId(),
+          "nom" => $sv->partie->getNom(),
+          "description" => $sv->partie->getDescription(),
+          "imagefondname" => $sv->partie->getimagefondname(),
+          "theme" => $sv->partie->getTheme(),
+          "colortext" => $sv->partie->getColortext(),
+          "colortitre" => $sv->partie->getColortitre(),
+          "colorfenetre" => $sv->partie->getcolorfenetre(),
+          "fontpolice" => $sv->partie->getfontpolice(),
+          "fontsize" => $sv->partie->getfontsize(),
+          "modejeux" => $sv->partie->getModejeux()
         ]
       ]));
       $from->send(json_encode([
         "action" => "AfficherPresentation"
       ]));
-      $this->RefreshCompteurUser();
+      $sv->RefreshCompteurUser();
     }
     return true;
   }
