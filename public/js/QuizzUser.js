@@ -245,16 +245,16 @@ function ModeMakeyMakey () {
       if (event.key === 'ArrowRight') {
         modeJeux.SendReponse(3,1);
       }
-      if (event.key === 'Q') {
+      if (event.key === 'q') {
         modeJeux.SendReponse(0,2);
       }
-      if (event.key === 'Z') {
+      if (event.key === 'z') {
         modeJeux.SendReponse(1,2);
       }
-      if (event.key === 'D') {
+      if (event.key === 'd') {
         modeJeux.SendReponse(2,2);
       }
-      if (event.key === 'S') {
+      if (event.key === 's') {
         modeJeux.SendReponse(3,2);
       }
     }, false);
