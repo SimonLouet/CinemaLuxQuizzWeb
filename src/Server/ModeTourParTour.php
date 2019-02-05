@@ -53,6 +53,8 @@ class ModeTourParTour implements GameMode
     }
   }
 
+
+
   private function Connexion($sv,ConnectionInterface $from)
   {
     $from->send(json_encode([
