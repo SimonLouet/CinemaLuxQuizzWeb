@@ -33,10 +33,6 @@ class ServerWebSocket implements MessageComponentInterface
       'repondu' => false
     ];
 
-    if($gameMode == null){
-      $this->deconnexion($conn);
-
-    }
   }
 
   public function onClose(ConnectionInterface $closedConnection)
@@ -77,7 +73,7 @@ class ServerWebSocket implements MessageComponentInterface
       $mdp = $messageData->mdp ?? '';
       return $this->LoginAdmin($from, $mdp);
 
-      
+
 
       default:
       if($this->gameMode != null){
