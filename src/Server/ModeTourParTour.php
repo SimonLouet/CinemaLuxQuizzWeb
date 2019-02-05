@@ -40,13 +40,13 @@ class ModeTourParTour implements GameMode
       case 'LoginUser':
       $mail = $messageData->mail ?? '';
       $mdp = $messageData->mdp ?? '';
-      return $this->LoginUser($from, $mail,$mdp);
+      return $this->LoginUser($sv,$from, $mail,$mdp);
 
       case 'FirstConnexion':
       $pseudonyme = $messageData->pseudonyme ?? '';
       $mail = $messageData->mail ?? '';
       $mdp = $messageData->mdp ?? '';
-      return $this->FirstConnexion($from, $mail, $pseudonyme,$mdp);
+      return $this->FirstConnexion($sv,$from, $mail, $pseudonyme,$mdp);
 
       default:
       break;
@@ -331,7 +331,7 @@ class ModeTourParTour implements GameMode
     return true;
   }
 
-  private function FirstConnexion(ConnectionInterface $from, $mail, $pseudonyme,$mdp)
+  private function FirstConnexion($sv,ConnectionInterface $from, $mail, $pseudonyme,$mdp)
   {
     $sv->users[$from->resourceId]['utilisateur']->setlogin($pseudonyme);
     $sv->users[$from->resourceId]['utilisateur']->setMail($mail);
