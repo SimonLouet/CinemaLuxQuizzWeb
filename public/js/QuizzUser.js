@@ -335,6 +335,11 @@ ws.onmessage = function (event) {
     AfficherFirstConnexion(message);
     break;
 
+
+    case 'AfficherMenuLogin':
+    AfficherMenuLogin();
+    break;
+
     case 'TentativeConnexion':
     TentativeConnexion(message);
     break;
