@@ -32,6 +32,11 @@ class ServerWebSocket implements MessageComponentInterface
       'status' => 'NotConnected',
       'repondu' => false
     ];
+
+    if($gameMode == null){
+      $this->deconnexion($conn);
+
+    }
   }
 
   public function onClose(ConnectionInterface $closedConnection)
@@ -72,16 +77,7 @@ class ServerWebSocket implements MessageComponentInterface
       $mdp = $messageData->mdp ?? '';
       return $this->LoginAdmin($from, $mdp);
 
-      case 'LoginUser':
-      $mail = $messageData->mail ?? '';
-      $mdp = $messageData->mdp ?? '';
-      return $this->LoginUser($from, $mail,$mdp);
-
-      case 'FirstConnexion':
-      $pseudonyme = $messageData->pseudonyme ?? '';
-      $mail = $messageData->mail ?? '';
-      $mdp = $messageData->mdp ?? '';
-      return $this->FirstConnexion($from, $mail, $pseudonyme,$mdp);
+      
 
       default:
       if($this->gameMode != null){
@@ -103,6 +99,7 @@ class ServerWebSocket implements MessageComponentInterface
     if($this->users[$from->resourceId]['status'] == 'Admin'){
       echo "Deconnexion de l'administrateur\n";
       $partie = null;
+      $gameMode = null;
       foreach ($this->users as $user) {
         if($user['status'] == 'Connected'){
           $this->deconnexion($user['connection']);
@@ -213,137 +210,7 @@ class ServerWebSocket implements MessageComponentInterface
     ]));
   }
 
-  private function LoginUser(ConnectionInterface $from, $mail, $mdp)
-  {
-    if($this->partie == null){
-      $from->send(json_encode([
-        "action" => "LoginUser",
-        "valide" => false,
-        "erreur" => "Aucune partie est en cours."
-      ]));
-      return;
-    }
 
-    if($this->etape != "QRCode" && $this->etape != "Presentation"){
-      $from->send(json_encode([
-        "action" => "LoginUser",
-        "valide" => false,
-        "erreur" => "les inscriptions sont fermé."
-      ]));
-      return;
-    }
-
-    $utilisateur = $this->em->getRepository(Utilisateur::class)->findOneBy(['mail' => $mail ]);
-
-
-    if($utilisateur != null){
-      echo "Connexion du client\n";
-      $valide = true;
-      foreach ($this->users as $user) {
-        if($user['status'] == 'Connected'){
-          if($utilisateur->getid() == $user['utilisateur']->getid() ){
-            $valide = false;
-            break;
-          }
-        }
-      }
-      if(!$valide){
-        $from->send(json_encode([
-          "action" => "LoginUser",
-          "valide" => false,
-          "erreur" => "Compte déjà connecté."
-        ]));
-        return;
-      }
-
-      if(md5($mdp) != $utilisateur->getmdp()){
-        $from->send(json_encode([
-          "action" => "LoginUser",
-          "valide" => false,
-          "erreur" => "Mot de passe incorrect."
-        ]));
-        return;
-      }
-
-      $this->users[$from->resourceId]['status'] = 'Connected';
-      $this->users[$from->resourceId]['utilisateur'] = $utilisateur;
-      $from->send(json_encode([
-        "action" => "LoginUser",
-        "valide" => true,
-        "partie" => [
-          "id" => $this->partie->getId(),
-          "nom" => $this->partie->getNom(),
-          "description" => $this->partie->getDescription(),
-          "imagefondname" => $this->partie->getimagefondname(),
-          "theme" => $this->partie->getTheme(),
-          "colortext" => $this->partie->getColortext(),
-          "colortitre" => $this->partie->getColortitre(),
-          "colorfenetre" => $this->partie->getcolorfenetre(),
-          "fontpolice" => $this->partie->getfontpolice(),
-          "fontsize" => $this->partie->getfontsize(),
-          "modejeux" => $this->partie->getModejeux()
-        ]
-      ]));
-      $from->send(json_encode([
-        "action" => "AfficherPresentation"
-      ]));
-      $this->RefreshCompteurUser();
-    }else{
-      echo "inscription du client\n";
-
-      $utilisateur = new Utilisateur();
-
-      $utilisateur->setlogin("");
-      $utilisateur->setMdp(md5($mdp));
-      $utilisateur->setMail($mail);
-
-      $entityManager = $this->em->getManager();
-      $entityManager->persist($utilisateur);
-      $entityManager->flush();
-
-      $this->users[$from->resourceId]['status'] = 'Connected';
-      $this->users[$from->resourceId]['utilisateur'] = $utilisateur;
-
-      $from->send(json_encode([
-        "action" => "AfficherFirstConnexion",
-        "mail" => $mail
-      ]));
-      $this->RefreshCompteurUser();
-    }
-    return true;
-  }
-
-  private function FirstConnexion(ConnectionInterface $from, $mail, $pseudonyme,$mdp)
-  {
-    $this->users[$from->resourceId]['utilisateur']->setlogin($pseudonyme);
-    $this->users[$from->resourceId]['utilisateur']->setMail($mail);
-    $this->users[$from->resourceId]['utilisateur']->setMdp(md5($mdp));
-
-    $entityManager = $this->em->getManager();
-    $entityManager->persist($this->users[$from->resourceId]['utilisateur']);
-    $entityManager->flush();
-    $from->send(json_encode([
-      "action" => "LoginUser",
-      "valide" => true,
-      "partie" => [
-        "id" => $this->partie->getId(),
-        "nom" => $this->partie->getNom(),
-        "description" => $this->partie->getDescription(),
-        "imagefondname" => $this->partie->getimagefondname(),
-        "theme" => $this->partie->getTheme(),
-        "colortext" => $this->partie->getColortext(),
-        "colortitre" => $this->partie->getColortitre(),
-        "colorfenetre" => $this->partie->getcolorfenetre(),
-        "fontpolice" => $this->partie->getfontpolice(),
-        "fontsize" => $this->partie->getfontsize(),
-        "modejeux" => $this->partie->getModejeux()
-      ]
-    ]));
-    $from->send(json_encode([
-      "action" => "AfficherPresentation"
-    ]));
-    return true;
-  }
 
 
   public function GetAutorisation(ConnectionInterface $from)

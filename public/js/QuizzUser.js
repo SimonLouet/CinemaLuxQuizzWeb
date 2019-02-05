@@ -309,6 +309,10 @@ ws.onopen = function () {
   ws.send(JSON.stringify({
     action: 'Connexion'
   }));
+  _body.innerHTML =
+  '<div class="alert alert-danger">'+
+  '<strong>Info !</strong>En attente du serveur ...'
+  '</div>';
 };
 
 ws.onclose = function() {
