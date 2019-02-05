@@ -197,7 +197,7 @@ class ServerWebSocket implements MessageComponentInterface
     return true;
   }
 
-  private function RefreshCompteurUser(){
+  public function RefreshCompteurUser(){
     $nb = 0;
     $admin;
     foreach ($this->users as $user) {
