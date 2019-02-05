@@ -157,7 +157,10 @@ class ServerWebSocket implements MessageComponentInterface
 
       foreach ($this->users as $user) {
         if($user['status'] == 'NotConnected'){
-          return $user;
+
+            $user['connection']->send(json_encode([
+              "action" => "TentativeConnexion"
+            ]));
         }
       }
 
