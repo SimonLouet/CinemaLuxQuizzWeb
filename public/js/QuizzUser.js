@@ -306,7 +306,9 @@ var modeJeux = null;
 
 
 ws.onopen = function () {
-  //AfficherMenuLogin("");
+  ws.send(JSON.stringify({
+    action: 'Connexion'
+  }));
 };
 
 ws.onclose = function() {

@@ -32,9 +32,6 @@ class ServerWebSocket implements MessageComponentInterface
       'status' => 'NotConnected',
       'repondu' => false
     ];
-    if($this->gameMode != null){
-      $this->gameMode->Connexion($this,$from);
-    }
   }
 
   public function onClose(ConnectionInterface $closedConnection)
