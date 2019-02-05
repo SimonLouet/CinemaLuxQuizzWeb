@@ -272,22 +272,6 @@ function ModeMakeyMakey () {
       var background = document.getElementById('background');
       background.style.backgroundColor = "green";
       _body.innerHTML = rendu;
-    }else{
-      var rendu =
-      '<div class="row justify-content-center"  style="min-height: 2vh;">'+
-      '	<div class="col-md-12 " style="padding: 0px 0px 0px 0px;">'+
-        '<div class="progress" id="bar-chrono" style="height: 100%; width:100%;">'+
-          '<div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>'+
-          '</div>'+
-        '</div>'+
-      '</div>'+
-      '<div class="row  justify-content-center align-items-center" style="min-height: 98vh;">'+
-      '<i class="fas fa-times" style="font-size:200px;color:white;">'+
-      '</div>';
-      var background = document.getElementById('background');
-      background.style.backgroundColor = "red";
-      chronoStart(4000,"");
-      setTimeout(function(){ _body.innerHTML = modeJeux.bodyquestion;var background = document.getElementById('background');background.style.backgroundColor = partie.colorfenetre;}, 4000);
     }
 
     _body.innerHTML = rendu;

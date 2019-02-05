@@ -35,7 +35,8 @@ class ModeMakeyMakey implements GameMode
 
       case 'RepondreQuestion':
       $idreponse = $messageData->idreponse ?? 0;
-      return $this->RepondreQuestion($sv,$from, $idreponse);
+      $equipe = $messageData->equipe ?? 0;
+      return $this->RepondreQuestion($sv,$from, $equipe);
       break;
 
       default:
@@ -64,15 +65,15 @@ class ModeMakeyMakey implements GameMode
       return;
     }
 
-    $utilisateur = $sv->em->getRepository(Utilisateur::class)->findOneBy(['mail' => "MakeyMakey@cinemalux.org" ]);
+    $equipe1 = $sv->em->getRepository(Utilisateur::class)->findOneBy(['mail' => "MakeyMakey1@cinemalux.org" ]);
+    $equipe2 = $sv->em->getRepository(Utilisateur::class)->findOneBy(['mail' => "MakeyMakey2@cinemalux.org" ]);
 
-
-    if($utilisateur != null){
+    if($equipe1 != null && $equipe2 != null){
       echo "Connexion du client\n";
       $valide = true;
       foreach ($sv->users as $user) {
         if($user['status'] == 'Connected'){
-          if($utilisateur->getid() == $user['utilisateur']->getid() ){
+          if($equipe1->getid() == $user['equipe1']->getid() ||  $equipe2->getid() == $user['equipe2']->getid() ){
             $valide = false;
             break;
           }
@@ -86,67 +87,50 @@ class ModeMakeyMakey implements GameMode
         ]));
         return;
       }
-
-      $sv->users[$from->resourceId]['status'] = 'Connected';
-      $sv->users[$from->resourceId]['utilisateur'] = $utilisateur;
-      $from->send(json_encode([
-        "action" => "LoginUser",
-        "valide" => true,
-        "partie" => [
-          "id" => $sv->partie->getId(),
-          "nom" => $sv->partie->getNom(),
-          "description" => $sv->partie->getDescription(),
-          "imagefondname" => $sv->partie->getimagefondname(),
-          "theme" => $sv->partie->getTheme(),
-          "colortext" => $sv->partie->getColortext(),
-          "colortitre" => $sv->partie->getColortitre(),
-          "colorfenetre" => $sv->partie->getcolorfenetre(),
-          "fontpolice" => $sv->partie->getfontpolice(),
-          "fontsize" => $sv->partie->getfontsize(),
-          "modejeux" => $sv->partie->getModejeux()
-        ]
-      ]));
-      $from->send(json_encode([
-        "action" => "AfficherPresentation"
-      ]));
-      $sv->RefreshCompteurUser();
     }else{
       echo "inscription du client\n";
 
-      $utilisateur = new Utilisateur();
+      $equipe1 = new Utilisateur();
+      $equipe2 = new Utilisateur();
 
-      $utilisateur->setlogin("Equipe");
-      $utilisateur->setMdp(md5("5684q6rqg54q6rg4q6gqry5f4"));
-      $utilisateur->setMail("MakeyMakey@cinemalux.org");
+      $equipe1->setlogin("Equipe1");
+      $equipe2->setlogin("Equipe2");
+      $equipe1->setMdp(md5("5684q6rqg54q6rg4q6gqry5f4"));
+      $equipe2->setMdp(md5("5684q6rqg54q6rg4q6gqry5f4"));
+      $equipe1->setMail("MakeyMakey1@cinemalux.org");
+      $equipe2->setMail("MakeyMakey2@cinemalux.org");
 
       $entityManager = $sv->em->getManager();
-      $entityManager->persist($utilisateur);
+      $entityManager->persist($equipe1);
+      $entityManager->persist($equipe2);
       $entityManager->flush();
-
-      $sv->users[$from->resourceId]['status'] = 'Connected';
-      $sv->users[$from->resourceId]['utilisateur'] = $utilisateur;
-      $from->send(json_encode([
-        "action" => "LoginUser",
-        "valide" => true,
-        "partie" => [
-          "id" => $sv->partie->getId(),
-          "nom" => $sv->partie->getNom(),
-          "description" => $sv->partie->getDescription(),
-          "imagefondname" => $sv->partie->getimagefondname(),
-          "theme" => $sv->partie->getTheme(),
-          "colortext" => $sv->partie->getColortext(),
-          "colortitre" => $sv->partie->getColortitre(),
-          "colorfenetre" => $sv->partie->getcolorfenetre(),
-          "fontpolice" => $sv->partie->getfontpolice(),
-          "fontsize" => $sv->partie->getfontsize(),
-          "modejeux" => $sv->partie->getModejeux()
-        ]
-      ]));
-      $from->send(json_encode([
-        "action" => "AfficherPresentation"
-      ]));
-      $sv->RefreshCompteurUser();
     }
+
+
+    $sv->users[$from->resourceId]['status'] = 'Connected';
+    $sv->users[$from->resourceId]['equipe1'] = $equipe1;
+    $sv->users[$from->resourceId]['equipe2'] = $equipe2;
+    $from->send(json_encode([
+      "action" => "LoginUser",
+      "valide" => true,
+      "partie" => [
+        "id" => $sv->partie->getId(),
+        "nom" => $sv->partie->getNom(),
+        "description" => $sv->partie->getDescription(),
+        "imagefondname" => $sv->partie->getimagefondname(),
+        "theme" => $sv->partie->getTheme(),
+        "colortext" => $sv->partie->getColortext(),
+        "colortitre" => $sv->partie->getColortitre(),
+        "colorfenetre" => $sv->partie->getcolorfenetre(),
+        "fontpolice" => $sv->partie->getfontpolice(),
+        "fontsize" => $sv->partie->getfontsize(),
+        "modejeux" => $sv->partie->getModejeux()
+      ]
+    ]));
+    $from->send(json_encode([
+      "action" => "AfficherPresentation"
+    ]));
+    $sv->RefreshCompteurUser();
     return true;
   }
 
@@ -165,9 +149,11 @@ class ModeMakeyMakey implements GameMode
   }
 
 
-  private function RepondreQuestion($sv,$from, $idreponse){
-   if($sv->users[$from->resourceId]['repondu'] + 4.000 <= microtime(true) && $idreponse < count ($this->question->getReponsespossible()) && $sv->etape == "Question"){
-
+  private function RepondreQuestion($sv,$from, $idreponse,$equipe){
+   if($idreponse < count ($this->question->getReponsespossible()) && $sv->etape == "Question"){
+     if($sv->users[$from->resourceId]['equipe'.$equipe.'Timer'] + 4.000 > microtime(true)){
+       return
+     }
        if($this->question->getReponsespossible()[$idreponse]->getCorrect()){
          $sv->etape = "reponseValide";
         $reponse = new Reponse();
@@ -175,7 +161,7 @@ class ModeMakeyMakey implements GameMode
         $reponse->setQuestion($this->question);
         $timeReponse = microtime(true);
         $reponse->setTimereponse($timeReponse);
-        $reponse->setUtilisateur($sv->users[$from->resourceId]['utilisateur']);
+        $reponse->setUtilisateur($sv->users[$from->resourceId]['equipe'.$equipe]);
         $reponse->addReponsedonnee($this->question->getReponsespossible()[$idreponse]);
 
         $entityManager = $sv->em->getManager();
@@ -185,31 +171,16 @@ class ModeMakeyMakey implements GameMode
           "action" => "AfficherReponse",
           "correct" => true,
           "reponselibelle" => $this->question->getReponsespossible()[$idreponse]->getLibelle(),
-          "utilisateurlogin" => $sv->users[$from->resourceId]['utilisateur']->getLogin()
+          "utilisateurlogin" => $sv->users[$from->resourceId]['equipe'.$equipe]->getLogin()
         ]));
-        $from->send(json_encode([
-          "action" => "AfficherResultat",
-          "correct" => true
-        ]));
-
-
       }else{
-        $sv->users[$from->resourceId]['repondu'] = microtime(true);
+        $sv->users[$from->resourceId]['equipe'.$equipe.'Timer'] = microtime(true);
         $this->SendAdmin($sv,json_encode([
           "action" => "AfficherReponse",
           "correct" => false,
           "reponselibelle" => $this->question->getReponsespossible()[$idreponse]->getLibelle(),
-          "utilisateurlogin" => $sv->users[$from->resourceId]['utilisateur']->getLogin()
+          "utilisateurlogin" => $sv->users[$from->resourceId]['equipe'.$equipe]->getLogin()
         ]));
-
-        $from->send(json_encode([
-          "action" => "AfficherResultat",
-          "correct" => false
-        ]));
-
-
-
-
       }
     }
   }
