@@ -152,7 +152,7 @@ class ModeMakeyMakey implements GameMode
   private function RepondreQuestion($sv,$from, $idreponse,$equipe){
    if($idreponse < count ($this->question->getReponsespossible()) && $sv->etape == "Question"){
      if($sv->users[$from->resourceId]['equipe'.$equipe.'Timer'] + 4.000 > microtime(true)){
-       return
+       return;
      }
        if($this->question->getReponsespossible()[$idreponse]->getCorrect()){
          $sv->etape = "reponseValide";
