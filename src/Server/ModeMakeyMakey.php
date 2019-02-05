@@ -79,6 +79,12 @@ class ModeMakeyMakey implements GameMode
           "correct" => true
         ]));
 
+        foreach ($sv->users as $user) {
+          if($user['status'] == 'Connected'){
+            $user['repondu'] = microtime(true) - 5000;
+          }
+        }
+        
       }else{
         $this->SendAdmin($sv,json_encode([
           "action" => "AfficherReponse",
@@ -92,11 +98,7 @@ class ModeMakeyMakey implements GameMode
           "correct" => false
         ]));
 
-        foreach ($sv->users as $user) {
-          if($user['status'] == 'Connected'){
-            $user['repondu'] = microtime(true) - 5000;
-          }
-        }
+
 
 
       }
