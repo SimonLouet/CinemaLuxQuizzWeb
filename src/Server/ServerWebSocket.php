@@ -96,6 +96,7 @@ class ServerWebSocket implements MessageComponentInterface
       echo "Deconnexion de l'administrateur\n";
       $this->partie = null;
       $this->gameMode = null;
+      $this->etape = null;
       foreach ($this->users as $user) {
         if($user['status'] == 'Connected'){
           $this->deconnexion($user['connection']);
@@ -156,7 +157,7 @@ class ServerWebSocket implements MessageComponentInterface
       ]));
 
       foreach ($this->users as $user) {
-        if($user['status'] == 'NotConnected'){
+        if($user['status'] != 'Admin'){
 
             $user['connection']->send(json_encode([
               "action" => "TentativeConnexion"
