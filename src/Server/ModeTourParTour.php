@@ -257,7 +257,23 @@ class ModeTourParTour implements GameMode
         return;
       }
       $sv->users[$from->resourceId]['status'] = 'Telecommande';
-
+      $from->send(json_encode([
+        "action" => "LoginUser",
+        "valide" => true,
+        "partie" => [
+          "id" => $sv->partie->getId(),
+          "nom" => $sv->partie->getNom(),
+          "description" => $sv->partie->getDescription(),
+          "imagefondname" => $sv->partie->getimagefondname(),
+          "theme" => $sv->partie->getTheme(),
+          "colortext" => $sv->partie->getColortext(),
+          "colortitre" => $sv->partie->getColortitre(),
+          "colorfenetre" => $sv->partie->getcolorfenetre(),
+          "fontpolice" => $sv->partie->getfontpolice(),
+          "fontsize" => $sv->partie->getfontsize(),
+          "modejeux" => $sv->partie->getModejeux()
+        ]
+      ]));
       $from->send(json_encode([
         "action" => "AfficherTelecommande"
       ]));

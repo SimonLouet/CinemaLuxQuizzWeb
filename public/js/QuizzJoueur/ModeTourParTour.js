@@ -77,10 +77,6 @@ function ModeTourParTour () {
 
 
   this.AfficherTelecommande = function (message){
-
-    var background = document.getElementById('background');
-
-    var haut = (window.innerHeight);
     var rendu =
     '<div class="row " style="min-height: 100vh;">'+
     '<div  class="col "style="padding: 10px 10px 10px 10px;min-height: 100vh;"><button id="nextEtape" style="height: 100%;" type="button"  class="btn btn-block btn-primary">Suivant</button></div>'+
