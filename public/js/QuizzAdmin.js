@@ -34,7 +34,8 @@ function ModeTourParTour () {
     if (event.key === 'Enter') {
       console.log("NestEtape");
       ws.send(JSON.stringify({
-        action: 'NextEtape'
+        action: 'NextEtape',
+        origin: "Admin"
       }));
     }
   }, false);
@@ -175,7 +176,8 @@ function ModeTourParTour () {
 
     _body.innerHTML = rendu;
     chronoStart(message.question.timer,JSON.stringify({
-      action: 'NextEtape'
+      action: 'NextEtape',
+      origin: "Chrono"
     }));
   }
 

@@ -29,7 +29,9 @@ class ModeTourParTour implements GameMode
       break;
 
       case 'NextEtape':
-      return $this->NextEtape($sv,$from);
+
+      $origin = $messageData->origin ?? "Admin";
+      return $this->NextEtape($sv,$from,$origin);
       break;
 
       case 'RepondreQuestion':
@@ -63,20 +65,22 @@ class ModeTourParTour implements GameMode
     return true;
   }
 
-  private function NextEtape($sv,ConnectionInterface $from)
+  private function NextEtape($sv,ConnectionInterface $from,$origin)
   {
     if($sv->GetAutorisation($from)){
       if($sv->etape == "QRCode" || $sv->etape == "Reponse"){
-        $this->nbQuestion += 1;
-        if($this->nbQuestion <= count($sv->partie->getQuestions())){
-          $this->SendAfficherQuestion($sv,$from,$this->nbQuestion);
-        }else{
-          $this->SendAfficherFin($sv,$from);
+        if($origin == "Admin"){
+          $this->nbQuestion += 1;
+          if($this->nbQuestion <= count($sv->partie->getQuestions())){
+            $this->SendAfficherQuestion($sv,$from,$this->nbQuestion);
+          }else{
+            $this->SendAfficherFin($sv,$from);
+          }
         }
-
-
       }else if($sv->etape == "Question"){
-        $this->SendAfficherReponse($sv,$from,$this->nbQuestion);
+        if($origin == "Chrono"){
+          $this->SendAfficherReponse($sv,$from,$this->nbQuestion);
+        }
       }
     }
     return true;
