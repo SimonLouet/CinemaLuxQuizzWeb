@@ -18,6 +18,10 @@ function ModeTourParTour () {
       this.AfficherQuestion(message);
       break;
 
+      case 'AfficherTelecommande':
+
+      this.AfficherTelecommande(message);
+      break;
 
       case 'AfficherResultat':
       //_body.innerHTML = event.data;
