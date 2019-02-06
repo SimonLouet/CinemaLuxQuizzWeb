@@ -172,7 +172,7 @@ function AfficherMenuLogin(erreur){
   '<form onsubmit = "SendLoginAdmin(); return false;" >'+
   '<div class="form-group">'+
   '<div class="form-label-group">'+
-  '<input type="password" id="inputPassword" value="admin" class="form-control" placeholder="Password" required="required">'+
+  '<input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">'+
   '<label for="inputPassword">Mot de passe administrateur</label>'+
   '</div>'+
   '</div>'+

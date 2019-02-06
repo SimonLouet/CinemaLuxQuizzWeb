@@ -98,9 +98,7 @@ class ServerWebSocket implements MessageComponentInterface
       $this->gameMode = null;
       $this->etape = null;
       foreach ($this->users as $user) {
-        if($user['status'] == 'Connected'){
-          $this->deconnexion($user['connection']);
-        }
+        $this->deconnexion($user['connection']);
       }
     }else{
       echo "Deconnexion d'un client\n";
@@ -173,7 +171,7 @@ class ServerWebSocket implements MessageComponentInterface
 
   private function LoginAdmin(ConnectionInterface $from, $mdp)
   {
-    if($mdp != "admin"){
+    if($mdp != "RomuluX14"){
       $from->send(json_encode([
         "action" => "LoginAdmin",
         "valide" => false,
