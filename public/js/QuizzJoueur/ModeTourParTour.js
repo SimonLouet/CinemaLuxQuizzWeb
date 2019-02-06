@@ -84,7 +84,7 @@ function ModeTourParTour () {
 
     _body.innerHTML = rendu;
     var nextEtapeButton = document.getElementById('nextEtape');
-    reponseButton.setAttribute("onclick","modeJeux.SendNextEtape();");
+    nextEtapeButton.setAttribute("onclick","modeJeux.SendNextEtape();");
   }
 
   this.AfficherQuestion = function (message){
