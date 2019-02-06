@@ -72,14 +72,14 @@ class ModeTourParTour implements GameMode
         if($origin == "Admin"){
           $this->nbQuestion += 1;
           if($this->nbQuestion <= count($sv->partie->getQuestions())){
-            $this->SendAfficherQuestion($sv,$this->GetAdmin()['connection'],$this->nbQuestion);
+            $this->SendAfficherQuestion($sv,$this->GetAdmin($sv)['connection'],$this->nbQuestion);
           }else{
-            $this->SendAfficherFin($sv,$this->GetAdmin()['connection']);
+            $this->SendAfficherFin($sv,$this->GetAdmin($sv)['connection']);
           }
         }
       }else if($sv->etape == "Question"){
         if($origin == "Chrono"){
-          $this->SendAfficherReponse($sv,$this->GetAdmin()['connection'],$this->nbQuestion);
+          $this->SendAfficherReponse($sv,$this->GetAdmin($sv)['connection'],$this->nbQuestion);
         }
       }
     }
