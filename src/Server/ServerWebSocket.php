@@ -222,7 +222,7 @@ class ServerWebSocket implements MessageComponentInterface
 
   public function GetAutorisation(ConnectionInterface $from)
   {
-    if($this->users[$from->resourceId]['status'] == 'Admin'){
+    if($this->users[$from->resourceId]['status'] == 'Admin' || $this->users[$from->resourceId]['status'] == 'Telecommande'){
       return true;
     }
     $from->send(json_encode([

@@ -32,7 +32,6 @@ function ModeTourParTour () {
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-      console.log("NestEtape");
       ws.send(JSON.stringify({
         action: 'NextEtape',
         origin: "Admin"

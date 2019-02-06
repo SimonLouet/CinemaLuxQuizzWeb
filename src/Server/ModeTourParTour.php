@@ -247,7 +247,22 @@ class ModeTourParTour implements GameMode
       ]));
       return;
     }
+    if ($mail == "telecommande@cinemalux.org"){
+      if ($mdp != "jesuisunetelecommande"){
+        $from->send(json_encode([
+          "action" => "LoginUser",
+          "valide" => false,
+          "erreur" => "Mot de passe incorrect pour la telecommande"
+        ]));
 
+        $sv->users[$from->resourceId]['status'] = 'Telecommande';
+
+        $from->send(json_encode([
+          "action" => "AfficherTelecommande"
+        ]));
+      }
+
+    }
     if($sv->etape != "QRCode" && $sv->etape != "Presentation"){
       $from->send(json_encode([
         "action" => "LoginUser",

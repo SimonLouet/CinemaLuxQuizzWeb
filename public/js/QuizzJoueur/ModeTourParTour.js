@@ -37,6 +37,18 @@ function ModeTourParTour () {
     return false;
   };
 
+  this.SendNextEtape = function (x) {
+    ws.send(JSON.stringify({
+      action: 'NextEtape',
+      origin: "Admin"
+    }));
+    return false;
+  };
+
+
+
+
+
   this.AfficherFin = function (message){
     var background = document.getElementById('background');
     background.style.backgroundColor = partie.colorfenetre;
@@ -57,6 +69,22 @@ function ModeTourParTour () {
     '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;">'+
     '<i class="fas fa-circle-notch fa-spin" style="font-size:200px;color:white;"></i>'+
     '</div>';
+  }
+
+
+  this.AfficherTelecommande = function (message){
+
+    var background = document.getElementById('background');
+
+    var haut = (window.innerHeight);
+    var rendu =
+    '<div class="row " style="min-height: 100vh;">'+
+    '<div  class="col "style="padding: 10px 10px 10px 10px;min-height: 100vh;"><button id="nextEtape" style="height: 100%;" type="button"  class="btn btn-block btn-primary">Suivant</button></div>'+
+    '</div>';
+
+    _body.innerHTML = rendu;
+    var nextEtapeButton = document.getElementById('nextEtape');
+    reponseButton.setAttribute("onclick","modeJeux.SendNextEtape();");
   }
 
   this.AfficherQuestion = function (message){
