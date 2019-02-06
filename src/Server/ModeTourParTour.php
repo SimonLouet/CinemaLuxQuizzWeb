@@ -72,14 +72,14 @@ class ModeTourParTour implements GameMode
         if($origin == "Admin"){
           $this->nbQuestion += 1;
           if($this->nbQuestion <= count($sv->partie->getQuestions())){
-            $this->SendAfficherQuestion($sv,$from,$this->nbQuestion);
+            $this->SendAfficherQuestion($sv,$this->GetAdmin()['connection'],$this->nbQuestion);
           }else{
-            $this->SendAfficherFin($sv,$from);
+            $this->SendAfficherFin($sv,$this->GetAdmin()['connection']);
           }
         }
       }else if($sv->etape == "Question"){
         if($origin == "Chrono"){
-          $this->SendAfficherReponse($sv,$from,$this->nbQuestion);
+          $this->SendAfficherReponse($sv,$this->GetAdmin()['connection'],$this->nbQuestion);
         }
       }
     }
@@ -409,5 +409,15 @@ class ModeTourParTour implements GameMode
       }
     }
     return true;
+  }
+
+  private function GetAdmin($sv)
+  {
+    foreach ($sv->users as $user) {
+      if($user['status'] == 'Admin'){
+        return $user;
+      }
+    }
+    return null;
   }
 }
