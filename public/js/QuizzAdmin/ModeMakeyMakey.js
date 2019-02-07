@@ -1,6 +1,7 @@
 
 function ModeMakeyMakey () {
   this.bodyQuestion;
+  this.reponseAfficher = 0;
 
   this.Action = function (message) {
     switch (message.action) {
@@ -18,6 +19,13 @@ function ModeMakeyMakey () {
       //_body.innerHTML = event.data;
       this.AfficherFin(message);
       break;
+
+      case 'AfficherReponsePossible':
+      //_body.innerHTML = event.data;
+      this.AfficherReponsePossible(message);
+      break;
+
+
     }
 
   }
@@ -133,6 +141,7 @@ function ModeMakeyMakey () {
       '</div>'+
       '</div>';
     }
+
     rendu += '<div class="row " style="min-height: 50vh;max-height: 50vh;">';
     var i = 0;
     var hauteur;
@@ -146,7 +155,7 @@ function ModeMakeyMakey () {
       largeur = (100 / ((message.reponsepossible.length + (message.reponsepossible.length %2)) / 2));;
     }
     for (let r of message.reponsepossible) {
-      rendu +='<div class="col "style="padding: 10px 10px 10px 10px;min-height: '+hauteur+'vh;max-width: '+largeur+'vw;"><button  style="height: 100%;font-size: '+r.fontsize+'px;white-space: normal;" type="button" class="btn btn-block btn-primary  bg-'+colors[i]+'">'+r.libelle+'</button></div>';
+      rendu +='<div id="reponse-'+(i+1)+'" class="col "style="cisibility:hidden; padding: 10px 10px 10px 10px;min-height: '+hauteur+'vh;max-width: '+largeur+'vw;"><button  style="height: 100%;font-size: '+r.fontsize+'px;white-space: normal;" type="button" class="btn btn-block btn-primary  bg-'+colors[i]+'">'+r.libelle+'</button></div>';
       if(message.reponsepossible.length <= 4 ){
         if(i%2 == 1){
           rendu +='<div class="w-100"style="height: 0vh;"></div>';
@@ -210,5 +219,11 @@ function ModeMakeyMakey () {
       setTimeout(function(){ _body.innerHTML = modeJeux.bodyQuestion;background.style.backgroundImage = "url('/QuizzLux/public/uploads/imageFond/"+partie.imagefondname+"')";}, 1000);
     }
     _body.innerHTML = rendu;
+  }
+
+  this.AfficherReponsePossible = function (message){
+    var reponse = document.getElementById('reponse-'+ this.reponseAfficher);
+    background.style.visibility = "visible";
+    this.reponseAfficher += 1;
   }
 }

@@ -17,6 +17,9 @@ class ModeMakeyMakey implements GameMode
   public $nbQuestion = 0;
   public $question;
   public $reponsePossibles = 0;
+  public $reponse = 0;
+  public $nbreponse = 0;
+
 
   public function __construct(){
   }
@@ -30,6 +33,8 @@ class ModeMakeyMakey implements GameMode
 
 
       case 'NextEtape':
+
+      $origin = $messageData->origin ?? "Admin";
       return $this->NextEtape($sv,$from);
       break;
 
@@ -137,27 +142,35 @@ class ModeMakeyMakey implements GameMode
   }
 
 
-  private function NextEtape($sv,ConnectionInterface $from)
+  private function NextEtape($sv,ConnectionInterface $from,$origin)
   {
-    $this->nbQuestion += 1;
-    $from = $this->GetAdmin($sv)['connection'];
-    if($this->nbQuestion <= count($sv->partie->getQuestions())){
-      $this->SendAfficherQuestion($sv,$from,$this->nbQuestion);
-    }else{
-      $this->SendAfficherFin($sv,$from);
-    }
 
+    $from = $this->GetAdmin($sv)['connection'];
+    if($sv->etape == "question" && $origin == "Admin"){
+      if($this->reponse < v){
+        $this->SendAfficherReponsePossible($sv,$from);
+      }else{
+        $sv->etape = "reponse";
+      }
+    }if($sv->etape == "reponse" && $origin = "Chrono"){
+      $this->nbQuestion += 1;
+      if($this->nbQuestion <= count($sv->partie->getQuestions())){
+        $this->SendAfficherQuestion($sv,$from,$this->nbQuestion);
+      }else{
+        $this->SendAfficherFin($sv,$from);
+      }
+    }
     return true;
   }
 
 
   private function RepondreQuestion($sv,$from, $idreponse,$equipe){
-   if($idreponse < count ($this->question->getReponsespossible()) && $sv->etape == "Question"){
+   if($idreponse < count ($this->question->getReponsespossible()) && $sv->etape == "reponse"){
      if($sv->users[$from->resourceId]['equipe'.$equipe.'Timer'] + 4.000 > microtime(true)){
        return;
      }
-       if($this->question->getReponsespossible()[$idreponse]->getCorrect()){
-         $sv->etape = "reponseValide";
+     if($this->question->getReponsespossible()[$idreponse]->getCorrect()){
+        $sv->etape = "reponseValide";
         $reponse = new Reponse();
         $reponse->setQuestion($this->question);
         $timeReponse = microtime(true);
@@ -189,6 +202,7 @@ class ModeMakeyMakey implements GameMode
 
   private function SendAfficherQuestion($sv,ConnectionInterface $from, $idQuestion)
   {
+    $this->nbreponse = 0;
     $this->question = $sv->em->getRepository(Question::class)->findOneBy(['partie' => $sv->partie,'numero' => $idQuestion ]);
     $reponsePossibles = array();
     foreach ($this->question->getReponsespossible() as $reponsePossible) {
@@ -197,6 +211,7 @@ class ModeMakeyMakey implements GameMode
         "fontsize" => $reponsePossible->getFontSize(),
         "piecejointe" => $reponsePossible->getPiecejointe()
       ]);
+      $this->nbreponse += 1;
     }
     if($this->question->getPiecejointe() != null){
       $from->send(json_encode([
@@ -276,6 +291,24 @@ class ModeMakeyMakey implements GameMode
 
     return true;
   }
+
+  private function SendAfficherReponsePossible($sv,ConnectionInterface $from)
+  {
+    $this->reponse += 1;
+    $from->send(json_encode([
+      "action" => "AfficherReponsePossible"
+    ]));
+
+    return true;
+  }
+
+
+
+
+
+
+
+
 
   private function SendAll($sv,$json)
   {
