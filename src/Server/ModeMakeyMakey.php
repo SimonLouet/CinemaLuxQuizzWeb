@@ -33,7 +33,6 @@ class ModeMakeyMakey implements GameMode
 
 
       case 'NextEtape':
-
       $origin = $messageData->origin ?? "Admin";
       return $this->NextEtape($sv,$from);
       break;
@@ -147,7 +146,7 @@ class ModeMakeyMakey implements GameMode
 
     $from = $this->GetAdmin($sv)['connection'];
     if($sv->etape == "question" && $origin == "Admin"){
-      if($this->reponse < v){
+      if($this->reponse < $this->nbreponse){
         $this->SendAfficherReponsePossible($sv,$from);
       }else{
         $sv->etape = "reponse";
