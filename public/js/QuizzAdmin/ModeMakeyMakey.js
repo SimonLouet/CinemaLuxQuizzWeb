@@ -107,7 +107,7 @@ function ModeMakeyMakey () {
           '</div>'+
 
           '<div class="col-md-5 " >'+
-                '<img class="rounded mx-auto d-block"    width="98%" height="auto" src="/QuizzLux/public/uploads/'+question.piecejointe+'"></img>'+
+                '<img class="rounded mx-auto d-block"    width="auto" height="100vh" src="/QuizzLux/public/uploads/'+question.piecejointe+'"></img>'+
           '</div>'+
         '</div>';
       }else if(ext == "mp4"){
