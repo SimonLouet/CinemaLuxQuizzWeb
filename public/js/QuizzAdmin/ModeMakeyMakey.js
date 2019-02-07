@@ -37,7 +37,8 @@ function ModeMakeyMakey () {
     if (event.key === 'Enter') {
       console.log("NextEtape");
       ws.send(JSON.stringify({
-        action: 'NextEtape'
+        action: 'NextEtape',
+        origin: 'Admin'
       }));
     }
   }, false);
@@ -194,7 +195,8 @@ function ModeMakeyMakey () {
       var background = document.getElementById('background');
       background.style.backgroundColor = "green";
       background.style.backgroundImage = "";
-      setTimeout(function(){ws.send(JSON.stringify({action: 'NextEtape'}));}, 3000);
+      setTimeout(function(){ws.send(JSON.stringify({action: 'NextEtape',
+      origin: 'Chrono'}));}, 3000);
     }else{
 
 
