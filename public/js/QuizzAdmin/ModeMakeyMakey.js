@@ -85,6 +85,7 @@ function ModeMakeyMakey () {
   }
 
   this.AfficherQuestion = function (message){
+    this.reponseAfficher = 0; 
     background.style.backgroundImage = "url('/QuizzLux/public/uploads/imageFond/"+partie.imagefondname+"')";
     question = message.question;
     var rendu ="";
@@ -224,8 +225,9 @@ function ModeMakeyMakey () {
   }
 
   this.AfficherReponsePossible = function (message){
+    this.reponseAfficher += 1;
     var reponse = document.getElementById('reponse-'+ this.reponseAfficher);
     background.style.visibility = "visible";
-    this.reponseAfficher += 1;
+
   }
 }

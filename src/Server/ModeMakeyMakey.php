@@ -202,6 +202,7 @@ class ModeMakeyMakey implements GameMode
   private function SendAfficherQuestion($sv,ConnectionInterface $from, $idQuestion)
   {
     $this->nbreponse = 0;
+    $this->reponse = 0;
     $this->question = $sv->em->getRepository(Question::class)->findOneBy(['partie' => $sv->partie,'numero' => $idQuestion ]);
     $reponsePossibles = array();
     foreach ($this->question->getReponsespossible() as $reponsePossible) {
