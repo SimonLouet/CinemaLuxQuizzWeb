@@ -98,7 +98,9 @@ class ServerWebSocket implements MessageComponentInterface
       $this->gameMode = null;
       $this->etape = '';
       foreach ($this->users as $user) {
-        $this->deconnexion($user['connection']);
+        if($this->users['connection']->resourceId != $from->resourceId){
+          $this->deconnexion($user['connection']);
+        }
       }
     }else{
       echo "Deconnexion d'un client\n";
