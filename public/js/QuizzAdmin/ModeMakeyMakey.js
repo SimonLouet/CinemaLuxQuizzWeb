@@ -2,7 +2,7 @@
 function ModeMakeyMakey () {
   this.bodyQuestion;
   this.reponseAfficher = 0;
-  thie.affichageReponse = null;
+  this.affichageReponse = null;
   this.Action = function (message) {
     switch (message.action) {
       case 'AfficherQuestion':
