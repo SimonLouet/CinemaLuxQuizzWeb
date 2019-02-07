@@ -96,7 +96,7 @@ class ServerWebSocket implements MessageComponentInterface
       echo "Deconnexion de l'administrateur\n";
       $this->partie = null;
       $this->gameMode = null;
-      $this->etape = null;
+      $this->etape = '';
       foreach ($this->users as $user) {
         $this->deconnexion($user['connection']);
       }
