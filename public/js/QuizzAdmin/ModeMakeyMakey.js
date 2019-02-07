@@ -177,6 +177,10 @@ function ModeMakeyMakey () {
   }
 
   this.AfficherReponse = function (message){
+    if(this.affichageReponse != null){
+      clearTimeout(this.affichageReponse);
+      this.affichageReponse = null;
+    }
     if(message.correct){
       var rendu =
       '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;">'+
@@ -215,9 +219,7 @@ function ModeMakeyMakey () {
       var background = document.getElementById('background');
       background.style.backgroundColor = "red";
       background.style.backgroundImage = "";
-      if(this.affichageReponse != null){
-        clearTimeout(this.affichageReponse);
-      }
+
       this.affichageReponse = setTimeout(function(){this.affichageReponse = null; _body.innerHTML = modeJeux.bodyQuestion;background.style.backgroundImage = "url('/QuizzLux/public/uploads/imageFond/"+partie.imagefondname+"')";}, 4000);
     }
     _body.innerHTML = rendu;
