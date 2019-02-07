@@ -50,15 +50,14 @@ function ModeMakeyMakey () {
 
     var rendu =
 
-    '<div class="row justify-content-center" style="height: 100vh;">'+
+    '<div class="row justify-content-center align-items-center" style="height: 100vh;">'+
       '<div class="col-md-5 ">'+
       '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
     '   <table  id="dataTable" width="100%" cellspacing="0">'+
     '     <thead>'+
             '<tr>'+
-            '<th style="font-size: '+partie.fontsize+'px;color:'+partie.colortext+';">n°</th>'+
-            '<th style="font-size: '+partie.fontsize+'px;color:'+partie.colortext+';">Nom</th>'+
-            '<th style="font-size: '+partie.fontsize+'px;color:'+partie.colortext+';">Score</th>'+
+            '<th style="font-size: '+(partie.fontsize * 3.0)+'px;color:'+partie.colortext+';">Nom</th>'+
+            '<th style="font-size: '+(partie.fontsize * 3.0)+'px;color:'+partie.colortext+';">Score</th>'+
             '</tr>'+
     '     </thead>'+
     '     <tbody>';
@@ -66,9 +65,8 @@ function ModeMakeyMakey () {
     for (let r of message.score) {
       if(nb <= 10){
         rendu +='<tr>'+
-        '<td style="font-size: '+partie.fontsize+'px;color:'+partie.colortext+';">'+nb+'</td>'+
-        '<td style="font-size: '+partie.fontsize+'px;color:'+partie.colortext+';">'+r.login+'</td>'+
-        '<td style="font-size: '+partie.fontsize+'px;color:'+partie.colortext+';">'+r.score+'</td>'+
+        '<td style="font-size: '+(partie.fontsize * 3.0)+'px;color:'+partie.colortext+';">'+r.login+'</td>'+
+        '<td style="font-size: '+(partie.fontsize * 3.0)+'px;color:'+partie.colortext+';">'+r.score+'</td>'+
         '</tr>';
         nb ++;
       }
