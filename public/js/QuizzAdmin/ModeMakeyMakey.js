@@ -174,7 +174,6 @@ function ModeMakeyMakey () {
     '</div>';
 
     _body.innerHTML = rendu;
-    modeJeux.bodyQuestion = _body.innerHTML;
   }
 
   this.AfficherReponse = function (message){
@@ -229,5 +228,6 @@ function ModeMakeyMakey () {
     var reponse = document.getElementById('reponse-'+ this.reponseAfficher);
     reponse.style.visibility = "visible";
 
+    modeJeux.bodyQuestion = _body.innerHTML;
   }
 }
