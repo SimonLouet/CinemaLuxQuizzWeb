@@ -2,7 +2,7 @@
 function ModeMakeyMakey () {
   this.bodyQuestion;
   this.reponseAfficher = 0;
-  thie.affichageReponse;
+  thie.affichageReponse = null;
   this.Action = function (message) {
     switch (message.action) {
       case 'AfficherQuestion':
@@ -218,7 +218,7 @@ function ModeMakeyMakey () {
       if(this.affichageReponse != null){
         clearTimeout(this.affichageReponse);
       }
-      this.affichageReponse = setTimeout(function(){this.affichageReponse = null _body.innerHTML = modeJeux.bodyQuestion;background.style.backgroundImage = "url('/QuizzLux/public/uploads/imageFond/"+partie.imagefondname+"')";}, 4000);
+      this.affichageReponse = setTimeout(function(){this.affichageReponse = null; _body.innerHTML = modeJeux.bodyQuestion;background.style.backgroundImage = "url('/QuizzLux/public/uploads/imageFond/"+partie.imagefondname+"')";}, 4000);
     }
     _body.innerHTML = rendu;
   }
