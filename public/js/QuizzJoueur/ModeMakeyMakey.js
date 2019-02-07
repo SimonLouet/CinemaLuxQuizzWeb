@@ -34,7 +34,8 @@ function ModeMakeyMakey () {
     if (event.key === 'Enter') {
       console.log("NextEtape");
       ws.send(JSON.stringify({
-        action: 'NextEtape'
+        action: 'NextEtape',
+        origin: 'Admin'
       }));
     }
   }, false);
