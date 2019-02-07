@@ -2,7 +2,7 @@
 function ModeMakeyMakey () {
   this.bodyQuestion;
   this.reponseAfficher = 0;
-
+  thie.affichageReponse;
   this.Action = function (message) {
     switch (message.action) {
       case 'AfficherQuestion':
@@ -215,8 +215,10 @@ function ModeMakeyMakey () {
       var background = document.getElementById('background');
       background.style.backgroundColor = "red";
       background.style.backgroundImage = "";
-
-      setTimeout(function(){ _body.innerHTML = modeJeux.bodyQuestion;background.style.backgroundImage = "url('/QuizzLux/public/uploads/imageFond/"+partie.imagefondname+"')";}, 5000);
+      if(this.affichageReponse != null){
+        clearTimeout(this.affichageReponse);
+      }
+      this.affichageReponse = setTimeout(function(){this.affichageReponse = null _body.innerHTML = modeJeux.bodyQuestion;background.style.backgroundImage = "url('/QuizzLux/public/uploads/imageFond/"+partie.imagefondname+"')";}, 4000);
     }
     _body.innerHTML = rendu;
   }

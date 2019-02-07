@@ -151,7 +151,7 @@ class ModeMakeyMakey implements GameMode
       }else{
         $sv->etape = "Reponse";
       }
-    }else if(($sv->etape == "Reponse"|| $sv->etape == "QRCode") && $origin == "Admin"){
+    }else if(($sv->etape == "ReponseValide"|| $sv->etape == "QRCode") && $origin == "Admin"){
       $this->nbQuestion += 1;
       if($this->nbQuestion <= count($sv->partie->getQuestions())){
         $this->SendAfficherQuestion($sv,$from,$this->nbQuestion);
@@ -169,7 +169,7 @@ class ModeMakeyMakey implements GameMode
        return;
      }
      if($this->question->getReponsespossible()[$idreponse]->getCorrect()){
-        $sv->etape = "reponseValide";
+        $sv->etape = "ReponseValide";
         $reponse = new Reponse();
         $reponse->setQuestion($this->question);
         $timeReponse = microtime(true);
