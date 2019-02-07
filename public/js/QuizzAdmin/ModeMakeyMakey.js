@@ -183,11 +183,11 @@ function ModeMakeyMakey () {
         '<div class="col-md-12 ">'+
           '<div class="row  justify-content-center align-items-center">'+
             '<div class="col-md-12 ">'+
-              '<p class="text-center" style="font-size: '+partie.fontsize+'px;color:white;">'+message.utilisateurlogin+'</p>'+
+              '<p class="text-center" style="font-size: '+(partie.fontsize * 2.0)+'px;color:white;">'+message.utilisateurlogin+'</p>'+
             '</div>'+
             '<i class="fa fa-check" style="font-size:200px;color:white;"></i>'+
             '<div class="col-md-12 ">'+
-              '<p class="text-center" style="font-size: '+partie.fontsize+'px;color:white;">'+message.reponselibelle+'</p>'+
+              '<p class="text-center" style="font-size: '+(partie.fontsize * 2.0)+'px;color:white;">'+message.reponselibelle+'</p>'+
             '</div>'+
           '</div>'+
         '</div>'+
@@ -195,8 +195,6 @@ function ModeMakeyMakey () {
       var background = document.getElementById('background');
       background.style.backgroundColor = "green";
       background.style.backgroundImage = "";
-      setTimeout(function(){ws.send(JSON.stringify({action: 'NextEtape',
-      origin: 'Chrono'}));}, 3000);
     }else{
 
 
@@ -205,11 +203,11 @@ function ModeMakeyMakey () {
         '<div class="col-md-12 ">'+
           '<div class="row  justify-content-center align-items-center">'+
             '<div class="col-md-12 ">'+
-              '<p class="text-center" style="font-size: '+partie.fontsize+'px;color:white;">'+message.utilisateurlogin+'</p>'+
+              '<p class="text-center" style="font-size: '+(partie.fontsize * 2.0)+'px;color:white;">'+message.utilisateurlogin+'</p>'+
             '</div>'+
             '<i class="fa fa-times" style="font-size:200px;color:white;"></i>'+
             '<div class="col-md-12 ">'+
-              '<p class="text-center" style="font-size: '+partie.fontsize+'px;color:white;">'+message.reponselibelle+'</p>'+
+              '<p class="text-center" style="font-size: '+(partie.fontsize * 2.0)+'px;color:white;">'+message.reponselibelle+'</p>'+
             '</div>'+
           '</div>'+
         '</div>'+
@@ -218,7 +216,7 @@ function ModeMakeyMakey () {
       background.style.backgroundColor = "red";
       background.style.backgroundImage = "";
 
-      setTimeout(function(){ _body.innerHTML = modeJeux.bodyQuestion;background.style.backgroundImage = "url('/QuizzLux/public/uploads/imageFond/"+partie.imagefondname+"')";}, 1000);
+      setTimeout(function(){ _body.innerHTML = modeJeux.bodyQuestion;background.style.backgroundImage = "url('/QuizzLux/public/uploads/imageFond/"+partie.imagefondname+"')";}, 5000);
     }
     _body.innerHTML = rendu;
   }

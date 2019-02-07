@@ -151,7 +151,7 @@ class ModeMakeyMakey implements GameMode
       }else{
         $sv->etape = "Reponse";
       }
-    }else if(($sv->etape == "Reponse"|| $sv->etape == "QRCode") && $origin == "Chrono"){
+    }else if(($sv->etape == "Reponse"|| $sv->etape == "QRCode") && $origin == "Admin"){
       $this->nbQuestion += 1;
       if($this->nbQuestion <= count($sv->partie->getQuestions())){
         $this->SendAfficherQuestion($sv,$from,$this->nbQuestion);
