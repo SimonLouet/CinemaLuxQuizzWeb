@@ -106,7 +106,7 @@ function ModeMakeyMakey () {
             '</div>'+
           '</div>'+
 
-          '<div class="col-md-5 " >'+
+          '<div class="col-md-5 " style="height: 48vh;" >'+
                 '<img class="rounded mx-auto d-block"    width="auto" height="100vh" src="/QuizzLux/public/uploads/'+question.piecejointe+'"></img>'+
           '</div>'+
         '</div>';
