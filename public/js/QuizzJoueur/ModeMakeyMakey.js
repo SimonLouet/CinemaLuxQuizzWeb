@@ -37,6 +37,12 @@ function ModeMakeyMakey () {
         action: 'NextEtape',
         origin: 'Admin'
       }));
+    }else if (event.key === 'AudioVolumeDown') {
+      console.log("PreviousEtape");
+      ws.send(JSON.stringify({
+        action: 'PreviousEtape',
+        origin: 'Admin'
+      }));
     }
   }, false);
 

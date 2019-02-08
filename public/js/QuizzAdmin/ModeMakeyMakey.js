@@ -34,10 +34,16 @@ function ModeMakeyMakey () {
   //////////////////////////////////////////////////////////////////////////////////////////Fonction appeller par le client ////////////////////////////////////////////////////////////////////////////////////
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' || event.key === 'AudioVolumeUp' ) {
+    if (event.key === 'Enter' || event.key === 'AudioVolumeUp') {
       console.log("NextEtape");
       ws.send(JSON.stringify({
         action: 'NextEtape',
+        origin: 'Admin'
+      }));
+    }else if (event.key === 'AudioVolumeDown') {
+      console.log("PreviousEtape");
+      ws.send(JSON.stringify({
+        action: 'PreviousEtape',
         origin: 'Admin'
       }));
     }
@@ -222,6 +228,14 @@ function ModeMakeyMakey () {
     var reponse = document.getElementById('reponse-'+ this.reponseAfficher);
     reponse.style.visibility = "visible";
 
+    modeJeux.bodyQuestion = _body.innerHTML;
+  }
+
+  this.RetirerReponsePossible = function (message){
+
+    var reponse = document.getElementById('reponse-'+ this.reponseAfficher);
+    reponse.style.visibility = "hidden";
+    this.reponseAfficher -= 1;
     modeJeux.bodyQuestion = _body.innerHTML;
   }
 }

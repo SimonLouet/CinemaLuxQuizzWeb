@@ -37,6 +37,13 @@ class ModeMakeyMakey implements GameMode
       return $this->NextEtape($sv,$from,$origin);
       break;
 
+
+      case 'PreviousEtape':
+      $origin = $messageData->origin ?? "";
+      return $this->PreviousEtape($sv,$from,$origin);
+      break;
+
+
       case 'RepondreQuestion':
       $idreponse = $messageData->idreponse ?? 0;
       $equipe = $messageData->equipe ?? 0;
@@ -162,6 +169,25 @@ class ModeMakeyMakey implements GameMode
     return true;
   }
 
+  private function PreviousEtape($sv,ConnectionInterface $from,$origin)
+  {
+
+    $from = $this->GetAdmin($sv)['connection'];
+    if($sv->etape == "Question" && $origin == "Admin"){
+      if($this->reponse > 0){
+        $this->SendRetirerReponsePossible($sv,$from);
+      }else if ($this->nbQuestion == 1){
+        $this->nbQuestion -= 1;
+        $this->etape = "QRCode";
+        $from->send(json_encode([
+          "action" => "AfficherQRCode"
+        ]));
+      }
+    }else if($sv->etape == "Reponse" && $origin == "Admin"){
+      $sv->etape = "Question";
+    }
+    return true;
+  }
 
   private function RepondreQuestion($sv,$from, $idreponse,$equipe){
    if($idreponse < count ($this->question->getReponsespossible()) && $sv->etape == "Reponse"){
