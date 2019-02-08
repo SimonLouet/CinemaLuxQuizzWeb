@@ -68,14 +68,14 @@ class ModeTourParTour implements GameMode
         if($origin == "Admin"){
           $this->nbQuestion += 1;
           if($this->nbQuestion <= count($sv->partie->getQuestions())){
-            $this->SendAfficherQuestion($sv,$this->GetAdmin($sv)['connection'],$this->nbQuestion);
+            $this->SendAfficherQuestion($sv,$sv->GetAdmin()['connection'],$this->nbQuestion);
           }else{
-            $this->SendAfficherFin($sv,$this->GetAdmin($sv)['connection']);
+            $this->SendAfficherFin($sv,$sv->GetAdmin()['connection']);
           }
         }
       }else if($sv->etape == "Question"){
         if($origin == "Chrono"){
-          $this->SendAfficherReponse($sv,$this->GetAdmin($sv)['connection'],$this->nbQuestion);
+          $this->SendAfficherReponse($sv,$sv->GetAdmin()['connection'],$this->nbQuestion);
         }
       }
     }
@@ -185,7 +185,7 @@ class ModeTourParTour implements GameMode
     ]));
 
 
-    $this->SendAll($sv,json_encode([
+    $sv->SendAll(json_encode([
       "action" => "AfficherQuestion",
       "question" => [
         "timer" => $this->question->getTimer()
@@ -366,24 +366,4 @@ class ModeTourParTour implements GameMode
     return true;
   }
 
-
-  private function SendAll($sv,$json)
-  {
-    foreach ($sv->users as $user) {
-      if($user['status'] == 'Connected'){
-        $user['connection']->send($json);
-      }
-    }
-    return true;
-  }
-
-  private function GetAdmin($sv)
-  {
-    foreach ($sv->users as $user) {
-      if($user['status'] == 'Admin'){
-        return $user;
-      }
-    }
-    return null;
-  }
 }

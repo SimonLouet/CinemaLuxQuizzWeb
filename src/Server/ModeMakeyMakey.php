@@ -151,7 +151,7 @@ class ModeMakeyMakey implements GameMode
   private function NextEtape($sv,ConnectionInterface $from,$origin)
   {
 
-    $from = $this->GetAdmin($sv)['connection'];
+    $from = $sv->GetAdmin()['connection'];
     if($sv->etape == "Question" && $origin == "Admin"){
       if($this->reponse < $this->nbreponse){
         $this->SendAfficherReponsePossible($sv,$from);
@@ -172,7 +172,7 @@ class ModeMakeyMakey implements GameMode
   private function PreviousEtape($sv,ConnectionInterface $from,$origin)
   {
 
-    $from = $this->GetAdmin($sv)['connection'];
+    $from = $sv->GetAdmin()['connection'];
     if($sv->etape == "Question" && $origin == "Admin"){
       if($this->reponse > 0){
         $this->SendRetirerReponsePossible($sv,$from);
@@ -205,7 +205,7 @@ class ModeMakeyMakey implements GameMode
         $entityManager = $sv->em->getManager();
         $entityManager->persist($reponse);
         $entityManager->flush();
-        $this->SendAdmin($sv,json_encode([
+        $sv->SendAdmin(json_encode([
           "action" => "AfficherReponse",
           "correct" => true,
           "reponselibelle" => $this->question->getReponsespossible()[$idreponse]->getLibelle(),
@@ -213,7 +213,7 @@ class ModeMakeyMakey implements GameMode
         ]));
       }else{
         $sv->users[$from->resourceId]['equipe'.$equipe.'Timer'] = microtime(true);
-        $this->SendAdmin($sv,json_encode([
+        $sv->SendAdmin(json_encode([
           "action" => "AfficherReponse",
           "correct" => false,
           "reponselibelle" => $this->question->getReponsespossible()[$idreponse]->getLibelle(),
@@ -271,7 +271,7 @@ class ModeMakeyMakey implements GameMode
 
 
 
-    $this->SendAll($sv,json_encode([
+    $sv->SendAll($sv,json_encode([
       "action" => "AfficherQuestion",
       "question" => [
         "timer" => $this->question->getTimer()
@@ -345,35 +345,10 @@ class ModeMakeyMakey implements GameMode
 
 
 
-  private function SendAll($sv,$json)
-  {
-    foreach ($sv->users as $user) {
-      if($user['status'] == 'Connected'){
-        $user['connection']->send($json);
-      }
-    }
-    return true;
-  }
 
-  private function SendAdmin($sv,$json)
-  {
-    foreach ($sv->users as $user) {
-      if($user['status'] == 'Admin'){
-        $user['connection']->send($json);
-        return true;
-      }
-    }
-    return true;
-  }
 
-  private function GetAdmin($sv)
-  {
-    foreach ($sv->users as $user) {
-      if($user['status'] == 'Admin'){
-        return $user;
-      }
-    }
-    return null;
-  }
+
+
+  
 
 }

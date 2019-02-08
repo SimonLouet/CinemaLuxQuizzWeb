@@ -220,6 +220,10 @@ class ServerWebSocket implements MessageComponentInterface
 
 
 
+
+
+
+
   public function GetAutorisation(ConnectionInterface $from)
   {
     if($this->users[$from->resourceId]['status'] == 'Admin' || $this->users[$from->resourceId]['status'] == 'Telecommande'){
@@ -232,7 +236,7 @@ class ServerWebSocket implements MessageComponentInterface
     return false;
   }
 
-  private function GetAdmin()
+  public function GetAdmin()
   {
     foreach ($this->users as $user) {
       if($user['status'] == 'Admin'){
@@ -242,5 +246,26 @@ class ServerWebSocket implements MessageComponentInterface
       }
     }
     return null;
+  }
+
+  private function SendAdmin($json)
+  {
+    foreach ($this->users as $user) {
+      if($user['status'] == 'Admin'){
+        $user['connection']->send($json);
+        return true;
+      }
+    }
+    return true;
+  }
+
+  public function SendAll($json)
+  {
+    foreach ($this->users as $user) {
+      if($user['status'] == 'Connected'){
+        $user['connection']->send($json);
+      }
+    }
+    return true;
   }
 }
