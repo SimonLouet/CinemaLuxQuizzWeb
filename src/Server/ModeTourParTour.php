@@ -64,18 +64,19 @@ class ModeTourParTour implements GameMode
   private function NextEtape($sv,ConnectionInterface $from,$origin)
   {
     if($sv->GetAutorisation($from)){
+      $from = $sv->GetAdmin()['connection'];
       if($sv->etape == "QRCode" || $sv->etape == "Reponse"){
         if($origin == "Admin"){
           $this->nbQuestion += 1;
           if($this->nbQuestion <= count($sv->partie->getQuestions())){
-            $this->SendAfficherQuestion($sv,$sv->GetAdmin()['connection'],$this->nbQuestion);
+            $this->SendAfficherQuestion($sv,$from,$this->nbQuestion);
           }else{
-            $this->SendAfficherFin($sv,$sv->GetAdmin()['connection']);
+            $this->SendAfficherFin($sv,$$from);
           }
         }
       }else if($sv->etape == "Question"){
         if($origin == "Chrono"){
-          $this->SendAfficherReponse($sv,$sv->GetAdmin()['connection'],$this->nbQuestion);
+          $this->SendAfficherReponse($sv,$from,$this->nbQuestion);
         }
       }
     }

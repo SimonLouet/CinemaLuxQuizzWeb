@@ -150,23 +150,23 @@ class ModeMakeyMakey implements GameMode
 
   private function NextEtape($sv,ConnectionInterface $from,$origin)
   {
-
-    $from = $sv->GetAdmin()['connection'];
-    if($sv->etape == "Question" && $origin == "Admin"){
-      if($this->reponse < $this->nbreponse){
-        $this->SendAfficherReponsePossible($sv,$from);
-      }else{
-        $sv->etape = "Reponse";
-      }
-    }else if(($sv->etape == "ReponseValide"|| $sv->etape == "QRCode") && $origin == "Admin"){
-      $this->nbQuestion += 1;
-      if($this->nbQuestion <= count($sv->partie->getQuestions())){
-        $this->SendAfficherQuestion($sv,$from,$this->nbQuestion);
-      }else{
-        $this->SendAfficherFin($sv,$from);
+    if($sv->GetAutorisation($from)){
+      $from = $sv->GetAdmin()['connection'];
+      if($sv->etape == "Question" && $origin == "Admin"){
+        if($this->reponse < $this->nbreponse){
+          $this->SendAfficherReponsePossible($sv,$from);
+        }else{
+          $sv->etape = "Reponse";
+        }
+      }else if(($sv->etape == "ReponseValide"|| $sv->etape == "QRCode") && $origin == "Admin"){
+        $this->nbQuestion += 1;
+        if($this->nbQuestion <= count($sv->partie->getQuestions())){
+          $this->SendAfficherQuestion($sv,$from,$this->nbQuestion);
+        }else{
+          $this->SendAfficherFin($sv,$from);
+        }
       }
     }
-    return true;
   }
 
   private function PreviousEtape($sv,ConnectionInterface $from,$origin)
@@ -349,6 +349,6 @@ class ModeMakeyMakey implements GameMode
 
 
 
-  
+
 
 }
