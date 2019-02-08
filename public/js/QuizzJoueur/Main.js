@@ -37,9 +37,6 @@ ws.onmessage = function (event) {
     LoginUser(message);
     break;
 
-    case 'AfficherFirstConnexion':
-    AfficherFirstConnexion(message);
-    break;
 
     case 'AfficherMenuLogin':
     AfficherMenuLogin("");
@@ -66,28 +63,17 @@ ws.onmessage = function (event) {
 
 
 var SendLoginUser = function () {
+
+    var pseudonyme = document.getElementById('inputPseudonyme').value;
   var mail = document.getElementById('inputEmail').value;
   var mdp = document.getElementById('inputPassword').value;
   ws.send(JSON.stringify({
     action: 'LoginUser',
+
+    pseudonyme: pseudonyme,
     mail: mail,
     mdp: mdp
   }));
-};
-
-var SendFirstConnexion = function () {
-  var pseudonyme = document.getElementById('inputPseudonyme').value;
-  var mail = document.getElementById('inputEmail').value;
-  var mdp = document.getElementById('inputPassword').value;
-  var confirmmdp = document.getElementById('confirmPassword').value;
-  if(confirmmdp == mdp){
-    ws.send(JSON.stringify({
-      action: 'FirstConnexion',
-      pseudonyme: pseudonyme,
-      mail:mail,
-      mdp:mdp
-    }));
-  }
 };
 
 
@@ -153,6 +139,13 @@ function AfficherMenuLogin(erreur){
   '<div class="card-header">Connexion</div>'+
   '<div class="card-body">'+
   '<form onsubmit = "SendLoginUser(); return false;" >'+
+
+  '<div class="form-group">'+
+  '<div class="form-label-group">'+
+  '<input type="text" id="inputPseudonyme" class="form-control" placeholder="First name" required="required" autofocus="autofocus">'+
+  '<label for="inputPseudonyme">Pseudonyme</label>'+
+  '</div>'+
+  '</div>'+
   '<div class="form-group">'+
   '<div class="form-label-group">'+
   '<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">'+
@@ -171,46 +164,4 @@ function AfficherMenuLogin(erreur){
   '</div>';
 
   _body.innerHTML = rendu;
-}
-
-function AfficherFirstConnexion(message){
-  var background = document.getElementById('background');
-  background.style.backgroundColor = "#343a40";
-
-  _body.innerHTML = '<div class="card card-register mx-auto mt-5">'+
-  '<div class="card-header">Première connexion</div>'+
-  '<div class="card-body">'+
-  '<form onsubmit = "SendFirstConnexion(); return false;">'+
-  '<div class="form-group">'+
-  '<div class="form-label-group">'+
-  '<input type="text" id="inputPseudonyme" class="form-control" placeholder="First name" required="required" autofocus="autofocus">'+
-  '<label for="inputPseudonyme">Pseudonyme</label>'+
-  '</div>'+
-  '</div>'+
-  '<div class="form-group">'+
-  '<div class="form-label-group">'+
-  '<input type="email" id="inputEmail" value="'+message.mail+'" class="form-control" placeholder="Email address" required="required">'+
-  '<label for="inputEmail">E-mail </label>'+
-  '</div>'+
-  '</div>'+
-  '<div class="form-group">'+
-  '<div class="form-row">'+
-  '<div class="col-md-6">'+
-  '<div class="form-label-group">'+
-  '<input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">'+
-  '<label for="inputPassword">Mot de passe</label>'+
-  '</div>'+
-  '</div>'+
-  '<div class="col-md-6">'+
-  '<div class="form-label-group">'+
-  '  <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password" required="required">'+
-  '  <label for="confirmPassword">Confirmer le mot de passe</label>'+
-  '</div>'+
-  '</div>'+
-  '</div>'+
-  '</div>'+
-  '<button  id="btn-submit" class="btn btn-primary btn-block" >Connexion</button>'+
-  '</form>'+
-  '</div>'+
-  '</div>';
 }

@@ -40,15 +40,11 @@ class ModeTourParTour implements GameMode
       break;
 
       case 'LoginUser':
-      $mail = $messageData->mail ?? '';
-      $mdp = $messageData->mdp ?? '';
-      return $this->LoginUser($sv,$from, $mail,$mdp);
-
-      case 'FirstConnexion':
       $pseudonyme = $messageData->pseudonyme ?? '';
       $mail = $messageData->mail ?? '';
       $mdp = $messageData->mdp ?? '';
-      return $this->FirstConnexion($sv,$from, $mail, $pseudonyme,$mdp);
+      return $this->LoginUser($sv,$from,$pseudonyme, $mail,$mdp);
+
 
       default:
       break;
@@ -237,7 +233,7 @@ class ModeTourParTour implements GameMode
     return true;
   }
 
-  private function LoginUser($sv,ConnectionInterface $from, $mail, $mdp)
+  private function LoginUser($sv,ConnectionInterface $from,$pseudonyme, $mail, $mdp)
   {
     if($sv->partie == null){
       $from->send(json_encode([
@@ -345,11 +341,22 @@ class ModeTourParTour implements GameMode
       ]));
       $sv->RefreshCompteurUser();
     }else{
+      $utilisateur = $sv->em->getRepository(Utilisateur::class)->findOneBy(['login' => $pseudonyme ]);
+      if($utilisateur != null){
+        if(!$valide){
+          $from->send(json_encode([
+            "action" => "LoginUser",
+            "valide" => false,
+            "erreur" => "Pseudo déja utilisé !"
+          ]));
+          return;
+        }
+      }
       echo "inscription du client\n";
 
       $utilisateur = new Utilisateur();
 
-      $utilisateur->setlogin("");
+      $utilisateur->setlogin($pseudonyme);
       $utilisateur->setMdp(md5($mdp));
       $utilisateur->setMail($mail);
 
@@ -360,46 +367,15 @@ class ModeTourParTour implements GameMode
       $sv->users[$from->resourceId]['status'] = 'Connected';
       $sv->users[$from->resourceId]['utilisateur'] = $utilisateur;
 
+
       $from->send(json_encode([
-        "action" => "AfficherFirstConnexion",
-        "mail" => $mail
+        "action" => "AfficherPresentation"
       ]));
       $sv->RefreshCompteurUser();
     }
     return true;
   }
 
-  private function FirstConnexion($sv,ConnectionInterface $from, $mail, $pseudonyme,$mdp)
-  {
-    $sv->users[$from->resourceId]['utilisateur']->setlogin($pseudonyme);
-    $sv->users[$from->resourceId]['utilisateur']->setMail($mail);
-    $sv->users[$from->resourceId]['utilisateur']->setMdp(md5($mdp));
-
-    $entityManager = $sv->em->getManager();
-    $entityManager->persist($sv->users[$from->resourceId]['utilisateur']);
-    $entityManager->flush();
-    $from->send(json_encode([
-      "action" => "LoginUser",
-      "valide" => true,
-      "partie" => [
-        "id" => $sv->partie->getId(),
-        "nom" => $sv->partie->getNom(),
-        "description" => $sv->partie->getDescription(),
-        "imagefondname" => $sv->partie->getimagefondname(),
-        "theme" => $sv->partie->getTheme(),
-        "colortext" => $sv->partie->getColortext(),
-        "colortitre" => $sv->partie->getColortitre(),
-        "colorfenetre" => $sv->partie->getcolorfenetre(),
-        "fontpolice" => $sv->partie->getfontpolice(),
-        "fontsize" => $sv->partie->getfontsize(),
-        "modejeux" => $sv->partie->getModejeux()
-      ]
-    ]));
-    $from->send(json_encode([
-      "action" => "AfficherPresentation"
-    ]));
-    return true;
-  }
 
   private function SendAll($sv,$json)
   {
