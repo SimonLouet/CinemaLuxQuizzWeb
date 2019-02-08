@@ -240,15 +240,13 @@ class ServerWebSocket implements MessageComponentInterface
   {
     foreach ($this->users as $user) {
       if($user['status'] == 'Admin'){
-        $user['connection']->send(json_encode([
-          "action" => "TentativeConnexion"
-        ]));
+        return $user;
       }
     }
     return null;
   }
 
-  private function SendAdmin($json)
+  public function SendAdmin($json)
   {
     foreach ($this->users as $user) {
       if($user['status'] == 'Admin'){
