@@ -328,6 +328,15 @@ class ModeMakeyMakey implements GameMode
     return true;
   }
 
+  private function SendRetirerReponsePossible($sv,ConnectionInterface $from)
+  {
+    $this->reponse -= 1;
+    $from->send(json_encode([
+      "action" => "RetirerReponsePossible"
+    ]));
+
+    return true;
+  }
 
 
 
