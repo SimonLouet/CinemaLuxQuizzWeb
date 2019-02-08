@@ -343,14 +343,13 @@ class ModeTourParTour implements GameMode
     }else{
       $utilisateur = $sv->em->getRepository(Utilisateur::class)->findOneBy(['login' => $pseudonyme ]);
       if($utilisateur != null){
-        if(!$valide){
-          $from->send(json_encode([
-            "action" => "LoginUser",
-            "valide" => false,
-            "erreur" => "Pseudo déja utilisé !"
-          ]));
-          return;
-        }
+        $from->send(json_encode([
+          "action" => "LoginUser",
+          "valide" => false,
+          "erreur" => "Pseudo déja utilisé !"
+        ]));
+        return;
+
       }
       echo "inscription du client\n";
 
