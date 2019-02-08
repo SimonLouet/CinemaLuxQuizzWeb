@@ -177,7 +177,7 @@ class ModeMakeyMakey implements GameMode
       if($this->reponse > 0){
         $this->SendRetirerReponsePossible($sv,$from);
       }else if ($this->nbQuestion == 1){
-        $this->nbQuestion -= 1;
+        $this->nbQuestion = 0;
         $this->etape = "QRCode";
         $from->send(json_encode([
           "action" => "AfficherQRCode"
