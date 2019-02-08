@@ -31,7 +31,7 @@ function ModeMakeyMakey () {
   }
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' || event.key === 'AudioVolumeUp') {
       console.log("NextEtape");
       ws.send(JSON.stringify({
         action: 'NextEtape',
