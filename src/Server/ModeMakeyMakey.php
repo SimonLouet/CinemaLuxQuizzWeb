@@ -271,7 +271,7 @@ class ModeMakeyMakey implements GameMode
 
 
 
-    $sv->SendAll($sv,json_encode([
+    $sv->SendAll(json_encode([
       "action" => "AfficherQuestion",
       "question" => [
         "timer" => $this->question->getTimer()
