@@ -33,7 +33,7 @@ function ModeMakeyMakey () {
 
   document.addEventListener('keydown', (event) => {
     var d = new Date();
-    if ((event.key === 'Enter' || event.key === 'AudioVolumeUp') && this.lastInput + 2000 <=  d.getTime()) {
+    if ((event.key === 'Enter' || event.key === 'AudioVolumeUp') && this.lastInput + 700 <=  d.getTime()) {
       this.lastInput = d.getTime();
 
       console.log("NextEtape");
@@ -41,7 +41,7 @@ function ModeMakeyMakey () {
         action: 'NextEtape',
         origin: 'Admin'
       }));
-    }else if (event.key === 'AudioVolumeDown' && this.lastInput + 2000 <=  d.getTime()) {
+    }else if (event.key === 'AudioVolumeDown' && this.lastInput + 700 <=  d.getTime()) {
       this.lastInput = d.getTime();
 
       console.log("PreviousEtape");
