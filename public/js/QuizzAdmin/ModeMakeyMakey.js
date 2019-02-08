@@ -34,7 +34,7 @@ function ModeMakeyMakey () {
   //////////////////////////////////////////////////////////////////////////////////////////Fonction appeller par le client ////////////////////////////////////////////////////////////////////////////////////
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' || event.key === 'Tab') {
+    if (event.key === 'Enter') {
       console.log("NextEtape");
       ws.send(JSON.stringify({
         action: 'NextEtape',
