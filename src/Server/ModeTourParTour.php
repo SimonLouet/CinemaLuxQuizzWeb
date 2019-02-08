@@ -316,30 +316,6 @@ class ModeTourParTour implements GameMode
         ]));
         return;
       }
-
-      $sv->users[$from->resourceId]['status'] = 'Connected';
-      $sv->users[$from->resourceId]['utilisateur'] = $utilisateur;
-      $from->send(json_encode([
-        "action" => "LoginUser",
-        "valide" => true,
-        "partie" => [
-          "id" => $sv->partie->getId(),
-          "nom" => $sv->partie->getNom(),
-          "description" => $sv->partie->getDescription(),
-          "imagefondname" => $sv->partie->getimagefondname(),
-          "theme" => $sv->partie->getTheme(),
-          "colortext" => $sv->partie->getColortext(),
-          "colortitre" => $sv->partie->getColortitre(),
-          "colorfenetre" => $sv->partie->getcolorfenetre(),
-          "fontpolice" => $sv->partie->getfontpolice(),
-          "fontsize" => $sv->partie->getfontsize(),
-          "modejeux" => $sv->partie->getModejeux()
-        ]
-      ]));
-      $from->send(json_encode([
-        "action" => "AfficherPresentation"
-      ]));
-      $sv->RefreshCompteurUser();
     }else{
       $utilisateur = $sv->em->getRepository(Utilisateur::class)->findOneBy(['login' => $pseudonyme ]);
       if($utilisateur != null){
@@ -362,16 +338,31 @@ class ModeTourParTour implements GameMode
       $entityManager = $sv->em->getManager();
       $entityManager->persist($utilisateur);
       $entityManager->flush();
-
-      $sv->users[$from->resourceId]['status'] = 'Connected';
-      $sv->users[$from->resourceId]['utilisateur'] = $utilisateur;
-
-
-      $from->send(json_encode([
-        "action" => "AfficherPresentation"
-      ]));
-      $sv->RefreshCompteurUser();
     }
+
+    $sv->users[$from->resourceId]['status'] = 'Connected';
+    $sv->users[$from->resourceId]['utilisateur'] = $utilisateur;
+    $from->send(json_encode([
+      "action" => "LoginUser",
+      "valide" => true,
+      "partie" => [
+        "id" => $sv->partie->getId(),
+        "nom" => $sv->partie->getNom(),
+        "description" => $sv->partie->getDescription(),
+        "imagefondname" => $sv->partie->getimagefondname(),
+        "theme" => $sv->partie->getTheme(),
+        "colortext" => $sv->partie->getColortext(),
+        "colortitre" => $sv->partie->getColortitre(),
+        "colorfenetre" => $sv->partie->getcolorfenetre(),
+        "fontpolice" => $sv->partie->getfontpolice(),
+        "fontsize" => $sv->partie->getfontsize(),
+        "modejeux" => $sv->partie->getModejeux()
+      ]
+    ]));
+    $from->send(json_encode([
+      "action" => "AfficherPresentation"
+    ]));
+    $sv->RefreshCompteurUser();
     return true;
   }
 
