@@ -25,6 +25,11 @@ function ModeMakeyMakey () {
       this.AfficherReponsePossible(message);
       break;
 
+      case 'RetirerReponsePossible':
+      //_body.innerHTML = event.data;
+      this.RetirerReponsePossible(message);
+      break;
+
 
     }
 
