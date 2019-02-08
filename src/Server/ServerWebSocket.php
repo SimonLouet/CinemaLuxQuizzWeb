@@ -24,6 +24,7 @@ class ServerWebSocket implements MessageComponentInterface
     $this->clients = new \SplObjectStorage();
   }
 
+  // Appellé quand un nouvel utilisateur se connect
   public function onOpen(ConnectionInterface $conn)
   {
     $this->users[$conn->resourceId] = [
@@ -35,13 +36,14 @@ class ServerWebSocket implements MessageComponentInterface
 
   }
 
+  // Appellé quand un utilisateur quitte la page
   public function onClose(ConnectionInterface $closedConnection)
   {
     $this->deconnexion($closedConnection);
   }
 
 
-
+  // Appellé quand un utilisateur provoque une erreur
   public function onError(ConnectionInterface $conn, \Exception $e)
   {
     $this->deconnexion($conn);
@@ -51,7 +53,7 @@ class ServerWebSocket implements MessageComponentInterface
 
 
 
-
+  // Appellé quand un utilisateur evoie un message
   public function onMessage(ConnectionInterface $from, $message)
   {
     $messageData = json_decode($message);
@@ -83,6 +85,7 @@ class ServerWebSocket implements MessageComponentInterface
     }
   }
 
+  // fonction pour deconnecter le serveur
   public function DeconnexionServeur(ConnectionInterface $from,$mdp)
   {
     if($mdp == "5qsef14qf68qsfe518qs45qs8gf4qg6sr6g"){
@@ -90,6 +93,7 @@ class ServerWebSocket implements MessageComponentInterface
     }
   }
 
+  // fonction pour deconnecter une utilisateur
   public function deconnexion(ConnectionInterface $from)
   {
     if($this->users[$from->resourceId]['status'] == 'Admin'){
@@ -110,6 +114,8 @@ class ServerWebSocket implements MessageComponentInterface
     unset($this->users[$from->resourceId]);
   }
 
+
+  //fonction pour demarrer une partie
   private function InitPartie(ConnectionInterface $from, $idPartie)
   {
     if($this->GetAutorisation($from)){
@@ -170,7 +176,7 @@ class ServerWebSocket implements MessageComponentInterface
   }
 
 
-
+  //Appeller quand un utilisateur essaye de se connecter en tant que Admin
   private function LoginAdmin(ConnectionInterface $from, $mdp)
   {
     if($mdp != "RomuluX14"){
