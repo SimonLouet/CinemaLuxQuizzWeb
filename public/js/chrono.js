@@ -14,15 +14,15 @@ function chrono(){
 	if(barchrono != null){
 		barchrono.innerHTML = '<div class="progress-bar" role="progressbar" style="width: '+pourcent+'%" aria-valuenow="'+pourcent+'" aria-valuemin="0" aria-valuemax="100">'+Math.ceil((tempEnd-diff) / 1000)+'s</div>';
 	}
-	var Compteurchrono = document.getElementById("compteur-chrono");
-	if(Compteurchrono != null){
-		Compteurchrono.innerHTML = Math.ceil((tempEnd-diff) / 1000);
+	var compteurchrono = document.getElementById("compteur-chrono");
+	if(compteurchrono != null){
+		compteurchrono.innerHTML = Math.ceil((tempEnd-diff) / 1000);
 	}
 	if(pourcent < 100){
 		timerID = setTimeout("chrono()", 10)
 	}else{
-		if(Compteurchrono != null){
-			Compteurchrono.innerHTML = "GO";
+		if(compteurchrono != null){
+			compteurchrono.innerHTML = "GO";
 		}
 
 		if(json != null){
