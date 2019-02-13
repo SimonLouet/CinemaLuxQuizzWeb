@@ -206,6 +206,7 @@ function ModeMakeyMakey () {
         '</div>'+
       '</div>'+
     '</div>';
+    _body.innerHTML += rendu;
     chronoStart(3000,JSON.stringify({
       action: 'NextEtape',
       origin: "Chrono"
