@@ -196,11 +196,11 @@ function ModeMakeyMakey () {
   this.AfficherChrono = function (message){
     var rendu =
     '<div  style="position: absolute;top: 0vh;left: 0vh;right: 0vh;bottom: 0vh;min-height: 100vh;  width: 100vw;">'+
-      '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;width: 100vw;">'+
+      '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;width: 100vw;margin:0px;">'+
         '<div class="col-md-12 ">'+
           '<div class="row  justify-content-center align-items-center">'+
             '<div class="col-md-12 ">'+
-              '<p id="compteur-chrono" class="text-center" style="color:'+partie.colortext+'; font-size: '+(partie.fontsize * 5.0)+'px;">Go</p>'+
+              '<p id="compteur-chrono" class="text-center" style="color:'+partie.colortext+'; font-size: '+(partie.fontsize * 10.0)+'px;">Go</p>'+
             '</div>'+
           '</div>'+
         '</div>'+
