@@ -71,7 +71,7 @@ class ModeTourParTour implements GameMode
           if($this->nbQuestion <= count($sv->partie->getQuestions())){
             $this->SendAfficherQuestion($sv,$from,$this->nbQuestion);
           }else{
-            $this->SendAfficherFin($sv,$$from);
+            $this->SendAfficherFin($sv,$from);
           }
         }
       }else if($sv->etape == "Question"){
@@ -143,7 +143,6 @@ class ModeTourParTour implements GameMode
               "action" => "AfficherResultat",
               "correct" => $userTimer["correct"]
             ]));
-            echo "qzdqdzdqzd \n";
             break;
           }
         }
