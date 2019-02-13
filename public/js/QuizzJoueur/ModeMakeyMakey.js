@@ -58,6 +58,16 @@ function ModeMakeyMakey () {
       equipe: equipe,
       idreponse: x
     }));
+    _body.innerHTML =
+    '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;width: 100vw;margin:0px;">'+
+      '<div class="col-md-12 ">'+
+        '<div class="row  justify-content-center align-items-center">'+
+          '<div class="col-md-12 ">'+
+            '<p  class="text-center" style="color:'+partie.colortext+'; font-size: '+(partie.fontsize * 5.0)+'px;">Equipe '+equipe+' réponse : '+ x+'</p>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
     return false;
   };
 
