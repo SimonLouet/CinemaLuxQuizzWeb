@@ -206,7 +206,7 @@ function ModeMakeyMakey () {
         '</div>'+
       '</div>'+
     '</div>';
-    chronoStart(message.question.timer,JSON.stringify({
+    chronoStart(3000,JSON.stringify({
       action: 'NextEtape',
       origin: "Chrono"
     }));
