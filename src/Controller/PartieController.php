@@ -13,6 +13,8 @@ use App\Entity\ReponsePossible;
 use App\Form\PartieType;
 use App\Form\PartieModifierType;
 
+use service\FPDF;
+
 class PartieController extends AbstractController
 {
   /**
@@ -21,7 +23,7 @@ class PartieController extends AbstractController
 
   public function FichePresentateur($id,Request $request)
   {
-    require('fpdf.php');
+    require('../fpdf.php');
 
     $pdf = new FPDF();
     $pdf->AddPage();
