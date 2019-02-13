@@ -46,7 +46,7 @@ function ModeTourParTour () {
 
     var rendu =
 
-    '<div class="row justify-content-center" style="height: 100vh;">'+
+    '<div class="row justify-content-center align-items-center" style="height: 100vh;">'+
       '<div class="col-md-5 ">'+
       '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
     '   <table  id="dataTable" width="100%" cellspacing="0">'+
