@@ -187,12 +187,12 @@ function ModeTourParTour () {
     '<div class="row " style="height: 100vh;">'+
     '	<div class="col-md-12 ">'+
     '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
-    '<p style="font-size: '+question.fontsize+'px;color:'+partie.colortext+';">'+question.numero+' - '+question.libelle+' </p>'+
+    '<p style="font-size: '+(question.fontsize*0.6)+'px;color:'+partie.colortext+';">'+question.numero+' - '+question.libelle+' </p>'+
   '</div>'+
     '</div>';
     var i = 0;
     for (let r of message.reponsepossible) {
-      rendu +='<div class="col col-md-12"style="padding: 0px 10px 0px 10px;"><button  style="height: 100%;font-size: '+(r.fontsize * 0.75)+'px;white-space: normal;" type="button" class="btn btn-block btn-primary  bg-'+colors[i]+'">'+r.libelle+'</button></div>';
+      rendu +='<div class="col col-md-12"style="padding: 0px 10px 0px 10px;"><button  style="height: 100%;font-size: '+(r.fontsize * 0.5)+'px;white-space: normal;" type="button" class="btn btn-block btn-primary  bg-'+colors[i]+'">'+r.libelle+'</button></div>';
 
       rendu +='<div class="w-100"style="height: 0vh;"></div>';
       i++;
