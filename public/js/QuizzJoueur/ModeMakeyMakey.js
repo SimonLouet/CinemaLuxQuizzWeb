@@ -67,7 +67,7 @@ function ModeMakeyMakey () {
           '</div>'+
         '</div>'+
       '</div>'+
-    '</div>'+
+    '</div>';
     return false;
   };
 
