@@ -26,6 +26,12 @@ function ModeMakeyMakey () {
       this.AfficherReponsePossible(message);
       break;
 
+      case 'AfficherChrono':
+      //_body.innerHTML = event.data;
+      this.AfficherChrono(message);
+      break;
+
+
       case 'RetirerReponsePossible':
       //_body.innerHTML = event.data;
       this.RetirerReponsePossible(message);
@@ -182,21 +188,31 @@ function ModeMakeyMakey () {
     '</div>'+
     '</div>';
 
+
+
+    _body.innerHTML = rendu;
+  }
+
+  this.AfficherChrono = function (message){
     rendu +=
     '<div  style="position: absolute;top: 0vh;min-height: 100vh;  min-width: 100%;">'+
       '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;">'+
         '<div class="col-md-12 ">'+
           '<div class="row  justify-content-center align-items-center">'+
             '<div class="col-md-12 ">'+
-              '<p class="text-center" style="color:'+partie.colortext+'; font-size: '+(partie.fontsize * 3.0)+'px;color:white;">Go</p>'+
+              '<p id="compteur-chrono" class="text-center" style="color:'+partie.colortext+'; font-size: '+(partie.fontsize * 5.0)+'px;">Go</p>'+
             '</div>'+
           '</div>'+
         '</div>'+
       '</div>'+
     '</div>';
-
-    _body.innerHTML = rendu;
+    chronoStart(message.question.timer,JSON.stringify({
+      action: 'NextEtape',
+      origin: "Chrono"
+    }));
   }
+
+
 
   this.AfficherReponse = function (message){
     if(this.affichageReponse != null){

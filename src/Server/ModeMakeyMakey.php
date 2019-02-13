@@ -155,7 +155,11 @@ class ModeMakeyMakey implements GameMode
       if($this->reponse < $this->nbreponse){
         $this->SendAfficherReponsePossible($sv,$from);
       }else{
-        $sv->etape = "Reponse";
+
+        $sv->etape = "Chrono";
+        $from->send(json_encode([
+          "action" => "AfficherChrono"
+        ]));
       }
     }else if(($sv->etape == "ReponseValide"|| $sv->etape == "QRCode") && $origin == "Admin"){
       $this->nbQuestion += 1;
@@ -164,6 +168,9 @@ class ModeMakeyMakey implements GameMode
       }else{
         $this->SendAfficherFin($sv,$from);
       }
+    }else if($sv->etape == "Chrono"  && $origin == "Chrono"){
+      $sv->etape = "Reponse";
+
     }
 
   }
