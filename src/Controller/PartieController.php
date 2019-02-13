@@ -24,18 +24,35 @@ class PartieController extends AbstractController
 
   public function FichePresentateur($id,Request $request)
   {
+    $partie = $this->getDoctrine()->getRepository(Partie::class)->find($id);
+    $questions = $this->getDoctrine()->getRepository(question::class)->findByPartieOrderByNumero($partie);
+
+    $rendu = "<h1>".$partie->getNom()."</h1><br/>"
+    $i = 1;
+    foreach ($questions as $question) {
+      $rendu .= "<h3>".$i."-".$question->getLibelle()."</h3><br/>"+
+      "</p>Réponse : </p><br/>";
+      foreach ($question->getreponsespossible() as $reponsepossible) {
+        if($reponsepossible->getCorrect()){
+          $rendu .="</p style='color: green;'><b> - ".$reponsepossible->getLibelle()."</b></p><br/>";
+        }else{
+          $rendu .="</p style='color: red;'> - ".$reponsepossible->getLibelle()."</p><br/>";
+        }
+      }
+      $i ++;
+    }
 
 
     // instantiate and use the dompdf class
     $dompdf = new Dompdf();
-    $dompdf->loadHtml('<p>hello world</p>');
+    $dompdf->loadHtml($rendu);
 
     // (Optional) Setup the paper size and orientation
     $dompdf->setPaper('A4', 'landscape');
 
     // Render the HTML as PDF
     $dompdf->render();
-    
+
     // Output the generated PDF to Browser
     $dompdf->stream();
 
