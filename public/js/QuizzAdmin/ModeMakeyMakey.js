@@ -195,8 +195,8 @@ function ModeMakeyMakey () {
 
   this.AfficherChrono = function (message){
     var rendu =
-    '<div  style="position: absolute;top: 0vh;left: 0vh;right: 0vh;bottom: 0vh;min-height: 100vh;  min-width: 100vw;">'+
-      '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;">'+
+    '<div  style="position: absolute;top: 0vh;left: 0vh;right: 0vh;bottom: 0vh;min-height: 100vh;  width: 100vw;">'+
+      '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;width: 100vw;">'+
         '<div class="col-md-12 ">'+
           '<div class="row  justify-content-center align-items-center">'+
             '<div class="col-md-12 ">'+
