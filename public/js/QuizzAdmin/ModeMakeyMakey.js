@@ -183,7 +183,7 @@ function ModeMakeyMakey () {
     '</div>';
 
     rendu +=
-    '<div class="row  justify-content-center align-items-center" style="position=absolute;min-height: 100vh;">'+
+    '<div class="row  justify-content-center align-items-center" style="position: absolute;min-height: 100vh;">'+
       '<div class="col-md-12 ">'+
         '<div class="row  justify-content-center align-items-center">'+
           '<div class="col-md-12 ">'+
