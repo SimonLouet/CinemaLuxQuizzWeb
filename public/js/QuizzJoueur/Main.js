@@ -7,7 +7,8 @@ var _body = document.getElementById('ws-content-receiver');
 var ws = new WebSocket('ws://' +  wsIp+":"+wsPort);
 var partie;
 var question;
-var colors = ["primary","warning","success","danger","secondary","info","light","muted"];
+var colors = ["primary","warning","success","danger","secondary","info"];
+var colorsNom = ["Bleu","Jaune","Vert","Rouge","gris","Bleu Turquoise"];
 var modeJeux = null;
 
 

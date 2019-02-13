@@ -63,7 +63,7 @@ function ModeMakeyMakey () {
       '<div class="col-md-12 ">'+
         '<div class="row  justify-content-center align-items-center">'+
           '<div class="col-md-12 ">'+
-            '<p  class="text-center" style="color:'+partie.colortext+'; font-size: '+(partie.fontsize * 5.0)+'px;">Equipe '+equipe+' réponse : '+ x+'</p>'+
+            '<p  class="text-center" style="color:'+partie.colortext+'; font-size: '+(partie.fontsize * 5.0)+'px;">Equipe '+equipe+' réponse : '+ colorsNom[x]+'</p>'+
           '</div>'+
         '</div>'+
       '</div>'+
@@ -89,7 +89,7 @@ function ModeMakeyMakey () {
 
     _body.innerHTML =
     '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;">'+
-    '<i class="fas fa-circle-notch fa-spin" style="font-size:200px;color:white;"></i>'+
+    '<i class="fas fa-circle-notch fa-spin" style="font-size:30px;color:white;"></i>'+
     '</div>';
 
     document.addEventListener('keydown', (event) => {
