@@ -19,31 +19,18 @@ class PartieController extends AbstractController
   * @Route("/partie", name="partie")
   */
 
-  public function FichePresentateur(Request $request)
+  public function FichePresentateur($id,Request $request)
   {
-    $partie = new Partie();
-    $form = $this->createForm(PartieType::class, $partie);
+    require('fpdf.php');
 
-    $form->handleRequest($request);
+    $pdf = new FPDF();
+    $pdf->AddPage();
+    $pdf->SetFont('Arial','B',16);
+    $pdf->Cell(40,10,'Hello World !');
+    $pdf->Output();
 
-    if ($form->isSubmitted() && $form->isValid()) {
-      $partie->setImagefondname($this->loadimageFond($form['imagefondname']->getData(),""));
+    return $this->redirect( $this->generateUrl('PartieConsulter', ['id' => $id]));
 
-      $partie = $form->getData();
-
-      $entityManager = $this->getDoctrine()->getManager();
-      $entityManager->persist($partie);
-      $entityManager->flush();
-
-      // Create a basic QR code
-
-
-      return $this->redirect( $this->generateUrl('PartieConsulter', ['id' => $partie->getid()]));
-    }
-    else
-    {
-      return $this->render('partie/Ajouter.html.twig', array('form' => $form->createView(),));
-    }
   }
 
 
