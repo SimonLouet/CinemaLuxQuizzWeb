@@ -201,22 +201,24 @@ class ModeTourParTour implements GameMode
 
   private function SendAfficherFin($sv,ConnectionInterface $from)
   {
-
+    echo "1 \n";
     $scores = $sv->em->getRepository(utilisateur::class)->Score($sv->partie->getid());
     foreach ($sv->users as $user) {
-
+        echo "2 \n";
       if($user['status'] == 'Connected'){
         $valide = false;
+          echo "3 \n";
         foreach ($scores as $score) {
           if($user['utilisateur']->getLogin() == $score["login"]){
             $valide = true;
+              echo "4 \n";
             $user['connection']->send(json_encode([
               "action" => "AfficherFin",
               "score" => $score["score"]
             ]));
           }
         }
-
+  echo "5 \n";
         if(!$valide){
           array_push($scores,["login" => $user['utilisateur']->getLogin(),"score"=>0]);
           $user['connection']->send(json_encode([
@@ -226,11 +228,12 @@ class ModeTourParTour implements GameMode
         }
       }
     }
+      echo "6 \n";
     $from->send(json_encode([
       "action" => "AfficherFin",
       "score" => $scores
     ]));
-
+  echo "7 \n";
     return true;
   }
 
