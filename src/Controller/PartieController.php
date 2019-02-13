@@ -30,13 +30,13 @@ class PartieController extends AbstractController
     $rendu = "<h1>".$partie->getNom()."</h1><br/>";
     $i = 1;
     foreach ($questions as $question) {
-      $rendu .= "<h3>".$i."-".$question->getLibelle()."</h3><br/>".
-      "<p>Réponse : </p><br/>";
+      $rendu .= "<h3>".$i."-".$question->getLibelle()."</h3>".
+      "<p>Réponse : </p>";
       foreach ($question->getreponsespossible() as $reponsepossible) {
         if($reponsepossible->getCorrect()){
-          $rendu .="<p style='color: green;'><b> - ".$reponsepossible->getLibelle()."</b></p><br/>";
+          $rendu .="<p style='color: green;'><b> - ".$reponsepossible->getLibelle()."</b></p>";
         }else{
-          $rendu .="<p style='color: red;'> - ".$reponsepossible->getLibelle()."</p><br/>";
+          $rendu .="<p style='color: red;'> - ".$reponsepossible->getLibelle()."</p>";
         }
       }
       $i ++;
