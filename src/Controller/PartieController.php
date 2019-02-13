@@ -27,7 +27,7 @@ class PartieController extends AbstractController
     $partie = $this->getDoctrine()->getRepository(Partie::class)->find($id);
     $questions = $this->getDoctrine()->getRepository(question::class)->findByPartieOrderByNumero($partie);
 
-    $rendu = "<h1>".$partie->getNom()."</h1><br/>"
+    $rendu = "<h1>".$partie->getNom()."</h1><br/>";
     $i = 1;
     foreach ($questions as $question) {
       $rendu .= "<h3>".$i."-".$question->getLibelle()."</h3><br/>"+
