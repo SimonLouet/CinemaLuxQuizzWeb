@@ -182,6 +182,17 @@ function ModeMakeyMakey () {
     '</div>'+
     '</div>';
 
+    rendu +=
+    '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;">'+
+      '<div class="col-md-12 ">'+
+        '<div class="row  justify-content-center align-items-center">'+
+          '<div class="col-md-12 ">'+
+            '<p class="text-center" style="font-size: '+(partie.fontsize * 3.0)+'px;color:white;">3</p>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+
     _body.innerHTML = rendu;
   }
 
