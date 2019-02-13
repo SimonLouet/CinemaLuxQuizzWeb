@@ -183,12 +183,12 @@ function ModeMakeyMakey () {
     '</div>';
 
     rendu +=
-    '<div  style="position: absolute;top: 0vh;">'+
+    '<div  style="position: absolute;top: 0vh;min-height: 100vh;  min-width: 100%;">'+
       '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;">'+
         '<div class="col-md-12 ">'+
           '<div class="row  justify-content-center align-items-center">'+
             '<div class="col-md-12 ">'+
-              '<p class="text-center" style="font-size: '+(partie.fontsize * 3.0)+'px;color:white;">3</p>'+
+              '<p class="text-center" style="color:'+partie.colortext+'; font-size: '+(partie.fontsize * 3.0)+'px;color:white;">Go</p>'+
             '</div>'+
           '</div>'+
         '</div>'+
