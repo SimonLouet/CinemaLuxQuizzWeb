@@ -192,7 +192,7 @@ function ModeTourParTour () {
     '</div>';
     var i = 0;
     for (let r of message.reponsepossible) {
-      rendu +='<div class="col col-md-12"style="padding: 0px 10px 0px 10px;"><button  style="height: 100%;font-size: '+(r.fontsize * 0.5)+'px;white-space: normal;" type="button" class="btn btn-block btn-primary  bg-'+colors[i]+'">'+r.libelle+'</button></div>';
+      rendu +='<div class="col col-md-12"style="padding: 0px 10px 0px 10px;"><button  style="height: 100%;font-size: '+(r.fontsize * 0.6)+'px;white-space: normal;" type="button" class="btn btn-block btn-primary  bg-'+colors[i]+'">'+r.libelle+'</button></div>';
 
       rendu +='<div class="w-100"style="height: 0vh;"></div>';
       i++;
