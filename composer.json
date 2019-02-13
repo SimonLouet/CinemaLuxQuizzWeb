@@ -7,6 +7,7 @@
         "ext-iconv": "*",
         "cboden/ratchet": "^0.4.1",
         "doctrine/annotations": "^1.6",
+        "dompdf/dompdf": "^0.8.3",
         "endroid/qr-code": "^3.5",
         "hemiframe/php-websocket": "^1.7",
         "hoa/websocket": "^3.17",

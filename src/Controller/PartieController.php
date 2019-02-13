@@ -13,7 +13,8 @@ use App\Entity\ReponsePossible;
 use App\Form\PartieType;
 use App\Form\PartieModifierType;
 
-use service\FPDF;
+use Dompdf\Dompdf;
+
 
 class PartieController extends AbstractController
 {
@@ -23,11 +24,18 @@ class PartieController extends AbstractController
 
   public function FichePresentateur($id,Request $request)
   {
-    $pdf = new FPDF();
-    $pdf->AddPage();
-    $pdf->SetFont('Arial','B',16);
-    $pdf->Cell(40,10,'Hello World !');
-    $pdf->Output();
+
+
+    // instantiate and use the dompdf class
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml('hello world');
+
+    // (Optional) Setup the paper size and orientation
+    $dompdf->setPaper('A4', 'landscape');
+
+
+    // Output the generated PDF to Browser
+    $dompdf->stream();
 
     return $this->redirect( $this->generateUrl('PartieConsulter', ['id' => $id]));
 
