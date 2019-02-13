@@ -9,6 +9,10 @@ PartieAjouter:
     path: /Partie/Ajouter
     controller: App\Controller\PartieController::Ajouter
 
+PartieFichePresentateur:
+    path: /Partie/FichePresentateur
+    controller: App\Controller\PartieController::FichePresentateur
+
 PartieCloner:
     path: /Partie/Cloner/{id}
     controller: App\Controller\PartieController::Cloner
