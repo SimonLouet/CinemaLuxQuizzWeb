@@ -53,7 +53,7 @@ class PartieController extends AbstractController
     $dompdf->render();
 
     // Output the generated PDF to Browser
-    $dompdf->stream();
+    $dompdf->stream($partie->getNom()."_Fiche_Presentateur.pdf");
 
     return $this->redirect( $this->generateUrl('PartieConsulter', ['id' => $id]));
 
