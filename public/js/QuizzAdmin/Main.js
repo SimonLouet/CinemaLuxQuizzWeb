@@ -138,11 +138,22 @@ function AfficherQRCode(message){
     '</div>'+
   '</div>'+
   '<div class="row justify-content-center " style="margin-top :5%;">'+
-    '<div class="col-md-2">'+
+    '<div class="col-md-4">'+
       '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
         '<img class="rounded mx-auto d-block" src="/QuizzLux/public/uploads/QrCode/QRcode.png" alt="QR code de la partie">'+
       '</div>'+
     '</div>'+
+    '<div class="col-md-4">'+
+      '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
+        '<img class="rounded mx-auto d-block" src="/QuizzLux/public/uploads/QrCode/QRcode.png" alt="QR code de la partie">'+
+      '</div>'+
+    '</div>'+
+    '<div class="col-md-4">'+
+      '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
+        '<img class="rounded mx-auto d-block" src="/QuizzLux/public/uploads/QrCode/QRcode.png" alt="QR code de la partie">'+
+      '</div>'+
+    '</div>'+
+
   '</div>'+
   '<div class="row justify-content-center" style="margin-top :5%;">'+
     '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
