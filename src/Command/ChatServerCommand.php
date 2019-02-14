@@ -34,8 +34,6 @@ class ChatServerCommand extends ContainerAwareCommand
         );
         $server->run();
       } catch (Exception $e) {
-        echo $e->getMessage();
-        exit(0);
       }
     }
 
