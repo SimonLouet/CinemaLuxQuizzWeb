@@ -85,20 +85,22 @@ class ModeTourParTour implements GameMode
 
 
   private function RepondreQuestion($sv,$from, $idreponse){
-    echo "Utilisateur : ".$sv->users[$from->resourceId]['utilisateur']->getLogin()  ."Reponse : ".$idreponse."\n";
-    if($this->question != null && (!$sv->users[$from->resourceId]['repondu']) && $idreponse < count ($this->question->getReponsespossible()) && $sv->etape == "Question"){
-      $sv->users[$from->resourceId]['repondu'] = true;
-      $reponse = new Reponse();
+    if($sv->users[$from->resourceId]['utilisateur'] != null){
+      echo "Utilisateur : ".$sv->users[$from->resourceId]['utilisateur']->getLogin()  ."Reponse : ".$idreponse."\n";
+      if($this->question != null && (!$sv->users[$from->resourceId]['repondu']) && $idreponse < count ($this->question->getReponsespossible()) && $sv->etape == "Question"){
+        $sv->users[$from->resourceId]['repondu'] = true;
+        $reponse = new Reponse();
 
-      $reponse->setQuestion($this->question);
-      $timeReponse = microtime(true);
-      $reponse->setTimereponse($timeReponse);
-      $reponse->setUtilisateur($sv->users[$from->resourceId]['utilisateur']);
-      $reponse->addReponsedonnee($this->question->getReponsespossible()[$idreponse]);
+        $reponse->setQuestion($this->question);
+        $timeReponse = microtime(true);
+        $reponse->setTimereponse($timeReponse);
+        $reponse->setUtilisateur($sv->users[$from->resourceId]['utilisateur']);
+        $reponse->addReponsedonnee($this->question->getReponsespossible()[$idreponse]);
 
-      $entityManager = $sv->em->getManager();
-      $entityManager->persist($reponse);
-      $entityManager->flush();
+        $entityManager = $sv->em->getManager();
+        $entityManager->persist($reponse);
+        $entityManager->flush();
+      }
     }
   }
 
