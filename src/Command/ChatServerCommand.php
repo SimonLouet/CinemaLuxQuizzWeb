@@ -33,6 +33,7 @@ class ChatServerCommand extends ContainerAwareCommand
             '0.0.0.0'
         );
         $server->run();
+      } catch (RequestException  $e) {
       }
     }
 
