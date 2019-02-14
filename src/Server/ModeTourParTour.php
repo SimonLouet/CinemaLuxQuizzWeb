@@ -85,7 +85,7 @@ class ModeTourParTour implements GameMode
 
 
   private function RepondreQuestion($sv,$from, $idreponse){
-    echo "Utilisateur : ".$sv->users[$from->resourceId]['utilisateur']->getNom()  ."Reponse : ".$idreponse."\n";
+    echo "Utilisateur : ".$sv->users[$from->resourceId]['utilisateur']->getLogin()  ."Reponse : ".$idreponse."\n";
     if($this->question != null && (!$sv->users[$from->resourceId]['repondu']) && $idreponse < count ($this->question->getReponsespossible()) && $sv->etape == "Question"){
       $sv->users[$from->resourceId]['repondu'] = true;
       $reponse = new Reponse();
@@ -233,7 +233,7 @@ class ModeTourParTour implements GameMode
   private function LoginUser($sv,ConnectionInterface $from,$pseudonyme, $mail, $mdp)
   {
 
-    echo "pseudo : ".$pseudonyme  ."Mail : ".$mail."Mdp : ".$mdp."\n";
+    echo "Pseudo : ".$pseudonyme  ."  Mail : ".$mail."  Mdp : ".$mdp."\n";
     if($sv->partie == null){
       $from->send(json_encode([
         "action" => "LoginUser",
