@@ -85,7 +85,8 @@ class ModeTourParTour implements GameMode
 
 
   private function RepondreQuestion($sv,$from, $idreponse){
-    if((!$sv->users[$from->resourceId]['repondu']) && $idreponse < count ($this->question->getReponsespossible()) && $sv->etape == "Question"){
+    echo "Utilisateur : ".$sv->users[$from->resourceId]['utilisateur']->getNom()  ."Reponse : ".$idreponse."\n";
+    if($this->question != null && (!$sv->users[$from->resourceId]['repondu']) && $idreponse < count ($this->question->getReponsespossible()) && $sv->etape == "Question"){
       $sv->users[$from->resourceId]['repondu'] = true;
       $reponse = new Reponse();
 
@@ -231,12 +232,15 @@ class ModeTourParTour implements GameMode
 
   private function LoginUser($sv,ConnectionInterface $from,$pseudonyme, $mail, $mdp)
   {
+
+    echo "pseudo : ".$pseudonyme  ."Mail : ".$mail."Mdp : ".$mdp."\n";
     if($sv->partie == null){
       $from->send(json_encode([
         "action" => "LoginUser",
         "valide" => false,
         "erreur" => "Aucune partie est en cours."
       ]));
+      echo "Aucune partie est en cours.\n";
       return;
     }
     if ($mail == "telecommande@cinemalux.org"){
@@ -246,6 +250,7 @@ class ModeTourParTour implements GameMode
           "valide" => false,
           "erreur" => "Mot de passe incorrect pour la telecommande"
         ]));
+        echo "Mot de passe incorrect pour la telecommande\n";
         return;
       }
       $sv->users[$from->resourceId]['status'] = 'Telecommande';
@@ -276,8 +281,9 @@ class ModeTourParTour implements GameMode
       $from->send(json_encode([
         "action" => "LoginUser",
         "valide" => false,
-        "erreur" => "les inscriptions sont fermé."
+        "erreur" => "Les inscriptions sont fermé."
       ]));
+      echo "les inscriptions sont fermé.\n";
       return;
     }
 
@@ -301,6 +307,7 @@ class ModeTourParTour implements GameMode
           "valide" => false,
           "erreur" => "Compte déjà connecté."
         ]));
+        echo "Compte déjà connecté.\n";
         return;
       }
 
@@ -310,9 +317,12 @@ class ModeTourParTour implements GameMode
           "valide" => false,
           "erreur" => "Mot de passe incorrect."
         ]));
+        echo "Mot de passe incorrect.\n";
         return;
       }
     }else{
+
+      echo "inscription du client\n";
       $utilisateur = $sv->em->getRepository(Utilisateur::class)->findOneBy(['login' => $pseudonyme ]);
       if($utilisateur != null){
         $from->send(json_encode([
@@ -320,10 +330,10 @@ class ModeTourParTour implements GameMode
           "valide" => false,
           "erreur" => "Pseudo déja utilisé !"
         ]));
+        echo "Pseudo déja utilisé !\n";
         return;
 
       }
-      echo "inscription du client\n";
 
       $utilisateur = new Utilisateur();
 
