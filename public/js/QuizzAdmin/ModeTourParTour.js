@@ -19,6 +19,11 @@ function ModeTourParTour () {
       this.AfficherReponse(message);
       break;
 
+
+      case 'AfficherQRCode':
+      AfficherQRCode(message);
+      break;
+
       case 'AfficherFin':
       //_body.innerHTML = event.data;
       this.AfficherFin(message);
@@ -42,8 +47,6 @@ function ModeTourParTour () {
   ////////////////////////////////////////////////////////////////////////////////////////Fonction de rendu ///////////////////////////////////////////////////////////////////////////////////////////////
 
   this.AfficherFin = function (message){
-
-
     var rendu =
 
     '<div class="row justify-content-center align-items-center" style="height: 100vh;">'+
@@ -79,6 +82,33 @@ function ModeTourParTour () {
     _body.innerHTML = rendu;
 
   }
+
+  function AfficherQRCode(message){
+    _body.innerHTML =
+    '<div class="row justify-content-center" style="margin-top :5%;">'+
+
+      '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
+        '<h1  style="font-size: '+(partie.fontsize * 2.5)+'px;color:'+partie.colortitre+';" class="text-center">'+partie.nom+' </h1>'+
+      '</div>'+
+    '</div>'+
+    '<div class="row justify-content-center " style="margin-top :5%;">'+
+      '<div class="col-md-6">'+
+          '<img class="rounded mx-auto d-block" src="/QuizzLux/public/uploads/QrCode/QRcode.png" alt="QR code de la partie">'+
+      '</div>'+
+      '<div class="col-md-6">'+
+          '<img class="rounded mx-auto d-block" src="/QuizzLux/public/uploads/QrCode/QRcode.png" alt="QR code de la partie">'+
+      '</div>'+
+
+    '</div>'+
+    '<div class="row justify-content-center" style="margin-top :5%;">'+
+      '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
+        '<h2  id="compteurjoueur"  style="font-size: '+(partie.fontsize * 1.75)+'px;color:'+partie.colortitre+';" class="text-center">Nombre de joueur : 0</h2>'+
+      '</div>'+
+    '</div>';
+  }
+
+
+
 
   this.AfficherQuestion = function (message){
     question = message.question;

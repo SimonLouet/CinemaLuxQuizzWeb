@@ -31,6 +31,9 @@ function ModeMakeyMakey () {
       this.AfficherChrono(message);
       break;
 
+      case 'AfficherQRCode':
+      AfficherQRCode(message);
+      break;
 
       case 'RetirerReponsePossible':
       //_body.innerHTML = event.data;
@@ -67,6 +70,18 @@ function ModeMakeyMakey () {
   }, false);
 
   ////////////////////////////////////////////////////////////////////////////////////////Fonction de rendu ///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+  function AfficherQRCode(message){
+    _body.innerHTML =
+    '<div class="row justify-content-center" style="margin-top :5%;">'+
+
+      '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
+        '<h1  style="font-size: '+(partie.fontsize * 2.5)+'px;color:'+partie.colortitre+';" class="text-center">'+partie.nom+' </h1>'+
+      '</div>'+
+    '</div>';
+  }
+
 
   this.AfficherFin = function (message){
     background.style.backgroundImage = "url('/QuizzLux/public/uploads/imageFond/"+partie.imagefondname+"')";
