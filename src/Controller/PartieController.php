@@ -183,6 +183,7 @@ class PartieController extends AbstractController
         );
       }
       $questions = $this->getDoctrine()->getRepository(question::class)->findByPartieOrderByNumero($partie);
+      $score = $this->getDoctrine()->getRepository(utilisateur::class)->score($id);
       $reponseStat = array();
       foreach ($questions as $question) {
         $stats = $this->getDoctrine()->getRepository(Question::class)->ReponseStatistique($question->getId());
@@ -198,7 +199,7 @@ class PartieController extends AbstractController
       }
 
 
-      return $this->render('partie/Statistique.html.twig', ['partie' => $partie,'questions' => $questions,'reponseStat' => $reponseStat]);
+      return $this->render('partie/Statistique.html.twig', ['partie' => $partie,'questions' => $questions,'reponseStat' => $reponseStat,'score' => $score]);
     }
 
 

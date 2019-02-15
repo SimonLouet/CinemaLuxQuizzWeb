@@ -53,6 +53,26 @@
 					<tr><td>Aucune question</td></tr>
 					{% endfor %}
 				</table>
+
+				<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Score</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for i in {{score}} %}
+						<tr>
+							<th>{{i.login}}</th>
+							<th>{{i.score}}</th>
+						</tr>
+					{% else %}
+					<tr><td>Aucun joueur</td></tr>
+					{% endfor %}
+				</tbody>
+
+				</table>
 			</div>
 		</div>
 	</div>
