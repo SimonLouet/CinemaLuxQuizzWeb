@@ -67,10 +67,10 @@ function ModeTourParTour () {
 
     var rendu =
     '<div class="row " style="min-height: 70vh;">'+
-      '<div  class="col" >'+
+      '<div  class="col-md-12" >'+
         '<h2>'+message.question.numero+'-'+message.question.libelle+'<h2/>'+
       '</div>'+
-      '<div  class="col" >';
+      '<div  class="col-md-12" >';
         for (let r of message.reponsepossible) {
           if(!r.correct){
 
@@ -81,7 +81,7 @@ function ModeTourParTour () {
 
         }
       rendu +='</div>'+
-    '</div>'
+    '</div>'+
     '<div class="row " style="min-height: 30vh;">'+
     '<div  class="col "style="padding: 10px 10px 10px 10px;min-height: 100vh;"><button id="nextEtape" style="height: 100%;" type="button"  class="btn btn-block btn-primary">Suivant</button></div>'+
     '</div>';
