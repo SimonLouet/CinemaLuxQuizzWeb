@@ -177,14 +177,18 @@ class ModeTourParTour implements GameMode
         "piecejointe" => $reponsePossible->getPiecejointe()
       ]);
     }
-
+    if($this->question->getPiecejointe() != null){
+      $piecejointe = $this->question->getPiecejointe()->getFilename();
+    }else{
+      $piecejointe = null;
+    }
     $from->send(json_encode([
       "action" => "AfficherQuestion",
       "question" => [
         "id" => $this->question->getId(),
         "numero" => $this->question->getNumero(),
         "libelle" =>$this->question->getLibelle(),
-        "piecejointe" => $this->question->getPiecejointe()->getFilename(),
+        "piecejointe" => $piecejointe,
         "videoyoutube" => $this->question->getVideoyoutube(),
         "timer" => $this->question->getTimer(),
         "fontsize" => $this->question->getFontsize(),
