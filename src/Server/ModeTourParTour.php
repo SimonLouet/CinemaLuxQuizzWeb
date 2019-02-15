@@ -183,7 +183,7 @@ class ModeTourParTour implements GameMode
       "question" => [
         "id" => $this->question->getId(),
         "numero" => $this->question->getNumero(),
-        "libelle" =>$this->question->getLibelle()
+        "libelle" =>$this->question->getLibelle(),
         "piecejointe" => $this->question->getPiecejointe()->getFilename(),
         "videoyoutube" => $this->question->getVideoyoutube(),
         "timer" => $this->question->getTimer(),
@@ -216,7 +216,7 @@ class ModeTourParTour implements GameMode
       "question" => [
         "id" => $this->question->getId(),
         "numero" => $this->question->getNumero(),
-        "libelle" =>$this->question->getLibelle()
+        "libelle" =>$this->question->getLibelle(),
         "piecejointe" => $this->question->getPiecejointe()->getFilename(),
         "videoyoutube" => $this->question->getVideoyoutube(),
         "timer" => $this->question->getTimer(),
