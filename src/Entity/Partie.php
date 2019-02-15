@@ -30,7 +30,7 @@ class Partie
     private $date;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", mappedBy="parties")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Utilisateur", mappedBy="parties",cascade={"remove"})
      */
     private $utilisateurs;
 
