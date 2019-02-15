@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
+use App\Entity\ReponsePossible;
 use App\Entity\Question;
 use App\Service\FileUploader;
 
@@ -30,7 +31,7 @@ class QuestionUploadListener
      $entity = $args->getEntity();
 
      // This logic only works for Product entities
-     if (!$entity instanceof Question) {
+     if (!($entity instanceof Question || $entity instanceof ReponsePossible) ) {
          return;
      }
 
@@ -74,7 +75,7 @@ class QuestionUploadListener
     {
       $entity = $args->getEntity();
 
-      if (!$entity instanceof Question) {
+      if (!($entity instanceof Question || $entity instanceof ReponsePossible)) {
           return;
       }
 
@@ -88,7 +89,7 @@ class QuestionUploadListener
     private function uploadFile($entity)
     {
         // upload only works for Product entities
-        if (!$entity instanceof Question) {
+        if (!($entity instanceof Question || $entity instanceof ReponsePossible)) {
             return;
         }
 
@@ -108,7 +109,7 @@ class QuestionUploadListener
     {
         $entity = $args->getEntity();
 
-        if (!$entity instanceof Question) {
+        if (!($entity instanceof Question || $entity instanceof ReponsePossible)) {
             return;
         }
 
