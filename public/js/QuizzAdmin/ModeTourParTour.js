@@ -250,7 +250,7 @@ function ModeTourParTour () {
       largeur = (100 / ((message.reponsepossible.length + (message.reponsepossible.length %2)) / 2));;
     }
     for (let r of message.reponsepossible) {
-      rendu +='<div class="col "style="padding: 10px 10px 10px 10px;min-height: '+hauteur+'vh;max-width: '+largeur+'vw;"><button  style="height: 100%;font-size: '+r.fontsize+'px;white-space: normal;" type="button" class="btn btn-block btn-primary  bg-'+colors[i]+'">'+r.libelle+;
+      rendu +='<div class="col "style="padding: 10px 10px 10px 10px;min-height: '+hauteur+'vh;max-width: '+largeur+'vw;"><button  style="height: 100%;font-size: '+r.fontsize+'px;white-space: normal;" type="button" class="btn btn-block btn-primary  bg-'+colors[i]+'">'+r.libelle;
 
       if(r.piecejointe != "" && r.piecejointe != null){
 
