@@ -45,6 +45,9 @@ public function getNbQuestion() {
 }
 
 public function resetPartie($idPartie) {
+  $rawSql = "DELETE up.* FROM utilisateur_partie as up  WHERE up.partie_id = ".$idPartie;
+  $stmt = $this->getEntityManager()->getConnection()->prepare($rawSql);
+  $stmt->execute();
   $rawSql = "DELETE r.* FROM reponse as r INNER JOIN question AS q ON r.question_id = q.id WHERE q.partie_id = ".$idPartie;
   $stmt = $this->getEntityManager()->getConnection()->prepare($rawSql);
   $stmt->execute();
