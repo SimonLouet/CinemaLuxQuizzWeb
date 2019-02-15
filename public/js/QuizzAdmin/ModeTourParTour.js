@@ -163,7 +163,7 @@ function ModeTourParTour () {
     rendu +=
       '<div class="col-md-10 ">'+
         '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
-          '<p class="text-center" style="font-size: '+question.fontsize+'px;color:'+partie.colortext+';">Attention il y a un cadeau à gagner !!</p>'+
+          '<p class="text-center" style="font-size: '+(partie.fontsize * 0.9)+'px;color:'+partie.colortext+';">Attention il y a un cadeau à gagner !!</p>'+
         '</div>'+
       '</div>'+
     '</div>';
