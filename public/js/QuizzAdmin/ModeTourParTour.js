@@ -250,7 +250,7 @@ function ModeTourParTour () {
       largeur = (100 / ((message.reponsepossible.length + (message.reponsepossible.length %2)) / 2));;
     }
     for (let r of message.reponsepossible) {
-      rendu +='<div class="col "style="padding: 10px 10px 10px 10px;min-height: '+hauteur+'vh;max-width: '+largeur+'vw;"><button  style="height: 100%;font-size: '+r.fontsize+'px;white-space: normal;" type="button" class="btn btn-block btn-primary  bg-'+colors[i]+'">'+r.libelle;
+      rendu +='<div class="col "style="padding: 10px 10px 10px 10px;min-height: '+hauteur+'vh;max-width: '+largeur+'vw;"><button  style="height: 100%;font-size: '+r.fontsize+'px;white-space: normal;" type="button" class="btn btn-block btn-primary  bg-'+colors[i]+'">';
 
       if(r.piecejointe != "" && r.piecejointe != null){
 
@@ -260,14 +260,11 @@ function ModeTourParTour () {
             '<div class="col-md-5 " >'+
                   '<img class="rounded mx-auto d-block"    width="98%" height="auto" src="/QuizzLux/public/uploads/'+r.piecejointe+'"></img>'+
             '</div>';
-        }else if(ext == "mp4"){
-          rendu +=
-            '<div class="col-md-5 " style="height: 100%;">'+
-              '<video width="100%" height="100%" autoplay loop >'+
-              	'<source src="/QuizzLux/public/uploads/'+r.piecejointe+'" type="video/mp4">'+
-              '</video>'+
-            '</div>';
+        }else{
+          rendu += "Mauvais format"
         }
+      }else{
+        rendu += +r.libelle;
       }
       rendu += '</button></div>';
 
