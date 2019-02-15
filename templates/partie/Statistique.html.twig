@@ -26,6 +26,16 @@
 									</tr>
 								</thead>
 								<tbody>
+									{% for i in reponseStat[0] %}
+										<tr>
+											<th>Nom</th>
+											<th>E-mail</th>
+											<th>Réponse</th>
+											<th>Heure de la réponse</th>
+										</tr>
+									{% else %}
+									<tr><td>Aucune réponse</td></tr>
+									{% endfor %}
 								</tbody>
 							</table>
 						</td>
