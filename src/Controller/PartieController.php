@@ -191,7 +191,7 @@ class PartieController extends AbstractController
           $date = new \DateTime();
           $date->setTimestamp($stat["timereponse"]);
 	        $mSecs   =  $stat["timereponse"] - floor($stat["timereponse"]);
-          $stats[$i]["timereponse"] =  $date->format("Y/m/d H:i:s") .":". $mSecs;
+          $stats[$i]["timereponse"] =  $date->format("Y/m/d H:i:s") .":". substr("".$mSecs,2,3);
           $i += 1;
         }
         array_push($reponseStat,$stats);
