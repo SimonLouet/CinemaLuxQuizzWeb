@@ -23,6 +23,11 @@ function ModeTourParTour () {
       this.AfficherTelecommande(message);
       break;
 
+      case 'AfficherAttenteQuestion':
+
+      this.AfficherAttenteQuestion(message);
+      break;
+
       case 'AfficherResultat':
       //_body.innerHTML = event.data;
       this.AfficherResultat(message);
@@ -79,14 +84,6 @@ function ModeTourParTour () {
             '<p class="text-center" style="font-size: '+(partie.fontsize * 1.0)+'px;color:'+partie.colortext+';">En attente des autres joueur...</p>'+
           '</div>'+
         '</div>'+
-      '</div>'+
-    '</div>';
-
-    '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;">'+
-      '<i class="fas fa-circle-notch fa-spin" style="font-size:200px;color:white;"></i>'+
-
-      '<div class="col-md-12 ">'+
-        '<p class="text-center" style="font-size: '+(partie.fontsize * 2.0)+'px;color:white;">'+message.reponselibelle+'</p>'+
       '</div>'+
     '</div>';
   }
@@ -160,6 +157,19 @@ function ModeTourParTour () {
     _body.innerHTML = rendu;
   }
 
+  this.AfficherAttenteQuestion = function (message){
+    var background = document.getElementById('background');
+    background.style.backgroundColor = partie.colorfenetre;
+
+    var rendu =
+    '<div class="row  justify-content-center align-items-center" style="min-height: 95vh;">'+
+      '<div class="col-md-12 ">'+
+        '<p class="text-center" style="font-size: '+(partie.fontsize * 1.0)+'px;color:'+partie.colortext+';">Question '+message.question.numero+'</p>'+
+      '</div>'+
+    '</div>';
+    _body.innerHTML = rendu;
+  }
+
   this.AfficherAttente = function (){
     var background = document.getElementById('background');
     background.style.backgroundColor = partie.colorfenetre;
@@ -172,10 +182,16 @@ function ModeTourParTour () {
     '</div>'+
     '</div>'+
     '</div>'+
-    '<div class="row  justify-content-center align-items-center" style="min-height: 100vh;">'+
-    '<i class="fa fa-circle-o-notch fa-spin" style="font-size:200px;color:white;"></i>'+
+    '<div class="row  justify-content-center align-items-center" style="min-height: 95vh;">'+
+      '<div class="col-md-12 ">'+
+        '<div class="row  justify-content-center align-items-center">'+
+          '<i class="fas fa-circle-notch fa-spin" style="font-size:200px;color:'+partie.colortext+';"></i>'+
+          '<div class="col-md-12 ">'+
+            '<p class="text-center" style="font-size: '+(partie.fontsize * 1.0)+'px;color:'+partie.colortext+';">En attente des autres joueur...</p>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
     '</div>';
-
 
     _body.innerHTML = rendu;
   }

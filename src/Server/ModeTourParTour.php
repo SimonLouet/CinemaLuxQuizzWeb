@@ -247,6 +247,12 @@ class ModeTourParTour implements GameMode
       ]
     ]));
 
+    $sv->SendAll(json_encode([
+      "action" => "AfficherAttenteQuestion",
+      "question" => [
+        "numero" => $this->question->getNumero()
+      ]
+    ]));
 
     $sv->etape = "AttenteQuestion";
 
