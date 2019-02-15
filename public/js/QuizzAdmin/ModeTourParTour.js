@@ -160,7 +160,7 @@ function ModeTourParTour () {
         '</div>'+
       '</div>';
     }
-    if(question.cadeau != NULL){
+    if(question.cadeau != null){
       rendu +=
         '<div class="col-md-10 ">'+
           '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
