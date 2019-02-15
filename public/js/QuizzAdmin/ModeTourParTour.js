@@ -251,16 +251,16 @@ function ModeTourParTour () {
       largeur = (100 / ((message.reponsepossible.length + (message.reponsepossible.length %2)) / 2));;
     }
     for (let r of message.reponsepossible) {
-      rendu +='<div class="col "style="padding: 10px 10px 10px 10px;min-height: '+hauteur+'vh;max-width: '+largeur+'vw;"><button  style="height: 100%;font-size: '+r.fontsize+'px;white-space: normal;" type="button" class="btn btn-block btn-primary  bg-'+colors[i]+'">';
+      rendu +='<div class="col "style="padding: 10px 10px 10px 10px;height: '+hauteur+'vh;width: '+largeur+'vw;"><button  style="height: 100%;width:100%;font-size: '+r.fontsize+'px;white-space: normal;" type="button" class="btn btn-block btn-primary  bg-'+colors[i]+'">';
 
       if(r.piecejointe != "" && r.piecejointe != null){
 
         var ext = r.piecejointe.split('.').pop();
         if(ext == "jpg" || ext == "jpeg" || ext == "png" || ext == "gif"){
           rendu +=
-          '<div class="row justify-content-center align-items-center"style="min-height: 100vh;">'+
-            '<div class="col-md-5 " >'+
-                  '<img class="rounded mx-auto d-block"    width="100vh" height="auto" src="/QuizzLux/public/uploads/'+r.piecejointe+'" ></img>'+
+          '<div class="row justify-content-center align-items-center" style="height: 100%;">'+
+            '<div class="col-md-12 " style="height : 100%;width:100%;">'+
+                  '<img class="rounded"    style="max-height:100%; width : auto;max-width:100%;" src="/QuizzLux/public/uploads/'+r.piecejointe+'" ></img>'+
             '</div>'+
           '</div>';
         }else{
