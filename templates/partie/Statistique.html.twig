@@ -29,9 +29,9 @@
 									{% for i in reponseStat[0] %}
 										<tr>
 											<th>{{i.login}}</th>
-											<th>E-mail</th>
-											<th>Réponse</th>
-											<th>Heure de la réponse</th>
+											<th>{{i.mail}}</th>
+											<th>{{i.libelle}}</th>
+											<th>{{i.timereponse}}</th>
 										</tr>
 									{% else %}
 									<tr><td>Aucune réponse</td></tr>
