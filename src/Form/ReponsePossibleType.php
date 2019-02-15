@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ReponsePossibleType extends AbstractType
 {
@@ -21,7 +22,7 @@ class ReponsePossibleType extends AbstractType
         $builder
               ->add('libelle', TextType::class, array('label' => 'Intitulé de la réponse :'))
               ->add('correct', CheckboxType::class,array('required' => false))
-
+              ->add('piecejointe', FileType::class, array('label' => 'Pièce jointe','required' => false))
               ->add('fontsize', NumberType::class, array('label' => 'Taille police',  'data' => '40.0'))
               ->add('ajouter', SubmitType::class, array('label' => 'Ajouter la réponse'))
         ;

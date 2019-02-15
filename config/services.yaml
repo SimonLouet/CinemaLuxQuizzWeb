@@ -26,9 +26,16 @@ services:
     App\Service\FileUploader:
         arguments:
             $targetDirectory: 'uploads/'
-            
-            
+
+
     App\EventListener\QuestionUploadListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: postUpdate }
+            - { name: doctrine.event_listener, event: postLoad }
+
+    App\EventListener\ReponsePossibleUploadListener:
         tags:
             - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: preUpdate }

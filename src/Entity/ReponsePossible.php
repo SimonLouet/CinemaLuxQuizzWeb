@@ -87,12 +87,12 @@ class ReponsePossible
         return $this;
     }
 
-    public function getPiecejointe(): ?string
+    public function getPiecejointe()
     {
         return $this->piecejointe;
     }
 
-    public function setPiecejointe(?string $piecejointe): self
+    public function setPiecejointe( $piecejointe)
     {
         $this->piecejointe = $piecejointe;
 

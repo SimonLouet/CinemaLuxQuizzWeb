@@ -251,6 +251,26 @@ function ModeTourParTour () {
     }
     for (let r of message.reponsepossible) {
       rendu +='<div class="col "style="padding: 10px 10px 10px 10px;min-height: '+hauteur+'vh;max-width: '+largeur+'vw;"><button  style="height: 100%;font-size: '+r.fontsize+'px;white-space: normal;" type="button" class="btn btn-block btn-primary  bg-'+colors[i]+'">'+r.libelle+'</button></div>';
+
+      if(question.piecejointe != "" && question.piecejointe != null){
+
+        var ext = r.piecejointe.split('.').pop();
+        if(ext == "jpg" || ext == "jpeg" || ext == "png" || ext == "gif"){
+          rendu +=
+            '<div class="col-md-5 " >'+
+                  '<img class="rounded mx-auto d-block"    width="98%" height="auto" src="/QuizzLux/public/uploads/'+r.piecejointe+'"></img>'+
+            '</div>';
+        }else if(ext == "mp4"){
+          rendu +=
+            '<div class="col-md-5 " style="height: 50vh;">'+
+              '<video width="100%" height="100%" autoplay loop >'+
+              	'<source src="/QuizzLux/public/uploads/'+r.piecejointe+'" type="video/mp4">'+
+              '</video>'+
+            '</div>';
+        }
+      }
+
+
       if(message.reponsepossible.length <= 4 ){
         if(i%2 == 1){
           rendu +='<div class="w-100"style="height: 0vh;"></div>';

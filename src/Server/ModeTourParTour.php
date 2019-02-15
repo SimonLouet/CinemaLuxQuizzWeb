@@ -120,13 +120,21 @@ class ModeTourParTour implements GameMode
     }
     $this->question = $sv->em->getRepository(Question::class)->findOneBy(['partie' => $sv->partie,'numero' => $idQuestion ]);
     $this->reponsePossibles = $sv->em->getRepository(ReponsePossible::class)->findByQuestion($this->question);
-    $reponsepossible = array();
+    $reponsepossibles = array();
     $reponsepossiblevote = array();
     foreach ($this->question->getReponsespossible() as $reponsePossible) {
       $nbvote = $sv->em->getRepository(Reponse::class)->CountReponse($reponsePossible->getId());
+      if($reponsePossible->getPiecejointe() != null){
+        $piecejointe = $reponsePossible->getPiecejointe()->getFilename();
+      }else{
+        $piecejointe = null;
+      }
+      array_push($reponsepossibles, [
+        "libelle" => $reponsePossible->getLibelle(),
+        "fontsize" => $reponsePossible->getFontSize(),
+        "piecejointe" => $piecejointe
+      ]);
 
-      array_push($reponsepossible, ['libelle'=>$reponsePossible->getLibelle(),
-                                    'fontsize' => $reponsePossible->getFontsize()]);
       array_push($reponsepossiblevote, intval($nbvote[0]["pourcent"]));
 
     }
@@ -135,7 +143,7 @@ class ModeTourParTour implements GameMode
 
     $from->send(json_encode([
       "action" => "AfficherReponse",
-      "reponsepossible" => $reponsepossible,
+      "reponsepossible" => $reponsepossibles,
       "reponsepossiblevote" => $reponsepossiblevote,
       "usertimer" => $usersTimer
     ]));
@@ -171,10 +179,15 @@ class ModeTourParTour implements GameMode
     $this->question = $sv->em->getRepository(Question::class)->findOneBy(['partie' => $sv->partie,'numero' => $idQuestion ]);
     $reponsePossibles = array();
     foreach ($this->question->getReponsespossible() as $reponsePossible) {
+      if($reponsePossible->getPiecejointe() != null){
+        $piecejointe = $reponsePossible->getPiecejointe()->getFilename();
+      }else{
+        $piecejointe = null;
+      }
       array_push($reponsePossibles, [
         "libelle" => $reponsePossible->getLibelle(),
         "fontsize" => $reponsePossible->getFontSize(),
-        "piecejointe" => $reponsePossible->getPiecejointe()
+        "piecejointe" => $piecejointe
       ]);
     }
     if($this->question->getPiecejointe() != null){
