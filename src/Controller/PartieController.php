@@ -185,7 +185,14 @@ class PartieController extends AbstractController
       $questions = $this->getDoctrine()->getRepository(question::class)->findByPartieOrderByNumero($partie);
       $reponseStat = array();
       foreach ($questions as $question) {
-        array_push($reponseStat,$this->getDoctrine()->getRepository(Question::class)->ReponseStatistique($question->getId()));
+        $stats = $this->getDoctrine()->getRepository(Question::class)->ReponseStatistique($question->getId())
+
+        foreach($stats as $stat){
+          $date=date_create("2013-03-15");
+          $stat->timereponse =  date_format($date,"Y/m/d H:i:s:u");
+
+        }
+        array_push($reponseStat,$stats);
       }
 
 
