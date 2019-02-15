@@ -210,17 +210,7 @@ class ModeTourParTour implements GameMode
       "reponsepossible" => $reponsePossibles
     ]));
 
-    $sv->SendTelecommande(json_encode([
-      "action" => "AfficherQuestionTelecommande",
-      "question" => [
-        "id" => $this->question->getId(),
-        "numero" => $this->question->getNumero(),
-        "libelle" =>$this->question->getLibelle(),
-        "timer" => $this->question->getTimer(),
-        "cadeau" => $this->question->getCadeau()
-      ],
-      "reponsepossible" => $reponsePossibles
-    ]));
+
 
     $sv->SendAll(json_encode([
       "action" => "AfficherQuestion",
@@ -244,6 +234,15 @@ class ModeTourParTour implements GameMode
       $piecejointe = null;
     }
 
+    $reponsePossibles = array();
+    foreach ($this->question->getReponsespossible() as $reponsePossible) {
+      array_push($reponsePossibles, [
+        "libelle" => $reponsePossible->getLibelle(),
+        "fontsize" => $reponsePossible->getFontSize(),
+        "correct" => $reponsePossible->getCorrect(),
+      ]);
+    }
+
     $from->send(json_encode([
       "action" => "AfficherAttenteQuestion",
       "question" => [
@@ -259,7 +258,17 @@ class ModeTourParTour implements GameMode
     ]));
 
 
-
+    $sv->SendTelecommande(json_encode([
+      "action" => "AfficherQuestionTelecommande",
+      "question" => [
+        "id" => $this->question->getId(),
+        "numero" => $this->question->getNumero(),
+        "libelle" =>$this->question->getLibelle(),
+        "timer" => $this->question->getTimer(),
+        "cadeau" => $this->question->getCadeau()
+      ],
+      "reponsepossible" => $reponsePossibles
+    ]));
 
 
     $sv->SendAll(json_encode([
