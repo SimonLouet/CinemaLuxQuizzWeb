@@ -232,34 +232,25 @@ class ModeMakeyMakey implements GameMode
       $this->nbreponse += 1;
     }
     if($this->question->getPiecejointe() != null){
-      $from->send(json_encode([
-        "action" => "AfficherQuestion",
-        "question" => [
-          "id" => $this->question->getId(),
-          "numero" => $this->question->getNumero(),
-          "libelle" =>$this->question->getLibelle(),
-          "piecejointe" => $this->question->getPiecejointe()->getFilename(),
-          "videoyoutube" => $this->question->getVideoyoutube(),
-          "timer" => $this->question->getTimer(),
-          "fontsize" => $this->question->getFontsize()
-        ],
-        "reponsepossible" => $reponsePossibles
-      ]));
+      $piecejointe = $this->question->getPiecejointe()->getFilename();
     }else{
-      $from->send(json_encode([
-        "action" => "AfficherQuestion",
-        "question" => [
-          "id" => $this->question->getId(),
-          "numero" => $this->question->getNumero(),
-          "libelle" =>$this->question->getLibelle(),
-          "piecejointe" => null,
-          "videoyoutube" => $this->question->getVideoyoutube(),
-          "timer" => $this->question->getTimer(),
-          "fontsize" => $this->question->getFontsize()
-        ],
-        "reponsepossible" => $reponsePossibles
-      ]));
+      $piecejointe = null;
     }
+
+    $from->send(json_encode([
+      "action" => "AfficherQuestion",
+      "question" => [
+        "id" => $this->question->getId(),
+        "numero" => $this->question->getNumero(),
+        "libelle" =>$this->question->getLibelle(),
+        "piecejointe" => $piecejointe,
+        "videoyoutube" => $this->question->getVideoyoutube(),
+        "timer" => $this->question->getTimer(),
+        "fontsize" => $this->question->getFontsize()
+      ],
+      "reponsepossible" => $reponsePossibles
+    ]));
+
 
 
 

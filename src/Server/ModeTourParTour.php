@@ -210,6 +210,11 @@ class ModeTourParTour implements GameMode
   private function SendAfficherAttenteQuestion($sv,ConnectionInterface $from, $idQuestion)
   {
     $this->question = $sv->em->getRepository(Question::class)->findOneBy(['partie' => $sv->partie,'numero' => $idQuestion ]);
+    if($this->question->getPiecejointe() != null){
+      $piecejointe = $this->question->getPiecejointe()->getFilename();
+    }else{
+      $piecejointe = null;
+    }
 
     $from->send(json_encode([
       "action" => "AfficherAttenteQuestion",
@@ -217,7 +222,7 @@ class ModeTourParTour implements GameMode
         "id" => $this->question->getId(),
         "numero" => $this->question->getNumero(),
         "libelle" =>$this->question->getLibelle(),
-        "piecejointe" => $this->question->getPiecejointe()->getFilename(),
+        "piecejointe" => $piecejointe,
         "videoyoutube" => $this->question->getVideoyoutube(),
         "timer" => $this->question->getTimer(),
         "fontsize" => $this->question->getFontsize(),
