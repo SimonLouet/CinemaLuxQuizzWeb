@@ -69,10 +69,14 @@ class ModeTourParTour implements GameMode
         if($origin == "Admin"){
           $this->nbQuestion += 1;
           if($this->nbQuestion <= count($sv->partie->getQuestions())){
-            $this->SendAfficherQuestion($sv,$from,$this->nbQuestion);
+            $this->SendAfficherAttenteQuestion($sv,$from,$this->nbQuestion);
           }else{
             $this->SendAfficherFin($sv,$from);
           }
+        }
+      }else if($sv->etape == "AttenteQuestion"){
+        if($origin == "Admin"){
+          $this->SendAfficherQuestion($sv,$from,$this->nbQuestion);
         }
       }else if($sv->etape == "Question"){
         if($origin == "Chrono"){
@@ -197,6 +201,28 @@ class ModeTourParTour implements GameMode
     ]));
 
     $sv->etape = "Question";
+
+    return true;
+  }
+
+  private function SendAfficherAttenteQuestion($sv,ConnectionInterface $from, $idQuestion)
+  {
+    $this->question = $sv->em->getRepository(Question::class)->findOneBy(['partie' => $sv->partie,'numero' => $idQuestion ]);
+
+    $from->send(json_encode([
+      "action" => "AfficherAttenteQuestion",
+      "question" => [
+        "id" => $this->question->getId(),
+        "numero" => $this->question->getNumero(),
+        "libelle" =>$this->question->getLibelle(),
+        "videoyoutube" => $this->question->getVideoyoutube(),
+        "timer" => $this->question->getTimer(),
+        "fontsize" => $this->question->getFontsize()
+      ]
+    ]));
+
+
+    $sv->etape = "AttenteQuestion";
 
     return true;
   }

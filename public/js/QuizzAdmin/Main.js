@@ -144,7 +144,7 @@ function AfficherMenuLogin(erreur){
   '<div class="card-header">Nouvelle partie</div>'+
   '<div class="card-body">'+
   '<div class="alert alert-danger">'+
-  '<strong>Attention !</strong>Si une partie a déjà été joué avec se quizz toutes les réponses seront supprimés.'+
+  '<strong>Attention !</strong>Si une partie a déjà été joué avec ce quizz toutes les réponses seront supprimées.'+
   '</div>'+
   '<form onsubmit = "SendLoginAdmin(); return false;" >'+
   '<div class="form-group">'+
