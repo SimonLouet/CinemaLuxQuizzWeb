@@ -36,7 +36,9 @@ FermetureConnexion = function() {
 
 
 StartServeur = function (message){
-  window.open("http://"+wsIp+"/QuizzLux/public/PlayAdmin/WebSocket");
+  httpRequest = new XMLHttpRequest();
+  httpRequest.open('GET', "http://"+wsIp+"/QuizzLux/public/PlayAdmin/WebSocket", true);
+  httpRequest.send();
   return false;
 }
 
