@@ -186,7 +186,8 @@ class ModeTourParTour implements GameMode
         "libelle" =>$this->question->getLibelle(),
         "videoyoutube" => $this->question->getVideoyoutube(),
         "timer" => $this->question->getTimer(),
-        "fontsize" => $this->question->getFontsize()
+        "fontsize" => $this->question->getFontsize(),
+        "cadeau" => $this->question->getCadeau()
       ],
       "reponsepossible" => $reponsePossibles
     ]));
@@ -217,7 +218,8 @@ class ModeTourParTour implements GameMode
         "libelle" =>$this->question->getLibelle(),
         "videoyoutube" => $this->question->getVideoyoutube(),
         "timer" => $this->question->getTimer(),
-        "fontsize" => $this->question->getFontsize()
+        "fontsize" => $this->question->getFontsize(),
+        "cadeau" => $this->question->getCadeau()
       ]
     ]));
 

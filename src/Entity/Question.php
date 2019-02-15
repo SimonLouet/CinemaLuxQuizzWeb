@@ -69,6 +69,11 @@ class Question
      */
     private $fontsize;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $cadeau;
+
 
 
     public function __construct()
@@ -221,6 +226,18 @@ class Question
     public function setFontsize(float $fontsize): self
     {
         $this->fontsize = $fontsize;
+
+        return $this;
+    }
+
+    public function getCadeau(): ?string
+    {
+        return $this->cadeau;
+    }
+
+    public function setCadeau(?string $cadeau): self
+    {
+        $this->cadeau = $cadeau;
 
         return $this;
     }

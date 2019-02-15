@@ -24,6 +24,7 @@ class QuestionType extends AbstractType
             ->add('timer', IntegerType::class, array('label' => 'Temp pour répondre (milliseconds)'))
             ->add('videoyoutube', TextType::class, array('label' => 'Code video youtube (ex : ByzB0rWuLTQ)','required' => false))
             ->add('piecejointe', FileType::class, array('label' => 'Pièce jointe','required' => false))
+            ->add('cadeau', TextType::class, array('label' => 'Cadeau','required' => false))
             ->add('fontsize', NumberType::class, array('label' => 'Taille police',  'data' => '50.0'))
       			->add('ajouter', SubmitType::class, array('label' => 'Ajouter la question'))
         ;
