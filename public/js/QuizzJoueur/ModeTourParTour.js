@@ -74,16 +74,16 @@ function ModeTourParTour () {
         for (let r of message.reponsepossible) {
           if(!r.correct){
 
-            rendu +='<p class="text-danger">'+r.libelle+'</p><br/>';
+            rendu +='<h3 class="text-danger">'+r.libelle+'</h3><br/>';
           }else{
-            rendu +='<p class="text-success">'+r.libelle+'</p><br/>';
+            rendu +='<h3 class="text-success">'+r.libelle+'</h3><br/>';
           }
 
         }
       rendu +='</div>'+
     '</div>'+
     '<div class="row " style="min-height: 30vh;">'+
-    '<div  class="col "style="padding: 10px 10px 10px 10px;min-height: 100vh;"><button id="nextEtape" style="height: 100%;" type="button"  class="btn btn-block btn-primary">Suivant</button></div>'+
+    '<div  class="col "style="padding: 10px 10px 10px 10px;min-height: 30vh;"><button id="nextEtape" style="height: 100%;" type="button"  class="btn btn-block btn-primary">Suivant</button></div>'+
     '</div>';
 
     _body.innerHTML = rendu;
