@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Partie;
 use App\Entity\Question;
 use App\Entity\ReponsePossible;
+use App\Entity\Utilisateur;
 
 use App\Form\PartieType;
 use App\Form\PartieModifierType;
