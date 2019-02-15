@@ -399,12 +399,12 @@ class ModeTourParTour implements GameMode
       $entityManager->persist($utilisateur);
       $entityManager->flush();
     }
-    $utilisateur->addParty($this->partie);
+    $utilisateur->addParty($sv->partie);
 
     $entityManager = $sv->em->getManager();
     $entityManager->persist($utilisateur);
     $entityManager->flush();
-    
+
     $sv->users[$from->resourceId]['status'] = 'Connected';
     $sv->users[$from->resourceId]['utilisateur'] = $utilisateur;
     $from->send(json_encode([
