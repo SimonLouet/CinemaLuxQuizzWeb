@@ -112,33 +112,23 @@ function ModeTourParTour () {
 
   this.AfficherAttenteQuestion = function (message){
     question = message.question;
-    var rendu =
-    '<div class="row justify-content-center"  style="min-height: 2vh;">'+
-    '	<div class="col-md-12 " style="padding: 0px 0px 0px 0px;">'+
-      '<div class="progress" id="bar-chrono" style="height: 100%; width:100%;">'+
-        '<div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>'+
-        '</div>'+
-      '</div>'+
-    '</div>';
+    var rendu = '<div class="row justify-content-center align-items-center" style="min-height: 100vh;">';
     if(question.videoyoutube != null){
       rendu +=
-      '<div class="row justify-content-center align-items-center" style="min-height: 48vh;">'+
         '<div class="col-md-7 ">'+
           '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
             '<p class="text-center" style="font-size: '+question.fontsize+'px;color:'+partie.colortext+';">'+question.numero+' - '+question.libelle+' </p>'+
           '</div>'+
         '</div>'+
 
-        '<div class="col-md-5" style="height: 48vh;">'+
+        '<div class="col-md-5" style="height: 50vh;">'+
           '<iframe  width="98%" height="100%" src="https://www.youtube.com/embed/'+message.question.videoyoutube+'?&autoplay=1&loop=1&rel=0&showinfo=0&controls=0&iv_load_policy=3&playlist='+message.question.videoyoutube+'" frameborder="0" allow="modestbranding; accelerometer;showinfo; autoplay; loop; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'+
-        '</div>'+
-      '</div>';
+        '</div>';
     }else if(question.piecejointe != "" && question.piecejointe != null){
 
       var ext = question.piecejointe.split('.').pop();
       if(ext == "jpg" || ext == "jpeg" || ext == "png" || ext == "gif"){
         rendu +=
-        '<div class="row justify-content-center align-items-center" style="min-height: 48vh;">'+
           '<div class="col-md-7 ">'+
             '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
               '<p class="text-center" style="font-size: '+question.fontsize+'px;color:'+partie.colortext+';">'+question.numero+' - '+question.libelle+' </p>'+
@@ -147,34 +137,36 @@ function ModeTourParTour () {
 
           '<div class="col-md-5 " >'+
                 '<img class="rounded mx-auto d-block"    width="98%" height="auto" src="/QuizzLux/public/uploads/'+question.piecejointe+'"></img>'+
-          '</div>'+
-        '</div>';
+          '</div>';
       }else if(ext == "mp4"){
         rendu +=
-        '<div class="row justify-content-center align-items-center" style="min-height: 48vh;">'+
           '<div class="col-md-7 ">'+
             '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
               '<p class="text-center" style="font-size: '+question.fontsize+'px;color:'+partie.colortext+';">'+question.numero+' - '+question.libelle+' </p>'+
             '</div>'+
           '</div>'+
-          '<div class="col-md-5 " style="height: 48vh;">'+
+          '<div class="col-md-5 " style="height: 50vh;">'+
             '<video width="100%" height="100%" autoplay loop >'+
             	'<source src="/QuizzLux/public/uploads/'+question.piecejointe+'" type="video/mp4">'+
             '</video>'+
-          '</div>'+
-        '</div>';
+          '</div>';
       }
 
     }else{
-      rendu += '<div class="row justify-content-center align-items-center"style="min-height: 48vh;">'+
+      rendu +=
       '<div class="col-md-10 ">'+
         '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
           '<p class="text-center" style="font-size: '+question.fontsize+'px;color:'+partie.colortext+';">'+question.numero+' - '+question.libelle+' </p>'+
         '</div>'+
-      '</div>'+
       '</div>';
     }
-
+    rendu +=
+      '<div class="col-md-10 ">'+
+        '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
+          '<p class="text-center" style="font-size: '+question.fontsize+'px;color:'+partie.colortext+';">Attention il y a un cadeau à gagner !!</p>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
     _body.innerHTML = rendu;
   }
 
