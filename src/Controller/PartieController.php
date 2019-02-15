@@ -186,12 +186,12 @@ class PartieController extends AbstractController
       $reponseStat = array();
       foreach ($questions as $question) {
         $stats = $this->getDoctrine()->getRepository(Question::class)->ReponseStatistique($question->getId());
-
+        $i = 0;
         foreach($stats as $stat){
           $date = new \DateTime();
           $date->setTimestamp($stat["timereponse"]);
-          echo  $date->format("Y/m/d H:i:s");
-
+          $stats[$i]["timereponse"] =  $date->format("Y/m/d H:i:s");
+          $i += 1;
         }
         array_push($reponseStat,$stats);
       }
