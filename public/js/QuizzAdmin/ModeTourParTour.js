@@ -160,13 +160,15 @@ function ModeTourParTour () {
         '</div>'+
       '</div>';
     }
-    rendu +=
-      '<div class="col-md-10 ">'+
-        '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
-          '<p class="text-center" style="font-size: '+(partie.fontsize * 0.9)+'px;color:'+partie.colortext+';">Attention il y a un cadeau à gagner !!</p>'+
+    if(question.cadeau != NULL){
+      rendu +=
+        '<div class="col-md-10 ">'+
+          '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
+            '<p class="text-center" style="font-size: '+(partie.fontsize * 0.9)+'px;color:'+partie.colortext+';">'+question.cadeau+'</p>'+
+          '</div>'+
         '</div>'+
-      '</div>'+
-    '</div>';
+      '</div>';
+    }
     _body.innerHTML = rendu;
   }
 
