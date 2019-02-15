@@ -263,6 +263,16 @@ class ServerWebSocket implements MessageComponentInterface
     return true;
   }
 
+  public function SendTelecommande($json)
+  {
+    foreach ($this->users as $user) {
+      if($user['status'] == 'Telecommande'){
+        $user['connection']->send($json);
+      }
+    }
+    return true;
+  }
+
   public function SendAll($json)
   {
     foreach ($this->users as $user) {

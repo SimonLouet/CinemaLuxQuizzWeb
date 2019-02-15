@@ -28,6 +28,11 @@ function ModeTourParTour () {
       this.AfficherAttenteQuestion(message);
       break;
 
+      case 'AfficherQuestionTelecommande':
+
+      this.AfficherQuestionTelecommande(message);
+      break;
+
       case 'AfficherResultat':
       //_body.innerHTML = event.data;
       this.AfficherResultat(message);
@@ -56,6 +61,32 @@ function ModeTourParTour () {
 
 
 
+  this.AfficherQuestionTelecommande = function (message){
+    var rendu =
+    '<div class="row " style="min-height: 70vh;">'+
+      '<div  class="col" >'+
+        '<h2>'+message.question.numero+'-'+message.question.libelle+'<h2/>'+
+      '</div>'+
+      '<div  class="col" >'+
+        for (let r of message.reponsepossible) {
+          if(!r.correct){
+
+            rendu +='<p class="text-danger">'+r.libelle+'</p><br/>';
+          }else{
+            rendu +='<p class="text-success">'+r.libelle+'</p><br/>';
+          }
+
+        }
+      '</div>'+
+    '</div>'
+    '<div class="row " style="min-height: 30vh;">'+
+    '<div  class="col "style="padding: 10px 10px 10px 10px;min-height: 100vh;"><button id="nextEtape" style="height: 100%;" type="button"  class="btn btn-block btn-primary">Suivant</button></div>'+
+    '</div>';
+
+    _body.innerHTML = rendu;
+    var nextEtapeButton = document.getElementById('nextEtape');
+    nextEtapeButton.setAttribute("onclick","modeJeux.SendNextEtape();");
+  }
 
 
   this.AfficherFin = function (message){

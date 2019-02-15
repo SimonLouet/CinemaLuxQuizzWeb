@@ -210,6 +210,17 @@ class ModeTourParTour implements GameMode
       "reponsepossible" => $reponsePossibles
     ]));
 
+    $sv->SendTelecommande(json_encode([
+      "action" => "AfficherQuestionTelecommande",
+      "question" => [
+        "id" => $this->question->getId(),
+        "numero" => $this->question->getNumero(),
+        "libelle" =>$this->question->getLibelle(),
+        "timer" => $this->question->getTimer(),
+        "cadeau" => $this->question->getCadeau()
+      ],
+      "reponsepossible" => $reponsePossibles
+    ]));
 
     $sv->SendAll(json_encode([
       "action" => "AfficherQuestion",
@@ -246,6 +257,10 @@ class ModeTourParTour implements GameMode
         "cadeau" => $this->question->getCadeau()
       ]
     ]));
+
+
+
+
 
     $sv->SendAll(json_encode([
       "action" => "AfficherAttenteQuestion",
