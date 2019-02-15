@@ -229,7 +229,8 @@ function ModeTourParTour () {
       }
 
     }else{
-      rendu += '<div class="row justify-content-center align-items-center"style="min-height: 48vh;">'+
+      rendu +=
+      '<div class="row justify-content-center align-items-center"style="min-height: 48vh;">'+
       '<div class="col-md-10 ">'+
         '<div class="card" style="background-color:'+partie.colorfenetre+';">'+
           '<p class="text-center" style="font-size: '+question.fontsize+'px;color:'+partie.colortext+';">'+question.numero+' - '+question.libelle+' </p>'+
@@ -257,9 +258,11 @@ function ModeTourParTour () {
         var ext = r.piecejointe.split('.').pop();
         if(ext == "jpg" || ext == "jpeg" || ext == "png" || ext == "gif"){
           rendu +=
+          '<div class="row justify-content-center align-items-center"style="min-height: 100vh;">'+
             '<div class="col-md-5 " >'+
-                  '<img class="rounded mx-auto d-block"    width="98%" height="auto" src="/QuizzLux/public/uploads/'+r.piecejointe+'"></img>'+
-            '</div>';
+                  '<img class="rounded mx-auto d-block"    width="100vh" height="auto" src="/QuizzLux/public/uploads/'+r.piecejointe+'" ></img>'+
+            '</div>'+
+          '</div>';
         }else{
           rendu += "Mauvais format"
         }
