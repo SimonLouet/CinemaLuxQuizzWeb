@@ -62,6 +62,9 @@ function ModeTourParTour () {
 
 
   this.AfficherQuestionTelecommande = function (message){
+    var background = document.getElementById('background');
+    background.style.backgroundColor = "white";
+
     var rendu =
     '<div class="row " style="min-height: 70vh;">'+
       '<div  class="col" >'+
@@ -77,7 +80,7 @@ function ModeTourParTour () {
           }
 
         }
-      '</div>'+
+      rendu +='</div>'+
     '</div>'
     '<div class="row " style="min-height: 30vh;">'+
     '<div  class="col "style="padding: 10px 10px 10px 10px;min-height: 100vh;"><button id="nextEtape" style="height: 100%;" type="button"  class="btn btn-block btn-primary">Suivant</button></div>'+
