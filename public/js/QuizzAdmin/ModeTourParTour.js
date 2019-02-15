@@ -29,6 +29,8 @@ function ModeTourParTour () {
       case 'AfficherFin':
       this.AfficherFin(message);
       break;
+
+
     }
 
   }
@@ -108,7 +110,7 @@ function ModeTourParTour () {
     '</div>';
   }
 
-  this.AfficherQuestion = function (message){
+  this.AfficherAttenteQuestion = function (message){
     question = message.question;
     var rendu =
     '<div class="row justify-content-center"  style="min-height: 2vh;">'+
