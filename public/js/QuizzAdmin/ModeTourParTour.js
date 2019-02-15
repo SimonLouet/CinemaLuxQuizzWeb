@@ -267,7 +267,7 @@ function ModeTourParTour () {
           rendu += "Mauvais format"
         }
       }else{
-        rendu += +r.libelle;
+        rendu += r.libelle;
       }
       rendu += '</button></div>';
 
