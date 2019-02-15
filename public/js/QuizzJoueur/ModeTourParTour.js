@@ -67,7 +67,7 @@ function ModeTourParTour () {
       '<div  class="col" >'+
         '<h2>'+message.question.numero+'-'+message.question.libelle+'<h2/>'+
       '</div>'+
-      '<div  class="col" >'+
+      '<div  class="col" >';
         for (let r of message.reponsepossible) {
           if(!r.correct){
 
