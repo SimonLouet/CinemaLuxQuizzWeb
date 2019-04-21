@@ -1,3 +1,3 @@
 <?php
-header('Location: http://www.quizzlux.cinemalux.org/public/Partie/Lister');
+header('Location: http://213.32.21.144/CinemaLuxQuizzWeb/public/Partie/Lister');
 ?> 
