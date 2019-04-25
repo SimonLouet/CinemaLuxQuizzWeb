@@ -29,7 +29,7 @@ class ChatServerCommand extends ContainerAwareCommand
 
         $server = IoServer::factory(
             new HttpServer(new WsServer(new ServerWebSocket($em))),
-            8080,
+            8085,
             '0.0.0.0'
         );
         $server->run();
