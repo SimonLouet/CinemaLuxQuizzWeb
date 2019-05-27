@@ -4,6 +4,8 @@ namespace App\Server;
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
 
+use App\Entity\Partie;
+use App\Entity\Score;
 use App\Entity\Question;
 use App\Entity\Reponse;
 use App\Entity\ReponsePossible;
