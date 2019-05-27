@@ -25,7 +25,8 @@
 					<tr>
 						<td><a href="{{ path('PartieConsulter', { 'id': e.id }) }}">{{ e.nom }}</a></td>
 						<td>{{ e.date|date('d/m/Y') }}</td>
-						<td>{{{% if e.genre %}
+						<td>{{
+						{% if e.genre is not null %}
 						e.genre.libelle 
 						{% endif %}
 						}}</td>
