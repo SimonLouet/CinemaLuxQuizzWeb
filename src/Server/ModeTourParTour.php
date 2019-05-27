@@ -302,8 +302,8 @@ class ModeTourParTour implements GameMode
 			$score = new Score();
 
 			$score->setScore($score["score"]);
-			$score->setPartie($sv->partie);
-			$score->setUtilisateur($user['utilisateur']);
+			$score->setPartieId($sv->partie);
+			$score->setUtilisateurId($user['utilisateur']);
 			
 			$entityManager = $sv->em->getManager();
 			$entityManager->persist($score);
@@ -320,8 +320,8 @@ class ModeTourParTour implements GameMode
 		  $score = new Score();
 
 			$score->setScore(0);
-			$score->setPartie($sv->partie);
-			$score->setUtilisateur($user['utilisateur']);
+			$score->setPartieId($sv->partie);
+			$score->setUtilisateurId($user['utilisateur']);
 			
 			$entityManager = $sv->em->getManager();
 			$entityManager->persist($score);
