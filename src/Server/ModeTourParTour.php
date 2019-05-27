@@ -299,14 +299,14 @@ class ModeTourParTour implements GameMode
               "score" => $score["score"]
             ]));
 			
-			$score = new Score();
+			$scoreObjet = new Score();
 
-			$score->setScore($score["score"]);
-			$score->setPartieId($sv->partie);
-			$score->setUtilisateurId($user['utilisateur']);
+			$scoreObjet->setScore($score["score"]);
+			$scoreObjet->setPartieId($sv->partie);
+			$scoreObjet->setUtilisateurId($user['utilisateur']);
 			
 			$entityManager = $sv->em->getManager();
-			$entityManager->persist($score);
+			$entityManager->persist($scoreObjet);
 			$entityManager->flush();
           }
         }
@@ -317,14 +317,14 @@ class ModeTourParTour implements GameMode
             "score" => 0
           ]));
 		  
-		  $score = new Score();
+		  $scoreObjet = new Score();
 
-			$score->setScore(0);
-			$score->setPartieId($sv->partie);
-			$score->setUtilisateurId($user['utilisateur']);
+			$scoreObjet->setScore(0);
+			$scoreObjet->setPartieId($sv->partie);
+			$scoreObjet->setUtilisateurId($user['utilisateur']);
 			
 			$entityManager = $sv->em->getManager();
-			$entityManager->persist($score);
+			$entityManager->persist($scoreObjet);
 			$entityManager->flush();
         }
       }
