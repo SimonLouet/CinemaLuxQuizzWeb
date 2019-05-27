@@ -25,11 +25,11 @@
 					<tr>
 						<td><a href="{{ path('PartieConsulter', { 'id': e.id }) }}">{{ e.nom }}</a></td>
 						<td>{{ e.date|date('d/m/Y') }}</td>
-						<td>{{
-						{% if e.genre is not null %}
-						e.genre.libelle 
+						<td>
+						{% if e.genre %}
+						{{ e.genre.libelle  }}
 						{% endif %}
-						}}</td>
+						</td>
 						<td>
 							<a href="{{ path('PartiePlayStart', { 'id': e.id }) }}" target=_blank><i class="fa fa-play"></i></a>
 							<a href="{{ path('PartieCloner', { 'id': e.id }) }}"><i class="fas fa-clone"></i></a>
