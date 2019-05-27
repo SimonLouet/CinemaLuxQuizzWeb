@@ -25,6 +25,7 @@ class PartieType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, array('label' => 'Nom'))
+			->add('genre_id', EntityType::class, ['label' => 'Genre','class' => Genre::class,'choice_label' => 'libelle'])
             ->add('modejeux', ChoiceType::class, ['label' => 'Mode de jeux',
                                                   'choices'  => [
                                                       'Tour par tour' => "TourParTour",
@@ -42,17 +43,7 @@ class PartieType extends AbstractType
             ->add('fontpolice', TextType::class, array('label' => 'Nom police google (https://fonts.google.com/)',  'data' => 'Roboto'))
             ->add('fontsize', NumberType::class, array('label' => 'Taille police',  'data' => '40.0'))
             ->add('colortitre', ColorType::class, array('label' => 'Couleur des titres'))
-			->add('genre_id', EntityType::class, [
-					// looks for choices from this entity
-					'class' => Genre::class,
-
-					// uses the User.username property as the visible option string
-					'choice_label' => 'libelle',
-
-					// used to render a select box, check boxes or radios
-					// 'multiple' => true,
-					// 'expanded' => true,
-				])
+			
             ->add('colortext', ColorType::class, array('label' => 'Couleur des textes'))
             ->add('colorfenetre', ColorType::class, array('label' => 'Couleur des fenètre'))
 			      ->add('ajouter', SubmitType::class, array('label' => 'Nouvelle partie'))

@@ -296,6 +296,16 @@ class ModeTourParTour implements GameMode
               "action" => "AfficherFin",
               "score" => $score["score"]
             ]));
+			
+			$score = new Score();
+
+			$score->setScore($score["score"]);
+			$score->setPartie($sv->partie);
+			$score->setUtilisateur($user['utilisateur']);
+			
+			$entityManager = $sv->em->getManager();
+			$entityManager->persist($score);
+			$entityManager->flush();
           }
         }
         if(!$valide){
@@ -304,6 +314,16 @@ class ModeTourParTour implements GameMode
             "action" => "AfficherFin",
             "score" => 0
           ]));
+		  
+		  $score = new Score();
+
+			$score->setScore(0);
+			$score->setPartie($sv->partie);
+			$score->setUtilisateur($user['utilisateur']);
+			
+			$entityManager = $sv->em->getManager();
+			$entityManager->persist($score);
+			$entityManager->flush();
         }
       }
     }
