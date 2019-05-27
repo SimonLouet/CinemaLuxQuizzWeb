@@ -58,7 +58,7 @@ public function resetPartie($idPartie) {
 public function BestUtilisateur($partie): array
 {
 	
-	  $rawSql = "SELECT u.login,s.score FROM Score s , Utilisateur u Where s.utilisateur_id_id = u.id AND s.partie_id_id = ". $partie->getId()." ORDER BY s.score DESC LIMIT 1";
+	  $rawSql = "SELECT u.login,s.score FROM score s , utilisateur u Where s.utilisateur_id_id = u.id AND s.partie_id_id = ". $partie->getId()." ORDER BY s.score DESC LIMIT 1";
 	  $stmt = $this->getEntityManager()->getConnection()->prepare($rawSql);
 	  $stmt->execute([]);
 	  
