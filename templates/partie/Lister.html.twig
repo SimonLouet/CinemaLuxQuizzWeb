@@ -26,8 +26,8 @@
 						<td><a href="{{ path('PartieConsulter', { 'id': e.id }) }}">{{ e.nom }}</a></td>
 						<td>{{ e.date|date('d/m/Y') }}</td>
 						<td>
-						{% if e.genre %}
-						{{ e.genre.libelle  }}
+						{% if e.genre_id %}
+						{{ e.genre_id.libelle  }}
 						{% endif %}
 						</td>
 						<td>
