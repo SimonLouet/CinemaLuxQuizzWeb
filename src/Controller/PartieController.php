@@ -116,17 +116,17 @@ class PartieController extends AbstractController
 
     public function Consulter($id){
 
-      $partie = $this->getDoctrine()->getRepository(Partie::class)->find($id);
-      $questions = $this->getDoctrine()->getRepository(question::class)->findByPartieOrderByNumero($partie);
+		$partie = $this->getDoctrine()->getRepository(Partie::class)->find($id);
+		$questions = $this->getDoctrine()->getRepository(question::class)->findByPartieOrderByNumero($partie);
+		$bestUtilisateur = $this->getDoctrine()->getRepository(Partie::class)->BestUtilisateur($partie);
 
+		if (!$partie) {
+			throw $this->createNotFoundException(
+				'Aucune partie trouvé avec le numéro '.$id
+			);
+		}
 
-      if (!$partie) {
-        throw $this->createNotFoundException(
-          'Aucune partie trouvé avec le numéro '.$id
-        );
-      }
-
-      return $this->render('partie/Consulter.html.twig', ['partie' => $partie,'questions' => $questions]);
+      return $this->render('partie/Consulter.html.twig', ['partie' => $partie,'questions' => $questions,'bestUtilisateur' => $bestUtilisateur]);
     }
 
     public function Supprimer($id,Request $request)
