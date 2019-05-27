@@ -36,5 +36,10 @@
 
     <!-- Demo scripts for this page-->
     <script src="{{ asset('') }}Theme/js/demo/datatables-demo.js"></script>
-
+	<script type="text/javascript">
+	$(document).ready(function () {
+	$('#dtBasicExample').DataTable();
+	$('.dataTables_length').addClass('bs-select');
+	});
+    </script>
   </body>
