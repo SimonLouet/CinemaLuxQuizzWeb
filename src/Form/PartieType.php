@@ -41,14 +41,13 @@ class PartieType extends AbstractType
             ->add('fontpolice', TextType::class, array('label' => 'Nom police google (https://fonts.google.com/)',  'data' => 'Roboto'))
             ->add('fontsize', NumberType::class, array('label' => 'Taille police',  'data' => '40.0'))
             ->add('colortitre', ColorType::class, array('label' => 'Couleur des titres'))
-			->add('genre_id', EntityType::class, [
-								'class' => Genre::class,
-								'query_builder' => function (EntityRepository $er) {
-									return $er->createQueryBuilder('u')
-										->orderBy('u.libelle', 'ASC');
-								},
-								'choice_label' => 'libelle',
-							]);
+			->add('genre_id', ChoiceType::class, [
+					'choices'  => [
+						'Maybe' => null,
+						'Yes' => true,
+						'No' => false,
+					],
+				])
             ->add('colortext', ColorType::class, array('label' => 'Couleur des textes'))
             ->add('colorfenetre', ColorType::class, array('label' => 'Couleur des fenètre'))
 			      ->add('ajouter', SubmitType::class, array('label' => 'Nouvelle partie'))
